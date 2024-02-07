@@ -1,2 +1,10 @@
 .flaskenv
 .venv
+node_modules
+dev.db
+instance/dev.db
+__pycache__/
+*.py[cod]
+.DS_Store
+.vscode/
+.env
