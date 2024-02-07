@@ -11,7 +11,7 @@ class Document(db.Model):
     # list_type = db.Column(db.String(30), nullable=False)
     # sub_headers = db.Column(db.Boolean, nullable=False, defaults=False)
 
-    document_items = db.relationship('DocumentItem', back_populates = 'document')
+    document_items = db.relationship('DocumentItem', back_populates='document')
 
     def to_dict(self):
         return {
