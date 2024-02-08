@@ -15,6 +15,6 @@ class Document(db.Model):
 
     def to_dict(self):
         return {
-            id: self.id,
-            title: self.title
+            'id': self.id,
+            'title': self.title
         }

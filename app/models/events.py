@@ -1,4 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import datetime
+from icecream import ic
+
 
 class Event(db.Model):
     __tablename__ = 'events'
@@ -16,12 +19,16 @@ class Event(db.Model):
 
 
     def to_dict(self):
+        ic('Time object', self.time)
         return {
-            id: self.id,
-            title: self.title,
-            date: self.date,
-            time: self.time,
-            location: self.location,
-            flyer: self.flyer,
-            description: self.description
+            'id': self.id,
+            'title': self.title,
+            'date': self.date,
+            'time': self.time.strftime("%H:%M"),
+            'location': self.location,
+            'flyer': self.flyer,
+            'description': self.description
         }
+
+
+# jsonify({'current_time': time_str})

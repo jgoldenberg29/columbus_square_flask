@@ -15,6 +15,6 @@ class DocumentItem(db.Model):
 
     def to_dict(self):
         return {
-            id: self.id,
-            text: self.text
+            'id': self.id,
+            'text': self.text
         }

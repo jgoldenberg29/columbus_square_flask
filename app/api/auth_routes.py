@@ -3,6 +3,7 @@ from app.models import User, db
 from flask_login import login_required
 from app.forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
+from icecream import ic
 
 
 auth_routes = Blueprint('auth', __name__)
@@ -29,6 +30,7 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
+        ic('user', user)
         login_user(user)
         return user.to_dict()
     return {'errors': form.errors}, 401
