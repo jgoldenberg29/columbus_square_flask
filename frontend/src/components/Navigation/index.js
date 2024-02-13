@@ -32,16 +32,16 @@ export default function Navigation() {
     // }, [])
 
     return (
-        <div className='px-4 md:px-20 border-b md:border-none border-gray-300 pb-2'>
-            <div className='flex justify-between items-end py-4 md:py-6'>
-                <button onClick={() => {}} className='flex gap-3 items-end'>
+        <div className='px-4 md:px-20 border-b md:border-none border-cyan-500'>
+            <div className='flex justify-between items-end py-6 md:py-6'>
+                <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end'>
                     <img src={logo} alt='' className='h-12 w-12' />
                     <div className='hidden md:flex items-end'>
                         <h1 className='gap-1 text-4xl font-semibold text-cyan-600 tracking-tight text-end'><span className='text-5xl font-extrabold'>Friends</span> of Columbus Square</h1>
                     </div>
                     <div className='md:hidden flex flex-col justify-end items-start'>
-                        <h1 className='gap-1 text-lg font-semibold text-cyan-600 tracking-tight text-end leading-3'><span className='text-2xl font-extrabold'>Friends</span> of</h1>
-                        <h1 className='gap-1 text-lg font-semibold text-cyan-600 tracking-tight text-end leading-4'>Columbus Square</h1>
+                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-end leading-3'><span className='text-2xl font-extrabold'>Friends</span> of</h1>
+                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-end leading-4'>Columbus Square</h1>
                     </div>
                 </button>
 
@@ -76,12 +76,6 @@ export default function Navigation() {
                         </div>
                         <Transition
                             as={Fragment}
-                            // enter="transition ease-out duration-100"
-                            // enterFrom="transform opacity-0 scale-95"
-                            // enterTo="transform opacity-100 scale-100"
-                            // leave="transition ease-in duration-75"
-                            // leaveFrom="transform opacity-100 scale-100"
-                            // leaveTo="transform opacity-0 scale-95"
                             enter="transition ease-out duration-300 transform"
                             enterFrom="opacity-0 -translate-y-full scale-95"
                             enterTo="opacity-100 translate-y-0 scale-100"
@@ -89,8 +83,8 @@ export default function Navigation() {
                             leaveFrom="opacity-100 translate-y-0 scale-100"
                             leaveTo="opacity-0 -translate-y-full scale-95"
                         >
-                            <Menu.Items className="fixed top-28 right-0 w-screen origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
-                                <div className='flex flex-col'>
+                            <Menu.Items className="fixed top-20 right-0 w-screen origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
+                                <div className='flex flex-col border '>
                                     <Menu.Item>
                                         <Link to="/about" className="py-3 text-center focus:bg-slate-200 border-b border-slate-200">About</Link>
                                     </Menu.Item>
@@ -104,13 +98,13 @@ export default function Navigation() {
                                         <Link to="/gallery" className="py-3 text-center focus:bg-slate-200 border-b border-slate-200">Gallery</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <Link to="/contact" className="py-3 text-center focus:bg-slate-200 border-b border-slate-200">Contact</Link>
+                                        <Link to="/contact" className="py-3 text-center focus:bg-slate-200">Contact</Link>
                                     </Menu.Item>
-                                    <Menu.Item>
+                                    {/* <Menu.Item>
                                         <button onClick={() => setShowAccessibility(true)} className="py-3 text-center focus:bg-slate-200">
                                             Accessibility
                                         </button>
-                                    </Menu.Item>
+                                    </Menu.Item> */}
                                 </div>
                             </Menu.Items>
                         </Transition>
