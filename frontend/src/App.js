@@ -31,17 +31,16 @@ const App = () => {
         <Router>
             <div className={`${darkMode && 'bg-gray-700'}`}>
                 <Navigation />
-                <div className={`flex-grow pt-32 md:pt-48 md:px-40`}>
+                {/* <div className={`flex-grow pt-32 md:pt-48 md:px-40`}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/events" element={<Events />} />
                         <Route path='/gallery' element={<Gallery />} />
-                    {/* Other routes can be added here */}
                     </Routes>
-                </div>
-                <Footer />
+                </div> */}
+                {/* <Footer /> */}
             </div>
         </Router>
     );
