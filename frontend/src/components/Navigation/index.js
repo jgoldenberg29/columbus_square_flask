@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react';
 import MobileLogo from './mobile-logo';
 import logo from './FCSP-logo.jpeg';
+import desktopLogo1 from '../../FoCS-logos/desk-1-blk.png'
+import desktopLogo2 from '../../FoCS-logos/desk-2-blk.png'
+import mobileLogo from '../../FoCS-logos/mob-4-blk.png'
 import { useAccessibilityModal, useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation';
 import AccessibilityModal from '../AccessibilityModal';
@@ -34,38 +37,41 @@ export default function Navigation() {
     return (
         <div className='px-4 md:px-20 border-b md:border-none border-cyan-500'>
             <div className='flex justify-between items-end py-6 md:py-6'>
-                <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end'>
-                    <img src={logo} alt='' className='h-12 w-12' />
+                <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end h-3/5'>
+                    {/* <img src={desktopLogo1} className='h-12' /> */}
+                    <img src={desktopLogo2} className='hidden md:flex h-16' />
+                    <img src={mobileLogo} className='md:hidden h-16' />
+                    {/* <img src={logo} alt='' className='h-full max-h-16' />
                     <div className='hidden md:flex items-end'>
-                        <h1 className='gap-1 text-4xl font-semibold text-cyan-600 tracking-tight text-end'><span className='text-5xl font-extrabold'>Friends</span> of Columbus Square</h1>
+                        <h1 className='gap-1 md:text-3xl lg:text-4xl font-semibold text-cyan-600 tracking-tight text-start'><span className='md:text-4xl lg:text-5xl font-extrabold'>Friends</span> of Columbus Square</h1>
                     </div>
                     <div className='md:hidden flex flex-col justify-end items-start'>
-                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-end leading-3'><span className='text-2xl font-extrabold'>Friends</span> of</h1>
-                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-end leading-4'>Columbus Square</h1>
-                    </div>
+                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-start leading-3'><span className='text-2xl font-extrabold'>Friends</span> of</h1>
+                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-start leading-4'>Columbus Square</h1>
+                    </div> */}
                 </button>
 
                 {/* Desktop */}
-                <div className='hidden md:grid grid-cols-5 w-2/5 items-end'>
-                    <button onClick={() => navigate("/about")} className={`font-semibold text-xl hover:text-rose-500 ${page === "about" && "text-cyan-700"}`}>
+                <div className='hidden lg:flex gap-2 h-full'>
+                    <button onClick={() => navigate("/about")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "about" && "text-cyan-600"}`}>
                         About
                     </button>
-                    <button onClick={() => navigate("/events")} className={`font-semibold text-xl hover:text-rose-500 ${page === "events" && "text-cyan-700"}`}>
+                    <button onClick={() => navigate("/events")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
                         Events
                     </button>
-                    <button onClick={() => navigate("/donate")} className={`font-semibold text-xl hover:text-rose-500 ${page === "donate" && "text-cyan-700"}`}>
+                    <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
                         Donate
                     </button>
-                    <button onClick={() => navigate("/gallery")} className={`font-semibold text-xl hover:text-rose-500 ${page === "gallery" && "text-cyan-700"}`}>
+                    <button onClick={() => navigate("/gallery")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "gallery" && "text-cyan-600"}`}>
                         Gallery
                     </button>
-                    <button onClick={() => navigate("/contact")} className={`font-semibold text-xl hover:text-rose-500 ${page === "contact" && "text-cyan-700"}`}>
+                    <button onClick={() => navigate("/contact")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "contact" && "text-cyan-600"}`}>
                         Contact
                     </button>
                 </div>
 
                 {/* Mobile */}
-                <div className="md:hidden z-50" id="nav-tooltip-mobile">
+                <div className="lg:hidden z-50" id="nav-tooltip-mobile">
                     <Menu as="div" className="relative inline-block text-left">
                         <div>
                             <Menu.Button onClick={() => setOpenMobileNav(!openMobileNav)} className="rounded-lg focus:bg-slate-200 p-3">
@@ -83,22 +89,22 @@ export default function Navigation() {
                             leaveFrom="opacity-100 translate-y-0 scale-100"
                             leaveTo="opacity-0 -translate-y-full scale-95"
                         >
-                            <Menu.Items className="fixed top-20 right-0 w-screen origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
-                                <div className='flex flex-col border '>
+                            <Menu.Items className="fixed top-28 right-0 w-screen md:w-1/2 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
+                                <div className='flex flex-col border rounded-lg'>
                                     <Menu.Item>
-                                        <Link to="/about" className="py-3 text-center focus:bg-slate-200 border-b border-slate-200">About</Link>
+                                        <Link to="/about" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">About</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <Link to="/events" className="py-3 text-center focus:bg-slate-200 border-b border-slate-200">Events</Link>
+                                        <Link to="/events" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Events</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <Link to="/donate" className="py-3 text-center focus:bg-slate-200 border-b border-slate-200">Donate</Link>
+                                        <Link to="/donate" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Donate</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <Link to="/gallery" className="py-3 text-center focus:bg-slate-200 border-b border-slate-200">Gallery</Link>
+                                        <Link to="/gallery" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Gallery</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <Link to="/contact" className="py-3 text-center focus:bg-slate-200">Contact</Link>
+                                        <Link to="/contact" className="py-3 text-center font-semibold focus:bg-slate-200">Contact</Link>
                                     </Menu.Item>
                                     {/* <Menu.Item>
                                         <button onClick={() => setShowAccessibility(true)} className="py-3 text-center focus:bg-slate-200">
