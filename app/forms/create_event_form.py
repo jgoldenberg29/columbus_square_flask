@@ -17,8 +17,8 @@ locations = [
 
 
 class CreateEventForm(FlaskForm):
-    title=StringField('title', validators=[DataRequired()])
-    description=TextAreaField('description', validators=[DataRequired(), length])
+    title=StringField('title', validators=[DataRequired(), Length(4, 255)])
+    description=TextAreaField('description', validators=[DataRequired(), Length(10, 4000)])
     date=DateField('date', validators=[DataRequired()])
     time=TimeField('time', validators=[DataRequired()])
     location=SelectField('location', choices=locations, validators=[DataRequired()])
