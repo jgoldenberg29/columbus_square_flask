@@ -9,6 +9,5 @@ def get_all():
     """
     get all data on initial render
     """
-        # Add the user to the session, we are logged in!
     events = Event.query.all()
     return {'events': [event.to_dict() for event in events]}

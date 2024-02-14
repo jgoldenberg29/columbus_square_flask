@@ -13,7 +13,10 @@ def seed_events():
             date=event['date'],
             time=event['time'],
             location=event['location'],
-            flyer=event['flyer']
+            flyer=event['flyer'],
+            user_id=event['user_id'],
+            created_at=event['created_at'],
+            updated_at=event['updated_at']
             )
         db.session.add(new_event)
     db.session.commit()

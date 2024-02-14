@@ -16,7 +16,7 @@ class Event(db.Model):
     location = db.Column(db.String(40), nullable=False)
     flyer = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    user = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
@@ -33,7 +33,7 @@ class Event(db.Model):
             'location': self.location,
             'flyer': self.flyer,
             'description': self.description,
-            'poster': poster[0].to_dict(),
+            'poster': self.poster.to_dict(),
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }

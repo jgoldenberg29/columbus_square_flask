@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    posted_events = db.relationship('users', back_populates='poster')
+    posted_events = db.relationship('Event', back_populates='poster')
 
     @property
     def password(self):
@@ -33,5 +33,5 @@ class User(db.Model, UserMixin):
             'name': self.name,
             'email': self.email,
             'admin': self.admin,
-            'eventsPosted': [event.id for event in posted_events]
+            'eventsPosted': [event.id for event in self.posted_events]
         }
