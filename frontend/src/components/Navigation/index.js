@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Menu, Transition } from '@headlessui/react';
 import MobileLogo from './mobile-logo';
 import logo from './FCSP-logo.jpeg';
-import desktopLogo1 from '../../FoCS-logos/desk-1-blk.png'
-import desktopLogo2 from '../../FoCS-logos/desk-2-blk.png'
-import mobileLogo from '../../FoCS-logos/mob-4-blk.png'
+import desktopLogo1 from '../../FoCS-logos/logo-2-joy.png'
+import desktopLogo2 from '../../FoCS-logos/logo-2-gilam.png'
+import mobileLogo1 from '../../FoCS-logos/logo-3-joy.png'
+import mobileLogo2 from '../../FoCS-logos/logo-3-gilam.png'
 import { useAccessibilityModal, useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation';
 import AccessibilityModal from '../AccessibilityModal';
@@ -38,17 +39,10 @@ export default function Navigation() {
         <div className='px-4 md:px-20 border-b md:border-none border-cyan-500'>
             <div className='flex justify-between items-end py-6 md:py-6'>
                 <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end h-3/5'>
-                    {/* <img src={desktopLogo1} className='h-12' /> */}
-                    <img src={desktopLogo2} className='hidden md:flex h-16' />
-                    <img src={mobileLogo} className='md:hidden h-16' />
-                    {/* <img src={logo} alt='' className='h-full max-h-16' />
-                    <div className='hidden md:flex items-end'>
-                        <h1 className='gap-1 md:text-3xl lg:text-4xl font-semibold text-cyan-600 tracking-tight text-start'><span className='md:text-4xl lg:text-5xl font-extrabold'>Friends</span> of Columbus Square</h1>
-                    </div>
-                    <div className='md:hidden flex flex-col justify-end items-start'>
-                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-start leading-3'><span className='text-2xl font-extrabold'>Friends</span> of</h1>
-                        <h1 className='gap-1 text-xl font-semibold text-cyan-600 tracking-tight text-start leading-4'>Columbus Square</h1>
-                    </div> */}
+                    <img src={desktopLogo1} className='h-14' />
+                    {/* <img src={desktopLogo2} className='hidden md:flex h-16' /> */}
+                    <img src={mobileLogo1} className='md:hidden h-16' />
+                    {/* <img src={mobileLogo2} className='md:hidden h-16' /> */}
                 </button>
 
                 {/* Desktop */}
