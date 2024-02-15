@@ -31,7 +31,7 @@ const App = () => {
         <Router>
             <div className="">
                 <Navigation />
-                <div className={`px-4 md:w-3/5 mx-auto mt-32`}>
+                <div className={`px-4 md:w-4/5 mx-auto mt-32`}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
