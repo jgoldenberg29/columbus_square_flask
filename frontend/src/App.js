@@ -29,9 +29,9 @@ const App = () => {
 
     return (
         <Router>
-            <div className={`${darkMode && 'bg-gray-700'}`}>
+            <div className="">
                 <Navigation />
-                <div className={`flex-grow`}>
+                <div className={`px-4 md:px-64 mt-32`}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
