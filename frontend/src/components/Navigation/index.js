@@ -36,7 +36,7 @@ export default function Navigation() {
     // }, [])
 
     return (
-        <div className='fixed top-0 w-full bg-white/85 px-4 md:px-20 border-b md:border-none border-gray-300'>
+        <div className='z-50 fixed top-0 w-full bg-white/85 px-4 md:px-20 border-b md:border-none border-gray-300'>
             <div className='flex justify-between items-end py-6 md:py-6 w-full'>
                 <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end h-3/5'>
                     <img src={desktopLogo1} className='hidden md:flex h-14' />
