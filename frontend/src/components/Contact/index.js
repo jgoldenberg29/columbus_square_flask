@@ -38,7 +38,7 @@ export default function Contact() {
                             <ul>
                                 <li className="font-bold">Columbus Square Park</li>
                                 <li className="">Recreation Center</li>
-                                <li className="">12th and Wharton</li>
+                                <li className="">1200 Wharton St,</li>
                                 <li className="">Philadelphia, PA 19147</li>
                             </ul>
                         </div>
@@ -58,13 +58,13 @@ export default function Contact() {
                         </p>
                     </div>
                 </div>
-                <div className='px-4'>
-                    <h2 className='text-xl font-bold mb-3'>Address</h2>
+                <div className='px-4 py-4'>
+                    <h2 className='text-xl font-bold mb-3'>Location</h2>
                     <p className="mb-3">
                         Bounded by 12th, 13th, Wharton, and Reed Streets, Philadelphia, PA, 19147
                     </p>
                     <div className='max-h-[220]'>
-                        <MapContainer center={[39.9329856,-75.1650]} zoom={17} style={{ height: '300px', width: '100%', zIndex: '0', }}>
+                        <MapContainer center={[39.9329856,-75.1650]} zoom={17} style={{ height: '500px', width: '100%', zIndex: '0', }}>
                             <TileLayer
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

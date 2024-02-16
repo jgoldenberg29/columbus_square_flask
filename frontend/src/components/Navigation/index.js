@@ -36,8 +36,8 @@ export default function Navigation() {
     // }, [])
 
     return (
-        <div className='z-50 fixed top-0 w-full bg-white/85 px-4 md:px-20 border-b md:border-none border-gray-300'>
-            <div className='flex justify-between items-end py-6 md:py-6 w-full'>
+        <div className='z-50 fixed top-0 w-full bg-white/85 px-4 md:px-20 shadow-lg lg:shadow-none '>
+            <div className='flex justify-between items-center py-6 md:py-6 w-full'>
                 <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end h-3/5'>
                     <img src={desktopLogo1} className='hidden md:flex h-14' />
                     {/* <img src={desktopLogo2} className='hidden md:flex h-16' /> */}
@@ -46,22 +46,30 @@ export default function Navigation() {
                 </button>
 
                 {/* Desktop */}
-                <div className='hidden lg:flex gap-2 h-full'>
-                    <button onClick={() => navigate("/about")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "about" && "text-cyan-600"}`}>
-                        About
-                    </button>
-                    <button onClick={() => navigate("/events")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
-                        Events
-                    </button>
-                    <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
-                        Donate
-                    </button>
-                    <button onClick={() => navigate("/gallery")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "gallery" && "text-cyan-600"}`}>
-                        Gallery
-                    </button>
-                    <button onClick={() => navigate("/contact")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "contact" && "text-cyan-600"}`}>
-                        Contact
-                    </button>
+                <div className='hidden lg:flex h-full'>
+                    <div className='flex gap-2 mr-4'>
+                        <button onClick={() => navigate("/about")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "about" && "text-cyan-600"}`}>
+                            About
+                        </button>
+                        <button onClick={() => navigate("/events")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
+                            Events
+                        </button>
+                        <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
+                            Donate
+                        </button>
+                        <button onClick={() => navigate("/gallery")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "gallery" && "text-cyan-600"}`}>
+                            Gallery
+                        </button>
+                        <button onClick={() => navigate("/contact")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "contact" && "text-cyan-600"}`}>
+                            Contact
+                        </button>
+                    </div>
+                    <div className='border-l border-gray-300'>
+                        <button onClick={() => null} className='rounded-full py-1 px-2 ml-5 text-2xl hover:bg-gray-200' title='Admin Login'>
+                            {/* <i class="fa-solid fa-circle-user"></i> */}
+                            <i class="fa-regular fa-circle-user"></i>
+                        </button>
+                    </div>
                 </div>
 
                 {/* Mobile */}
@@ -83,7 +91,7 @@ export default function Navigation() {
                             leaveFrom="opacity-100 translate-y-0 scale-100"
                             leaveTo="opacity-0 -translate-y-full scale-95"
                         >
-                            <Menu.Items className="fixed top-28 right-0 w-screen md:w-1/2 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5">
+                            <Menu.Items className="fixed top-24 right-0 w-screen md:w-1/2 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black/5">
                                 <div className='flex flex-col border rounded-lg'>
                                     <Menu.Item>
                                         <Link to="/about" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">About</Link>
@@ -98,7 +106,12 @@ export default function Navigation() {
                                         <Link to="/gallery" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Gallery</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <Link to="/contact" className="py-3 text-center font-semibold focus:bg-slate-200">Contact</Link>
+                                        <Link to="/contact" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Contact</Link>
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                        <button onClick={() => null} className='py-3 text-center font-semibold focus:bg-slate-200'>
+                                            Login
+                                        </button>
                                     </Menu.Item>
                                     {/* <Menu.Item>
                                         <button onClick={() => setShowAccessibility(true)} className="py-3 text-center focus:bg-slate-200">
