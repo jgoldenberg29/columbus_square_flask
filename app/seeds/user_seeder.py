@@ -6,7 +6,9 @@ from sqlalchemy.sql import text
 def seed_users():
     admin = User(
         email='columbussquarepark@gmail.com',
-        password='ParkFriends1874!')
+        name='Steve',
+        admin=True,
+        password='AtThePark99')
 
     db.session.add(admin)
     db.session.commit()

@@ -13,9 +13,14 @@ class Event(db.Model):
     title = db.Column(db.String(255), nullable=False)
     date = db.Column(db.Date, nullable=False)
     time = db.Column(db.Time, nullable=False)
-    location = db.Column(db.String(), nullable=False)
+    location = db.Column(db.String(40), nullable=False)
     flyer = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
+    poster = db.relationship('User', back_populates='posted_events')
 
 
     def to_dict(self):
@@ -27,7 +32,10 @@ class Event(db.Model):
             'time': self.time.strftime("%H:%M"),
             'location': self.location,
             'flyer': self.flyer,
-            'description': self.description
+            'description': self.description,
+            'poster': self.poster.to_dict(),
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at
         }
 
 
