@@ -29,19 +29,18 @@ const App = () => {
 
     return (
         <Router>
-            <div className={`${darkMode && 'bg-gray-700'}`}>
+            <div className="">
                 <Navigation />
-                <div className={`flex-grow pt-32 md:pt-48 md:px-40`}>
+                <div className={`px-4 md:w-2/3 mx-auto mt-32`}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/events" element={<Events />} />
                         <Route path='/gallery' element={<Gallery />} />
-                    {/* Other routes can be added here */}
                     </Routes>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </Router>
     );

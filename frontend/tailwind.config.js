@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'newspaper': ['Cinzel', 'serif']
+        'newspaper': ['Cinzel', 'serif'],
+        'logo': ['Tajawal', 'serif']
       },
       colors: {
         'fun': '#6CBD91',
