@@ -1,20 +1,10 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import  csrfFetch from './csrf'
 
-// const initialState = {
-//     user: null
-// }
-
-const storeCSRFToken = response => {
-    const csrfToken = response.headers.get("X-CSRF-Token");
-    if (csrfToken) sessionStorage.setItem("X-CSRF-Token", csrfToken);
-  }
 
 export const authenticate = createAsyncThunk(
     'session/authenticate',
     async (thunkAPI) => {
-        const res = await csrfFetch("/api/session")
-        storeCSRFToken(res)
+        const res = await fetch("/api/auth/")
         if (res.ok) {
             const data = await res.json()
             return data
@@ -28,7 +18,7 @@ export const authenticate = createAsyncThunk(
 export const login = createAsyncThunk(
     'session/login',
     async (credentials, thunkAPI) => {
-        const res = await csrfFetch("/api/session", {
+        const res = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +41,7 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk(
     'session/logout',
     async (thunkAPI) => {
-        const res = await csrfFetch("/api/session", {
+        const res = await fetch("/api/session", {
             method: "DELETE"
         })
         if (res.ok) {

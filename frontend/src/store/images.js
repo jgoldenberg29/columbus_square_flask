@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import { fetchAll } from './allData'
-import csrfFetch from './csrf'
 
 // const initialState = {
 //     images: {}
@@ -9,7 +8,7 @@ import csrfFetch from './csrf'
 export const addImage = createAsyncThunk(
     'images/add',
     async (image, thunkAPI) => {
-        const res = await csrfFetch("", {
+        const res = await fetch("", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +30,7 @@ export const addImage = createAsyncThunk(
 export const removeImage = createAsyncThunk(
     'images/remove',
     async (image, thunkAPI) => {
-        const res = await csrfFetch("", {
+        const res = await fetch("", {
             method: "DELETE",
         })
         if (res.ok) {
