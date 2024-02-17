@@ -15,7 +15,7 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
+        return {'user': current_user.to_dict()}
     return {'errors': 'Unauthorized'}
 
 @auth_routes.route('/login', methods=['POST'])
@@ -32,11 +32,11 @@ def login():
         user = User.query.filter(User.email == form.data['email']).first()
         ic('user', user)
         login_user(user)
-        return user.to_dict()
+        return {'user': user.to_dict()}
     return {'errors': form.errors}, 401
 
 
-@auth_routes.route('/logout')
+@auth_routes.route('/logout', methods=['DELETE'])
 def logout():
     """
     Logs a user out
