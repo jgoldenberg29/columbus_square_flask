@@ -3,11 +3,10 @@ from flask_login import login_required, current_user
 from datetime import datetime
 from app.forms import CreateEventForm
 from app.models import Event
+from icecream import ic
 
 
-event_routes = Blueprint('event', __name__)
-
-
+event_routes = Blueprint('events', __name__)
 
 @event_routes.route('', methods=['POST'])
 @login_required
@@ -38,7 +37,7 @@ def add_event():
         return {'event': event.to_dict(), 'user': current_user.to_dict()}
     return {'errors': form.errors}, 401
 
-@event_routes.route('', methods=['PUT'])
+@event_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_event(id):
     """
