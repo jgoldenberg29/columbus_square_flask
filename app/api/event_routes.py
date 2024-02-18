@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from datetime import datetime
 from app.forms import CreateEventForm
-from app.models import Event
+from app.models import db, Event
 from icecream import ic
 
 
@@ -19,22 +19,21 @@ def add_event():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        user = User(
-            new_event = Event(
+
+        new_event = Event(
             title=data['title'],
             description=data['description'],
             date=data['date'],
             time=data['time'],
             location=data['location'],
-            flyer=data['flyer'],
+            flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg",
             user_id=current_user.id,
             created_at=datetime.now(),
             updated_at=datetime.now(),
-            )
         )
-        db.session.add(user)
+        db.session.add(new_event)
         db.session.commit()
-        return {'event': event.to_dict(), 'user': current_user.to_dict()}
+        return {'event': new_event.to_dict(), 'user': current_user.to_dict()}
     return {'errors': form.errors}, 401
 
 @event_routes.route('/<int:id>', methods=['PUT'])

@@ -61,24 +61,22 @@ export default function EventFormModal() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // const dateTime = new Date(`${date} at ${time}`)
-
-        const event = {
-            name: title,
-            date,
-            time,
-            location,
-            description,
-            full: false
-        }
+        const event = new FormData()
 
         if (isUpdateEventForm) event['id'] = eventToUpdate.id
+
+        event.append('title', title)
+        event.append('date', date)
+        event.append('time', time)
+        event.append('location', location)
+        event.append('description', description)
+        console.log('formdata title', event.get('title'))
 
         let data
         if (isUpdateEventForm) {
             data = await dispatch(updateEvent(event))
         } else {
-
+            console.log('event', event.entries())
             data = await dispatch(addEvent(event))
         }
 

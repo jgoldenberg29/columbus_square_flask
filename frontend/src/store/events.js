@@ -8,12 +8,10 @@ export const addEvent = createAsyncThunk(
     async (event, thunkAPI) => {
         const res = await fetch("/api/events", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                event
-            })
+            // headers: {
+            //     "Content-Type": "application/json",
+            // },
+            body: event
         })
         if (res.ok) {
             const data = await res.json()
@@ -30,12 +28,10 @@ export const updateEvent = createAsyncThunk(
     async (event, thunkAPI) => {
         const res = await fetch(`/api/events/${event.id}`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                event
-            })
+            // headers: {
+            //     "Content-Type": "application/json",
+            // },
+            body: event
         })
         if (res.ok) {
             const data = await res.json()
