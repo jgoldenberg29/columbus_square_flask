@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from datetime import datetime
-from app.forms import CreateEventForm
-from app.models import Event
+from app.forms import CreateEventForm, UpdateEventForm
+from app.models import db, Event
 from icecream import ic
 
 
@@ -19,23 +19,22 @@ def add_event():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        user = User(
-            new_event = Event(
+
+        new_event = Event(
             title=data['title'],
             description=data['description'],
             date=data['date'],
             time=data['time'],
             location=data['location'],
-            flyer=data['flyer'],
+            flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg",
             user_id=current_user.id,
             created_at=datetime.now(),
             updated_at=datetime.now(),
-            )
         )
-        db.session.add(user)
+        db.session.add(new_event)
         db.session.commit()
-        return {'event': event.to_dict(), 'user': current_user.to_dict()}
-    return {'errors': form.errors}, 401
+        return {'event': new_event.to_dict(), 'user': current_user.to_dict()}
+    return {'errors': form.errors}, 400
 
 @event_routes.route('/<int:id>', methods=['PUT'])
 @login_required
@@ -46,28 +45,29 @@ def update_event(id):
     form = UpdateEventForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     event = Event.query.get(id)
-
-    if event is None:
-        return {'errors': {'message':'Event not found'}}, 404
-
     if form.validate_on_submit():
         data = form.data
-        for key in data.keys():
-            event[key] = data[key]
 
-        event.updated_at = datetime.now()
+        event.title=data['title']
+        event.description=data['description']
+        event.date=data['date']
+        event.time=data['time']
+        event.location=data['location']
+        event.flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg"
+        event.user_id=current_user.id
+        event.updated_at=datetime.now()
+
         db.session.commit()
         return {'event': event.to_dict()}
-    return {'errors': form.errors}, 401
+    return {'errors': form.errors}, 400
 
 
-@event_routes.route('', methods=['DELETE'])
+@event_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_event(id):
     """
     Update an event, login required
     """
-    form['csrf_token'].data = request.cookies['csrf_token']
     event = Event.query.get(id)
 
     if event is None:
