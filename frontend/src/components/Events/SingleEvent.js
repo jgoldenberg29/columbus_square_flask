@@ -6,11 +6,13 @@ import { useAccessibilitySettings } from '../../context/accessibility';
 import { convertToESTFormat, formatDate } from './date_time_helpers.js'
 
 
-export default function SingleEvent({event, image}) {
+export default function SingleEvent({eventId, image}) {
+    console.log('ID', eventId)
     const { accessibilitySettings, headerFormat, contentFormat } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
     const user = useSelector(state => state.session.user)
+    const event = useSelector(state => state.events.all[eventId])
 
     const {
         setShowEventForm,
@@ -29,8 +31,9 @@ export default function SingleEvent({event, image}) {
 
     const eventTextClass = `lg:w-md xl:md my-2 ${contentFormat}`
 
-    const formattedDate = formatDate(event.date);
-    const formattedTime = convertToESTFormat(event.time);
+    const formattedDate = formatDate(event.displayDate);
+    // const formattedTime = convertToESTFormat(event.time);
+    const formattedTime = event.displayTime[0] === '0' ? event.displayTime.slice(1): event.displayTime;
 
     const updateOnClick = () => {
         setShowEventForm(true)
@@ -51,7 +54,7 @@ export default function SingleEvent({event, image}) {
                         src={image}/>
                 </div>
                 <div className="w-11/12 p-4 md:p-2 md:ml-1 pt-4 md:mt-0 md:mr-4">
-                    <p className={`font-bold text-2xl ${headerFormat}`}> {event.name}</p>
+                    <p className={`font-bold text-2xl ${headerFormat}`}> {event.title}</p>
                     <p className={eventTextClass}><span className="font-bold">date: </span>{formattedDate}</p>
                     <p className={eventTextClass}><span className="font-bold">time: </span>{formattedTime}</p>
                     <p className={eventTextClass}><span className="font-bold">location: </span>{event.location}</p>

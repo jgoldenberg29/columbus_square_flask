@@ -28,8 +28,10 @@ class Event(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'date': self.date,
-            'time': self.time.strftime("%H:%M"),
+            'displayDate': self.date,
+            'formDate': self.date.strftime('%Y-%m-%d'),
+            'formTime': self.time.strftime("%H:%M"),
+            'displayTime': self.time.strftime("%I:%M %p"),
             'location': self.location,
             'flyer': self.flyer,
             'description': self.description,

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from datetime import datetime
-from app.forms import CreateEventForm
+from app.forms import CreateEventForm, UpdateEventForm
 from app.models import db, Event
 from icecream import ic
 
@@ -45,16 +45,18 @@ def update_event(id):
     form = UpdateEventForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     event = Event.query.get(id)
-
-    if event is None:
-        return {'errors': {'message':'Event not found'}}, 404
-
     if form.validate_on_submit():
         data = form.data
-        for key in data.keys():
-            event[key] = data[key]
 
-        event.updated_at = datetime.now()
+        event.title=data['title']
+        event.description=data['description']
+        event.date=data['date']
+        event.time=data['time']
+        event.location=data['location']
+        event.flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg"
+        event.user_id=current_user.id
+        event.updated_at=datetime.now()
+
         db.session.commit()
         return {'event': event.to_dict()}
     return {'errors': form.errors}, 401

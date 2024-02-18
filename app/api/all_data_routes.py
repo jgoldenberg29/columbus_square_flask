@@ -10,4 +10,4 @@ def get_all():
     get all data on initial render
     """
     events = Event.query.all()
-    return {'events': [event.to_dict() for event in events]}
+    return {'events': {event.id: event.to_dict() for event in events}}
