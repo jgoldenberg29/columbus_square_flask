@@ -7,7 +7,6 @@ import { convertToESTFormat, formatDate } from './date_time_helpers.js'
 
 
 export default function SingleEvent({eventId, image}) {
-    console.log('ID', eventId)
     const { accessibilitySettings, headerFormat, contentFormat } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 

@@ -62,13 +62,12 @@ def update_event(id):
     return {'errors': form.errors}, 401
 
 
-@event_routes.route('', methods=['DELETE'])
+@event_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_event(id):
     """
     Update an event, login required
     """
-    form['csrf_token'].data = request.cookies['csrf_token']
     event = Event.query.get(id)
 
     if event is None:
