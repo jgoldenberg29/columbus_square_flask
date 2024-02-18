@@ -56,6 +56,8 @@ export default function EventFormModal() {
         } else {
             console.log('event', event.entries())
             data = await dispatch(addEvent(event))
+            console.log("🚀 ~ handleSubmit ~ data:", data)
+
         }
 
         if (data.errors) {

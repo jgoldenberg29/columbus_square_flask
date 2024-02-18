@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { addEvent } from './events'
 
 
 export const authenticate = createAsyncThunk(
@@ -78,6 +79,13 @@ const sessionSlice = createSlice({
         builder.addCase(logout.fulfilled, (state, action) => {
             state.user = null
         })
+
+        builder.addCase(addEvent.rejected, (state, action) => {
+            console.log('ADD EVENT REJECTED')
+            console.log(action)
+
+            state.errors = action.error
+        });
 
     }
 })

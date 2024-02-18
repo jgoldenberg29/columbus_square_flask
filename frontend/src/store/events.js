@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, isRejectedWithValue} from '@reduxjs/toolkit'
 import { fetchAll } from './allData'
 import fetch from './csrf'
 
@@ -55,7 +55,7 @@ export const removeEvent = createAsyncThunk(
             return data
         } else {
             const data = await res.json()
-            return data
+            return isRejectedWithValue(data)
         }
     }
 )

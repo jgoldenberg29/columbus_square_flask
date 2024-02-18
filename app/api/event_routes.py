@@ -34,7 +34,7 @@ def add_event():
         db.session.add(new_event)
         db.session.commit()
         return {'event': new_event.to_dict(), 'user': current_user.to_dict()}
-    return {'errors': form.errors}, 401
+    return {'errors': form.errors}, 400
 
 @event_routes.route('/<int:id>', methods=['PUT'])
 @login_required
@@ -59,7 +59,7 @@ def update_event(id):
 
         db.session.commit()
         return {'event': event.to_dict()}
-    return {'errors': form.errors}, 401
+    return {'errors': form.errors}, 400
 
 
 @event_routes.route('/<int:id>', methods=['DELETE'])
