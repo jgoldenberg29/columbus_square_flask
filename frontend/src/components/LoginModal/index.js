@@ -103,7 +103,7 @@ export default function LoginModal() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <div className='flex justify-center'>
-                                <button onClick={() => handleSubmit(email, password)} className={`mt-10 py-3 px-8 bg-fun rounded-xl active:bg-gray-300 ${textSize ? 'text-lg' : null}`}>
+                                <button onClick={() => handleSubmit(email, password)} className={`mt-6 py-3 px-8 bg-cyan-600 text-white rounded-xl active:bg-gray-300 ${textSize ? 'text-lg' : null}`}>
                                     Login
                                 </button>
                             </div>

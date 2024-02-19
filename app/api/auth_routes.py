@@ -16,6 +16,7 @@ def authenticate():
     """
     if current_user.is_authenticated:
         return {'user': current_user.to_dict()}
+
     return {'errors': 'Unauthorized'}
 
 @auth_routes.route('/login', methods=['POST'])

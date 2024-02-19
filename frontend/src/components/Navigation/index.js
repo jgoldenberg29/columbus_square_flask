@@ -11,7 +11,10 @@ import { useAccessibilityModal, useAccessibilitySettings } from '../../context/a
 import { useNavigation } from '../../context/navigation';
 import AccessibilityModal from '../AccessibilityModal';
 import { Tooltip, TooltipRefProps } from 'react-tooltip';
-
+import { useSelector } from 'react-redux';
+import { useLogin, useLogout } from '../../context/login';
+import LoginModal from '../LoginModal';
+import LogoutModal from '../LogoutModal';
 
 export default function Navigation() {
     const navigate = useNavigate();
@@ -23,26 +26,27 @@ export default function Navigation() {
     const { accessibilitySettings, contentFormat } = useAccessibilitySettings();
     const { darkMode, textSize, textSpacing } = accessibilitySettings;
     const { page, setPage } = useNavigation();
+    const { showLogin, setShowLogin } = useLogin();
+    const { showLogout, setShowLogout } = useLogout();
 
+    const user = useSelector(state => state.session.user)
 
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setShowTooltip(false)
-    //     }, 8000)
-
-    //     return () => {
-    //         clearTimeout(timer);
-    //     };
-    // }, [])
+    const handleUser = () => {
+        if (user) {
+            setShowLogout(true)
+        } else {
+            setShowLogin(true)
+        }
+    }
 
     return (
         <div className='z-50 fixed top-0 w-full bg-white/85 px-4 md:px-20 shadow-lg lg:shadow-none '>
             <div className='flex justify-between items-center py-6 md:py-6 w-full'>
                 <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end h-3/5'>
-                    <img src={desktopLogo1} className='hidden md:flex h-14' />
-                    {/* <img src={desktopLogo2} className='hidden md:flex h-16' /> */}
-                    <img src={mobileLogo1} className='md:hidden h-14' />
-                    {/* <img src={mobileLogo2} className='md:hidden h-16' /> */}
+                    {/* <img src={desktopLogo1} className='hidden md:flex h-14' /> */}
+                    <img src={desktopLogo2} className='hidden md:flex h-16' />
+                    {/* <img src={mobileLogo1} className='md:hidden h-14' /> */}
+                    <img src={mobileLogo2} className='md:hidden h-16' />
                 </button>
 
                 {/* Desktop */}
@@ -65,7 +69,7 @@ export default function Navigation() {
                         </button>
                     </div>
                     <div className='border-l border-gray-300'>
-                        <button onClick={() => null} className='rounded-full py-1 px-2 ml-5 text-2xl hover:bg-gray-200' title='Admin Login'>
+                        <button onClick={() => handleUser()} className='rounded-full py-1 px-2 ml-5 text-2xl hover:bg-gray-200' title='Admin Login'>
                             {/* <i class="fa-solid fa-circle-user"></i> */}
                             <i class="fa-regular fa-circle-user"></i>
                         </button>
@@ -124,6 +128,9 @@ export default function Navigation() {
                     </Menu>
                 </div>
             </div>
+
+            {showLogin && <LoginModal />}
+            {showLogout && <LogoutModal />}
         </div>
     )
 }

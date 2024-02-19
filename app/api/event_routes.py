@@ -19,7 +19,6 @@ def add_event():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-
         new_event = Event(
             title=data['title'],
             description=data['description'],
@@ -68,6 +67,7 @@ def delete_event(id):
     """
     Update an event, login required
     """
+
     event = Event.query.get(id)
 
     if event is None:
