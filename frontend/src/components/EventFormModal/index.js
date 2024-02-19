@@ -29,57 +29,35 @@ export default function EventFormModal() {
 
     useEffect(() => {
         if (isUpdateEventForm) {
-            setTitle(eventToUpdate?.name)
-            setDate(eventToUpdate?.date)
+            setTitle(eventToUpdate?.title)
+            setDate(eventToUpdate?.formDate)
             setLocation(eventToUpdate.location)
             setDescription(eventToUpdate.description)
-
-            const dateObject = new Date(eventToUpdate?.time);
-            let formattedTime = convertToESTFormat(eventToUpdate?.time)
-
-            // convert 12hour AM/PM string to "HH:MM" to populate time input field
-            if (formattedTime[1] !== ':') {
-                formattedTime = formattedTime.slice(0,5)
-            } else if (formattedTime[5] === 'P') {
-                let secondDigit = formattedTime[0]
-                if (secondDigit < 8) {
-                    secondDigit = Number(secondDigit) + 2
-                    const secondDigitString = String(secondDigit)
-                    formattedTime = '1' + secondDigitString + formattedTime.slice(1,4)
-                } else {
-                    secondDigit = Number(secondDigit) + 12
-                    const secondDigitString = String(secondDigit)
-                    formattedTime = secondDigitString + formattedTime.slice(1,4)
-                }
-            } else {
-                formattedTime = '0' + formattedTime
-                formattedTime = formattedTime.slice(0,5)
-            }
-            setTime(formattedTime)
+            setTime(eventToUpdate.formTime)
         }
     }, [eventToUpdate, isUpdateEventForm])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // const dateTime = new Date(`${date} at ${time}`)
-
-        const event = {
-            name: title,
-            date,
-            time,
-            location,
-            description,
-            full: false
-        }
+        const event = new FormData()
 
         if (isUpdateEventForm) event['id'] = eventToUpdate.id
+
+        event.append('title', title)
+        event.append('date', date)
+        event.append('time', time)
+        event.append('location', location)
+        event.append('description', description)
+        console.log('formdata title', event.get('title'))
 
         let data
         if (isUpdateEventForm) {
             data = await dispatch(updateEvent(event))
         } else {
-
+            console.log('event', event.entries())
             data = await dispatch(addEvent(event))
+            console.log("🚀 ~ handleSubmit ~ data:", data)
+
         }
 
         if (data.errors) {

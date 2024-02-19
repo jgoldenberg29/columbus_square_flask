@@ -48,7 +48,7 @@ export default function Events() {
 
         return (
             <>
-                <SingleEvent event={event} image={image}/>
+                <SingleEvent eventId={event.id} image={image}/>
             </>
         )
     })
