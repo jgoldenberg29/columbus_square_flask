@@ -30,9 +30,13 @@ export default function Contact() {
                         <p className="mb-3">
                             During the Fall, Winter, and Spring most centers operate between 2:00 PM and 10:00 PM. Some centers have limited hours on Saturdays.
                         </p>
-                        <p className='ml-2 flex items-center gap-3'>
+                        <p className='ml-2 flex items-center gap-3 mb-3'>
                             <i class="fa-solid fa-phone"></i>
                             <a href='' target='_blank' className='hover:text-rose-600'>(215) 685-1890</a>
+                        </p>
+                        <p className='ml-2 flex items-center gap-3 mb-3'>
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href='mailto:shara.gordon@phila.gov' target='_blank' className='hover:text-rose-600'>shara.gordon@phila.gov</a>
                         </p>
                         <div className='mt-3 ml-2'>
                             <ul>
