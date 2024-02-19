@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import { fetchAll } from './allData'
-import csrfFetch from './csrf'
+import fetch from './csrf'
 
 
 export const addEvent = createAsyncThunk(
     'events/add',
     async (event, thunkAPI) => {
-        const res = await csrfFetch("/api/events", {
+        const res = await fetch("/api/events", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const addEvent = createAsyncThunk(
 export const updateEvent = createAsyncThunk(
     'events/update',
     async (event, thunkAPI) => {
-        const res = await csrfFetch(`/api/events/${event.id}`, {
+        const res = await fetch(`/api/events/${event.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export const updateEvent = createAsyncThunk(
 export const removeEvent = createAsyncThunk(
     'events/remove',
     async (eventId, thunkAPI) => {
-        const res = await csrfFetch(`/api/events/${eventId}`, {
+        const res = await fetch(`/api/events/${eventId}`, {
             method: "DELETE",
         })
         if (res.ok) {
