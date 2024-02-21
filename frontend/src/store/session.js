@@ -4,13 +4,19 @@ import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 export const authenticate = createAsyncThunk(
     'session/authenticate',
     async (thunkAPI) => {
-        const res = await fetch("/api/auth/")
-        if (res.ok) {
-            const data = await res.json()
-            return data
-        } else {
-            const data = await res.json()
-            return data
+        try {
+            const res = await fetch("/api/auth/")
+            if (res.ok) {
+                const data = await res.json()
+                return data
+            }
+        //     else {
+        //         const data = await res.json()
+        //         return data
+        // }
+        } catch (error) {
+            const errors = error.json()
+            return errors
         }
     }
 )
@@ -79,6 +85,16 @@ const sessionSlice = createSlice({
             state.user = null
         })
 
+<<<<<<< Updated upstream
+=======
+        // builder.addCase(addEvent.rejected, (state, action) => {
+        //     console.log('ADD EVENT REJECTED')
+        //     console.log(action)
+
+        //     state.errors = action.error
+        // });
+
+>>>>>>> Stashed changes
     }
 })
 

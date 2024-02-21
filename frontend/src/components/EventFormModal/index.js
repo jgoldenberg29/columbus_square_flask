@@ -78,13 +78,18 @@ export default function EventFormModal() {
         if (isUpdateEventForm) {
             data = await dispatch(updateEvent(event))
         } else {
+<<<<<<< Updated upstream
+=======
+            data = await dispatch(addEvent(event))
+>>>>>>> Stashed changes
 
             data = await dispatch(addEvent(event))
         }
 
         if (data.errors) {
-
+            console.log("WE HAVE ERRORS", data)
         } else {
+            console.log("DATA", data)
             setIsUpdateEventForm(false)
             setEventToUpdate('')
             setShowEventForm(false)

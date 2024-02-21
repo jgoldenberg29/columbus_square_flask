@@ -8,19 +8,23 @@ export const addEvent = createAsyncThunk(
     async (event, thunkAPI) => {
         const res = await fetch("/api/events", {
             method: "POST",
+<<<<<<< Updated upstream
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 event
             })
+=======
+            body: event
+>>>>>>> Stashed changes
         })
         if (res.ok) {
             const data = await res.json()
             return data
         } else {
-            const data = await res.json()
-            return data
+            const error = await res.json()
+            return error
         }
     }
 )
@@ -30,12 +34,17 @@ export const updateEvent = createAsyncThunk(
     async (event, thunkAPI) => {
         const res = await fetch(`/api/events/${event.id}`, {
             method: "PUT",
+<<<<<<< Updated upstream
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 event
             })
+=======
+
+            body: event
+>>>>>>> Stashed changes
         })
         if (res.ok) {
             const data = await res.json()
@@ -66,7 +75,7 @@ export const removeEvent = createAsyncThunk(
 
 const eventSlice = createSlice({
     name: 'events',
-    initialState: {all: {}},
+    initialState: {all: {}, errors: {}},
     reducers: {
     },
     extraReducers: (builder) => {
@@ -76,6 +85,11 @@ const eventSlice = createSlice({
 
         builder.addCase(addEvent.fulfilled, (state, action) => {
             state.all[action.payload.event.id] = action.payload.event
+        });
+
+        builder.addCase(addEvent.rejected, (state, action) => {
+            console.log('ADD EVENT REJECTED', action)
+            state.errors = action.error
         });
 
         builder.addCase(updateEvent.fulfilled, (state, action) => {
