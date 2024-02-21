@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { AccessibilityProvider } from "./context/accessibility.js"
 import { LoginProvider } from "./context/login.js"
-import { EventFormProvider } from './context/eventForm.js';
+import { FormProvider } from './context/form.js';
 import { NavigationProvider } from './context/navigation';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <EventFormProvider>
+    <FormProvider>
       <AccessibilityProvider>
         <NavigationProvider>
           <LoginProvider>
@@ -32,6 +32,6 @@ root.render(
           </LoginProvider>
         </NavigationProvider>
       </AccessibilityProvider>
-    </EventFormProvider>
+    </FormProvider>
   </React.StrictMode>
 );

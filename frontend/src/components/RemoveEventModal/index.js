@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import {useDispatch} from 'react-redux'
-import { useEventForm } from '../../context/eventForm';
+import { useForm } from '../../context/form';
 import { removeEvent } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
@@ -13,24 +13,24 @@ export default function RemoveEventModal() {
     const dispatch = useDispatch()
 
     const {
-        showRemoveEvent,
-        setShowRemoveEvent,
-        removeEventId,
-    } = useEventForm()
+        showRemove,
+        setShowRemove,
+        removeItemId,
+    } = useForm()
 
     const handleRemove = async () => {
         // remove event
-         const data = await dispatch(removeEvent(removeEventId))
+         const data = await dispatch(removeEvent(removeItemId))
          if(data.errors) {
 
          } else {
-            setShowRemoveEvent(false)
+            setShowRemove(false)
          }
     }
 
     return (
-        <Transition appear show={showRemoveEvent} as={Fragment}>
-            <Dialog as="div" className="fixed z-100" onClose={() => setShowRemoveEvent(false)}>
+        <Transition appear show={showRemove} as={Fragment}>
+            <Dialog as="div" className="fixed z-100" onClose={() => setShowRemove(false)}>
             <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -69,7 +69,7 @@ export default function RemoveEventModal() {
                             <button onClick={handleRemove} className='rounded-lg bg-primary hover:bg-secondary active:bg-slate-200 px-6 py-2'>
                                 Remove Event
                             </button>
-                            <button onClick={() => setShowRemoveEvent(false)} className='rounded-lg bg-slate-300 hover:bg-slate-400 active:bg-slate-200 px-6 py-2'>
+                            <button onClick={() => setShowRemove(false)} className='rounded-lg bg-slate-300 hover:bg-slate-400 active:bg-slate-200 px-6 py-2'>
                                 Cancel
                             </button>
                         </div>

@@ -1,10 +1,9 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
-import { useEventForm } from '../../context/eventForm';
+import { useForm } from '../../context/form.js';
 import {useDispatch} from 'react-redux'
 import { updateEvent, addEvent } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
-import { convertToESTFormat } from '../Events/date_time_helpers.js'
 
 export default function EventFormModal() {
     const dispatch = useDispatch()
@@ -19,29 +18,29 @@ export default function EventFormModal() {
     const [description, setDescription] = useState('')
 
     const {
-        showEventForm,
-        setShowEventForm,
-        isUpdateEventForm,
-        setIsUpdateEventForm,
-        eventToUpdate,
-        setEventToUpdate,
-    } = useEventForm()
+        setShowForm,
+        isUpdateForm,
+        setIsUpdateForm,
+        setItemToUpdate,
+        showForm,
+        itemToUpdate,
+    } = useForm()
 
     useEffect(() => {
-        if (isUpdateEventForm) {
-            setTitle(eventToUpdate?.title)
-            setDate(eventToUpdate?.formDate)
-            setLocation(eventToUpdate.location)
-            setDescription(eventToUpdate.description)
-            setTime(eventToUpdate.formTime)
+        if (isUpdateForm) {
+            setTitle(itemToUpdate?.title)
+            setDate(itemToUpdate?.formDate)
+            setLocation(itemToUpdate.location)
+            setDescription(itemToUpdate.description)
+            setTime(itemToUpdate.formTime)
         }
-    }, [eventToUpdate, isUpdateEventForm])
+    }, [itemToUpdate, isUpdateForm])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const event = new FormData()
 
-        if (isUpdateEventForm) event['id'] = eventToUpdate.id
+        if (isUpdateForm) event['id'] = itemToUpdate.id
 
         event.append('title', title)
         event.append('date', date)
@@ -51,7 +50,7 @@ export default function EventFormModal() {
         console.log('formdata title', event.get('title'))
 
         let data
-        if (isUpdateEventForm) {
+        if (isUpdateForm) {
             data = await dispatch(updateEvent(event))
         } else {
             console.log('event', event.entries())
@@ -63,16 +62,16 @@ export default function EventFormModal() {
         if (data.errors) {
 
         } else {
-            setIsUpdateEventForm(false)
-            setEventToUpdate('')
-            setShowEventForm(false)
+            setIsUpdateForm(false)
+            setItemToUpdate('')
+            setShowForm(false)
         }
 
     }
 
     const onClose = () => {
-        setIsUpdateEventForm(false)
-        setShowEventForm(false)
+        setIsUpdateForm(false)
+        setShowForm(false)
         setTitle('')
         setDate('')
         setTime('')
@@ -81,7 +80,7 @@ export default function EventFormModal() {
     }
 
     return (
-        <Transition appear show={showEventForm} as={Fragment}>
+        <Transition appear show={showForm} as={Fragment}>
             <Dialog as="div" className="fixed z-100" onClose={onClose}>
             <Transition.Child
                 as={Fragment}
@@ -172,7 +171,7 @@ export default function EventFormModal() {
                             />
                             <div className='flex justify-center'>
                                 <button type='submit' className='mt-4 py-3 px-8 bg-secondary rounded-xl active:bg-gray-300'>
-                                    {isUpdateEventForm ? "Update" : "Create"}
+                                    {isUpdateForm ? "Update" : "Create"}
                                 </button>
                             </div>
                         </form>
