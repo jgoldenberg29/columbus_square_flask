@@ -78,11 +78,6 @@ export default function EventFormModal() {
         if (isUpdateEventForm) {
             data = await dispatch(updateEvent(event))
         } else {
-<<<<<<< Updated upstream
-=======
-            data = await dispatch(addEvent(event))
->>>>>>> Stashed changes
-
             data = await dispatch(addEvent(event))
         }
 

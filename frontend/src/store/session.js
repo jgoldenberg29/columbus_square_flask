@@ -85,8 +85,6 @@ const sessionSlice = createSlice({
             state.user = null
         })
 
-<<<<<<< Updated upstream
-=======
         // builder.addCase(addEvent.rejected, (state, action) => {
         //     console.log('ADD EVENT REJECTED')
         //     console.log(action)
@@ -94,7 +92,6 @@ const sessionSlice = createSlice({
         //     state.errors = action.error
         // });
 
->>>>>>> Stashed changes
     }
 })
 
