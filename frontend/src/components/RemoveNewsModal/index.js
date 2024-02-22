@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import {useDispatch} from 'react-redux'
 import { useForm } from '../../context/form';
-// import { removeEvent } from '../../store/events';
+import { removeNews } from '../../store/news';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
 export default function RemoveNewsModal() {
@@ -19,8 +19,7 @@ export default function RemoveNewsModal() {
     } = useForm()
 
     const handleRemove = async () => {
-        // remove news
-        //  const data = await dispatch(removeEvent(removeItemId))
+         const data = await dispatch(removeNews(removeItemId))
          if(data.errors) {
 
          } else {
