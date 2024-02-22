@@ -1,3 +1,3 @@
 from .login_form import LoginForm
-from .create_event_form import CreateEventForm
-from .update_event_form import UpdateEventForm
+from .event_form import EventForm
+from .news_form import NewsForm
