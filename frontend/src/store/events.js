@@ -62,7 +62,7 @@ export const removeEvent = createAsyncThunk(
 
 const eventSlice = createSlice({
     name: 'events',
-    initialState: {all: {}},
+    initialState: {all: {}, errors: {}},
     reducers: {
     },
     extraReducers: (builder) => {

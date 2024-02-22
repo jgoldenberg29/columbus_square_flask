@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useForm } from '../../context/form'
 import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
+import SingleNewsItem from './SingleNewsItem'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
 
@@ -20,6 +21,7 @@ export default function News() {
     const user = useSelector(state => state.session.user);
 
     const news = useSelector(state => state.news.all)
+    console.log("NEWS!!!!!!", news)
     const {
         showForm,
         setShowForm,
@@ -43,7 +45,7 @@ export default function News() {
 
         return (
             <>
-                <SingleEvent newsId={newsItem.id} image={image}/>
+                <SingleNewsItem newsId={newsItem.id} image={image}/>
             </>
         )
     })
