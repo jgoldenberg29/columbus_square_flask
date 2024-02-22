@@ -35,10 +35,5 @@ class Event(db.Model):
             'location': self.location,
             'flyer': self.flyer,
             'description': self.description,
-            'poster': self.poster.to_dict(),
-            'createdAt': self.created_at,
-            'updatedAt': self.updated_at
+            'poster': self.poster.name,
         }
-
-
-# jsonify({'current_time': time_str})

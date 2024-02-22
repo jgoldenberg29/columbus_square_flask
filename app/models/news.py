@@ -10,7 +10,7 @@ class News(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.Text, nullable=False)
+    body = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     image = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
@@ -24,12 +24,8 @@ class News(db.Model):
         return {
             'id': self.id,
             'title': self.title,
+            'body': self.description,
             'image': self.image,
-            'description': self.description,
+            'datePosted': created_at.date(),
             'poster': self.poster.to_dict(),
-            'createdAt': self.created_at,
-            'updatedAt': self.updated_at
         }
-
-
-# jsonify({'current_time': time_str})
