@@ -8,6 +8,9 @@ import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
+import MyCalendar from '../Calendar/fullcalendar'
+import FullCalendar from '../Calendar/fullcalendar'
+import ReactCalendar from '../Calendar/reactbigcalendar'
 
 
 export default function Events() {
@@ -56,16 +59,22 @@ export default function Events() {
     return (
         <div className="mt-6 px-4 mb-20">
             <div className='flex flex-col w-full my-4'>
-                <div className="flex justify-between gap-8">
-                    <h2 className={`${headerFormat} underline ${textSpacing ? "underline-offset-4" : "underlin-offset-1"} pb-4`} >Upcoming Events</h2>
+                <div className="flex justify-between pb-3 mb-6 border-b border-gray-300">
+                    <h2 className="text-3xl" >Upcoming Events</h2>
                     {user && <button
                                 onClick={() => setShowEventForm(true)}
-                                className="self-center py-1 px-2 md:px-4 bg-fun text-white rounded-xl border border-fun active:bg-secondary active:border active:border-white">
+                                className="self-center py-2 px-4 md:px-4 bg-cyan-500 text-white rounded-lg border border-cyan-500 hover:bg-cyan-600 hover:border-cyan-600 active:bg-cyan-300 active:border active:border-white">
                                 Add Event
                             </button>}
                 </div>
-                <div className='flex flex-col items-center md:items-stretch md:w-full'>
-                    {eventsMap}
+                <div className='grid grid-cols-3 gap-10'>
+                    <div>
+                        {/* <FullCalendar /> */}
+                        <ReactCalendar eventsArr={eventsArray} />
+                    </div>
+                    <div className='flex flex-col col-span-2 items-center md:items-stretch md:w-full'>
+                        {eventsMap}
+                    </div>
                 </div>
             </div>
             {/* <div>

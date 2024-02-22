@@ -83,6 +83,7 @@ const sessionSlice = createSlice({
         builder.addCase(addEvent.rejected, (state, action) => {
             console.log('ADD EVENT REJECTED')
             console.log(action)
+            console.log(action.error, "*******************")
 
             state.errors = action.error
         });
