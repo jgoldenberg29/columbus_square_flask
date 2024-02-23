@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { updateEvent, addEvent } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { convertToESTFormat } from '../Events/date_time_helpers.js'
+import moment from 'moment';
 
 export default function EventFormModal() {
     const dispatch = useDispatch()
@@ -32,6 +33,8 @@ export default function EventFormModal() {
     }, [date])
 
     useEffect(() => {
+        // console.log(startTime, ' and ', endTime)
+
         const alpha = startTime.split(' ')
         const beta = endTime.split(' ')
 
@@ -54,12 +57,12 @@ export default function EventFormModal() {
             numEndHour += 12
         }
 
-        console.log(numStartHour, " vs ", numEndHour)
+        // console.log(numStartHour, " vs ", numEndHour)
 
         if (numStartHour > numEndHour) {
             const newEndHour = numStartHour + 1
             const newEndTime = newEndHour.toString() + ":" + startMin + " " + startAMPM
-            console.log(newEndTime)
+            // console.log(newEndTime)
             setEndTime(newEndTime)
         }
     }, [startTime, endTime])
@@ -159,6 +162,32 @@ export default function EventFormModal() {
         return options;
     };
 
+    const handleStartTime = (val) => {
+        // e.preventDefault();
+
+        const time = val
+
+        setStartTime(time)
+
+        console.log("time: ", time)
+
+        const startTimeMoment = moment(time, 'hh:mm A');
+
+        // Parse end time into a Moment object
+        const endTimeMoment = moment(endTime, 'hh:mm A');
+
+        console.log(startTimeMoment)
+        console.log(endTimeMoment)
+
+        // Compare start time and end time
+        if (startTimeMoment.isAfter(endTimeMoment) || !endTime) {
+            // If start time is later than end time, update end time to start time
+            setEndTime(time);
+        }
+
+
+    }
+
     const timeOptions = generateTimeOptions();
 
     return (
@@ -232,7 +261,7 @@ export default function EventFormModal() {
                                     <div className='grid grid-cols-2 gap-4'>
                                         <div className='flex flex-col my-2 gap-1'>
                                             <label className='text-xs ml-1 font-bold'>Start Time</label>
-                                            <select value={startTime} onChange={(e) => setStartTime(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full">
+                                            <select value={startTime} onChange={(e) => handleStartTime(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full">
                                                 {timeOptions.map((time, index) => (
                                                     <option key={index} value={time}>{time}</option>
                                                 ))}
