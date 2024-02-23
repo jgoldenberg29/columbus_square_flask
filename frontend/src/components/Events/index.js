@@ -70,7 +70,7 @@ export default function Events() {
                 <div className='grid grid-cols-3 gap-10'>
                     <div>
                         {/* <FullCalendar /> */}
-                        <ReactCalendar eventsArr={eventsArray} />
+                        <ReactCalendar events={eventsArray} />
                     </div>
                     <div className='flex flex-col col-span-2 items-center md:items-stretch md:w-full'>
                         {eventsMap}

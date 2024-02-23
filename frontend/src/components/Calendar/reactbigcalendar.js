@@ -5,12 +5,10 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
 
-const ReactCalendar = ({ eventsArr }) => {
-    const events = eventsArr.map((event) => {
+const ReactCalendar = ({ events }) => {
 
-    })
 
-    console.log("EVENTS: ", events)
+    // console.log("EVENTS: ", events)
 
     return (
         <div style={{ height: 500 }}>

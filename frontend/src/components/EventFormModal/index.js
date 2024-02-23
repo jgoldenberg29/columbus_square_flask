@@ -12,14 +12,45 @@ export default function EventFormModal() {
     const { accessibilitySettings } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
-    const [title, setTitle] = useState('')
-    const [date, setDate] = useState('')
-    const [time, setTime] = useState('')
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
-    const [location, setLocation] = useState('')
-    const [description, setDescription] = useState('')
+    const [title, setTitle] = useState('');
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
+    const [startTime, setStartTime] = useState('');
+    const [endTime, setEndTime] = useState('');
+    const [location, setLocation] = useState('');
+    const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(true);
+    const [timeErr, setTimeErr] = useState('');
+    const [oneDay, setOneDay] = useState(true);
+
+    useEffect(() => {
+        if (startTime >= endTime) {
+            // const startDate = new Date(`2000-01-01T${startTime}`);
+            // startDate.setHours(startDate.getHours() + 1);
+            // const formattedEndTime = formatDate(startDate);
+            // setEndTime(formattedEndTime);
+
+            setEndTime(startTime)
+        }
+    }, [startTime, endTime])
+
+    const formatDate = (date) => {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const displayHours = hours > 12 ? hours - 12 : hours;
+        const formattedHours = displayHours.toString().padStart(2, '0');
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+        return `${formattedHours}:${formattedMinutes} ${ampm}`;
+    };
+
+    useEffect(() => {
+        if (title && date && startTime && endTime && location && description) {
+            setDisabled(false)
+        } else {
+            setDisabled(true)
+        }
+    }, [title, date, time, startTime, endTime, location, description])
 
     const {
         showEventForm,
@@ -140,56 +171,97 @@ export default function EventFormModal() {
                             <form
                                 onSubmit={handleSubmit}
                                 className="mt-4">
-                                <input
-                                    type="title"
-                                    id="title"
-                                    name="title"
-                                    className="my-2 p-2 border border-gray-300 rounded-md w-full"
-                                    placeholder='Title'
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                                <input
-                                    type="date"
-                                    id="date"
-                                    name="date"
-                                    className="my-2 p-2 border border-gray-300 rounded-md w-full"
-                                    value={date}
-                                    onChange={(e) => setDate(e.target.value)}
-                                />
-                                {/* <input
-                                type="time"
-                                id="time"
-                                name="time"
-                                step="900"
-                                className="my-2 p-2 border border-gray-300 rounded-md w-full"
-                                value={time}
-                                onChange={(e) => setTime(e.target.value)}
-                            /> */}
-                                <div className='grid grid-cols-2 gap-4'>
-                                    <div className='flex flex-col my-2 gap-1'>
-                                        <label className='text-xs ml-1'>Start Time</label>
-                                        <select value={startTime} onChange={(e) => setStartTime(e.target.value)} className="p-2 border border-gray-300 rounded-md w-full">
-                                            {timeOptions.map((time, index) => (
-                                                <option key={index} value={time}>{time}</option>
-                                            ))}
-                                        </select>
+                                <div className='flex flex-col gap-1'>
+                                    <label className='text-xs ml-1 font-bold'>Title</label>
+                                    <input
+                                        type="title"
+                                        id="title"
+                                        name="title"
+                                        className="mb-2 p-2 border border-gray-300 rounded-md w-full"
+                                        placeholder='e.g. "Art in the Park"'
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                    />
+                                </div>
+                                <div className='flex items-center gap-2 ml-4 my-2'>
+                                    <input type='checkbox' checked={oneDay} onClick={(e) => setOneDay(!oneDay)} className='' />
+                                    <label className='text-sm'>This is a one day event.</label>
+                                </div>
+                                <div className={`${oneDay ? "" : "hidden"}`}>
+                                    <div>
+                                        <label className='text-xs ml-1 font-bold'>When</label>
+                                        <input
+                                            type="date"
+                                            id="date"
+                                            name="date"
+                                            className="mb-2 p-2 border border-gray-300 rounded-md w-full"
+                                            value={date}
+                                            onChange={(e) => setDate(e.target.value)}
+                                        />
                                     </div>
-                                    <div className='flex flex-col my-2 gap-1'>
-                                        <label className='text-xs ml-1'>End Time</label>
-                                        <select value={endTime} onChange={(e) => setEndTime(e.target.value)} className="p-2 border border-gray-300 rounded-md w-full">
-                                            {timeOptions.map((time, index) => (
-                                                <option key={index} value={time}>{time}</option>
-                                            ))}
-                                        </select>
+                                    <div className='grid grid-cols-2 gap-4'>
+                                        <div className='flex flex-col my-2 gap-1'>
+                                            <label className='text-xs ml-1 font-bold'>Start Time</label>
+                                            <select value={startTime} onChange={(e) => setStartTime(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full">
+                                                {timeOptions.map((time, index) => (
+                                                    <option key={index} value={time}>{time}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className='flex flex-col my-2 gap-1'>
+                                            <label className='text-xs ml-1 font-bold'>End Time</label>
+                                            <select value={endTime} onChange={(e) => setEndTime(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full">
+                                                {timeOptions.map((time, index) => (
+                                                    <option key={index} value={time}>{time}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`${oneDay ? "hidden" : ""}`}>
+                                    <div className='flex flex-col gap-1 my-2'>
+                                        <label className='text-xs ml-1 font-bold mt-1'>Start Date</label>
+                                        <div className='grid grid-cols-2 gap-4 '>
+                                            <input
+                                                type="date"
+                                                id="date"
+                                                name="date"
+                                                className="p-2 border border-gray-300 rounded-md w-full"
+                                                value={date}
+                                                onChange={(e) => setDate(e.target.value)}
+                                            />
+                                            <select value={startTime} onChange={(e) => setStartTime(e.target.value)} className="px-1 border border-gray-300 rounded-md w-full">
+                                                {timeOptions.map((time, index) => (
+                                                    <option key={index} value={time}>{time}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col gap-1 my-2'>
+                                        <label className='text-xs ml-1 font-bold'>End Date</label>
+                                        <div className='grid grid-cols-2 gap-4 mb-2'>
+                                            <input
+                                                type="date"
+                                                id="date"
+                                                name="date"
+                                                className="p-2 border border-gray-300 rounded-md w-full"
+                                                value={date}
+                                                onChange={(e) => setDate(e.target.value)}
+                                            />
+                                            <select value={startTime} onChange={(e) => setEndTime(e.target.value)} className="px-1 border border-gray-300 rounded-md w-full">
+                                                {timeOptions.map((time, index) => (
+                                                    <option key={index} value={time}>{time}</option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='flex flex-col my-2 gap-1'>
-                                    <label className='text-xs ml-1'>Location</label>
+                                    <label className='text-xs ml-1 font-bold'>Location</label>
                                     <select
                                         id="location"
                                         name="location"
-                                        className="p-2 border border-gray-300 rounded-md w-full"
+                                        className="mb-2 p-2 border border-gray-300 rounded-md w-full"
                                         placeholder='Location'
                                         value={location}
                                         onChange={(e) => setLocation(e.target.value)}
@@ -204,16 +276,23 @@ export default function EventFormModal() {
                                         <option value="13th street">13th Street</option>
                                     </select>
                                 </div>
-                                <textarea
-                                    id="description"
-                                    name="description"
-                                    className="my-2 p-2 border border-gray-300 rounded-md w-full"
-                                    placeholder='Description'
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                />
+                                <div className='flex flex-col gap-1'>
+                                    <label className='text-xs ml-1 font-bold'>Description</label>
+                                    <textarea
+                                        id="description"
+                                        name="description"
+                                        className="mb-2 p-2 border border-gray-300 rounded-md w-full"
+                                        placeholder='Description'
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                    />
+                                </div>
                                 <div className='flex justify-center'>
-                                    <button type='submit' className='mt-4 py-3 px-7 text-white bg-cyan-500 rounded-lg active:bg-cyan-600'>
+                                    <button
+                                        type='submit'
+                                        disabled={disabled}
+                                        className={`mt-4 py-3 px-7 text-white bg-cyan-500 rounded-lg active:bg-cyan-600 ${disabled ? 'cursor-not-allowed bg-slate-400' : ''}`}
+                                    >
                                         {isUpdateEventForm ? "Update" : "Create"}
                                     </button>
                                 </div>
