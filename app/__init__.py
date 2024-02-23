@@ -10,7 +10,7 @@ from .api.auth_routes import auth_routes
 from .api.all_data_routes import all_data_routes
 from .api.user_routes import user_routes
 from .api.event_routes import event_routes
-from .api.blog_routes import blog_routes
+from .api.news_routes import news_routes
 from .seeds import seed_commands
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
@@ -29,7 +29,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(all_data_routes, url_prefix='/api/getAllData')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(event_routes, url_prefix='/api/events')
-app.register_blueprint(blog_routes, url_prefix='/api/blog')
+app.register_blueprint(news_routes, url_prefix='/api/news')
 
 db.init_app(app)
 Migrate(app, db)

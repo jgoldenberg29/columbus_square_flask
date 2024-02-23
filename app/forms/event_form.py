@@ -16,7 +16,7 @@ locations = [
 ]
 
 
-class CreateEventForm(FlaskForm):
+class EventForm(FlaskForm):
     title=StringField('title', validators=[DataRequired(), Length(4, 255)])
     description=TextAreaField('description', validators=[DataRequired(), Length(10, 4000)])
     date=DateField('date', validators=[DataRequired()])

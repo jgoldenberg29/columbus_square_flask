@@ -2,20 +2,17 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import { useForm } from '../../context/form.js';
 import {useDispatch} from 'react-redux'
-import { updateEvent, addEvent } from '../../store/events';
+import { updateNews, addNews } from '../../store/news.js';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
-export default function EventFormModal() {
+export default function NewsFormModal() {
     const dispatch = useDispatch()
 
     const { accessibilitySettings } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
     const [title, setTitle] = useState('')
-    const [date, setDate] = useState('')
-    const [time, setTime] = useState('')
-    const [location, setLocation] = useState('')
-    const [description, setDescription] = useState('')
+    const [body, setBody] = useState('')
 
     const {
         setShowForm,
@@ -31,30 +28,26 @@ export default function EventFormModal() {
             setTitle(itemToUpdate?.title)
             setDate(itemToUpdate?.formDate)
             setLocation(itemToUpdate.location)
-            setDescription(itemToUpdate.description)
+            setBody(itemToUpdate.body)
             setTime(itemToUpdate.formTime)
         }
     }, [itemToUpdate, isUpdateForm])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const event = new FormData()
+        const news = new FormData()
 
-        if (isUpdateForm) event['id'] = itemToUpdate.id
+        if (isUpdateForm) news['id'] = itemToUpdate.id
 
-        event.append('title', title)
-        event.append('date', date)
-        event.append('time', time)
-        event.append('location', location)
-        event.append('description', description)
-        console.log('formdata title', event.get('title'))
+        news.append('title', title)
+        news.append('body', body)
 
         let data
         if (isUpdateForm) {
-            data = await dispatch(updateEvent(event))
+            data = await dispatch(updateNews(news))
         } else {
-            console.log('event', event.entries())
-            data = await dispatch(addEvent(event))
+            console.log('news', news.entries())
+            data = await dispatch(addNews(news))
             console.log("🚀 ~ handleSubmit ~ data:", data)
 
         }
@@ -76,7 +69,7 @@ export default function EventFormModal() {
         setDate('')
         setTime('')
         setLocation('')
-        setDescription('')
+        setBody('')
     }
 
     return (
@@ -113,7 +106,7 @@ export default function EventFormModal() {
                         </Dialog.Title>
                         <div className="mt-2">
                             <p className={`${textSize ? null : "text-sm"} ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                Please enter your event details below.
+                                Please enter your news details below.
                             </p>
                         </div>
                         <form
@@ -128,46 +121,13 @@ export default function EventFormModal() {
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
-                            <input
-                                type="date"
-                                id="date"
-                                name="date"
-                                className="my-2 p-2 border border-gray-300 rounded-md w-full"
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                            />
-                            <input
-                                type="time"
-                                id="time"
-                                name="time"
-                                className="my-2 p-2 border border-gray-300 rounded-md w-full"
-                                value={time}
-                                onChange={(e) => setTime(e.target.value)}
-                            />
-                            <select
-                                id="location"
-                                name="location"
-                                className="my-2 p-2 border border-gray-300 rounded-md w-full"
-                                placeholder='Location'
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
-                            >
-                                <option value="">Choose one</option>
-                                <option value="Whole Park">Whole Park</option>
-                                <option value="Field">Field</option>
-                                <option value="Playground">Playground</option>
-                                <option value="Rec Center">Rec Center</option>
-                                <option value="Picnic Area">Picnic Area</option>
-                                <option value="Reed street">Reed street</option>
-                                <option value="13th street">13th Street</option>
-                            </select>
                             <textarea
-                                id="description"
-                                name="description"
+                                id="body"
+                                name="body"
                                 className="my-2 p-2 border border-gray-300 rounded-md w-full"
                                 placeholder='Description'
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
+                                value={body}
+                                onChange={(e) => setBody(e.target.value)}
                             />
                             <div className='flex justify-center'>
                                 <button type='submit' className='mt-4 py-3 px-8 bg-secondary rounded-xl active:bg-gray-300'>
