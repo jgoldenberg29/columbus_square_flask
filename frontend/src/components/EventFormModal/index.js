@@ -15,6 +15,10 @@ export default function EventFormModal() {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
+    const [start, setStart] = useState('');
+    const [end, setEnd] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [location, setLocation] = useState('');
@@ -24,13 +28,39 @@ export default function EventFormModal() {
     const [oneDay, setOneDay] = useState(true);
 
     useEffect(() => {
-        if (startTime >= endTime) {
-            // const startDate = new Date(`2000-01-01T${startTime}`);
-            // startDate.setHours(startDate.getHours() + 1);
-            // const formattedEndTime = formatDate(startDate);
-            // setEndTime(formattedEndTime);
+        // console.log(date)
+    }, [date])
 
-            setEndTime(startTime)
+    useEffect(() => {
+        const alpha = startTime.split(' ')
+        const beta = endTime.split(' ')
+
+        const startHour = alpha[0].split(':')[0]
+        const endHour = beta[0].split(':')[0]
+        const startMin = alpha[0].split(':')[1]
+        const endMin = beta[0].split(':')[1]
+
+        const startAMPM = alpha[1]
+        const endAMPM = beta[1]
+
+        let numStartHour = parseInt(startHour)
+        let numEndHour = parseInt(endHour)
+
+        if (startAMPM === 'PM' && numStartHour !== 12) {
+            numStartHour += 12
+        }
+
+        if (endAMPM === 'PM' && numEndHour !== 12) {
+            numEndHour += 12
+        }
+
+        console.log(numStartHour, " vs ", numEndHour)
+
+        if (numStartHour > numEndHour) {
+            const newEndHour = numStartHour + 1
+            const newEndTime = newEndHour.toString() + ":" + startMin + " " + startAMPM
+            console.log(newEndTime)
+            setEndTime(newEndTime)
         }
     }, [startTime, endTime])
 
@@ -156,7 +186,7 @@ export default function EventFormModal() {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <Dialog.Panel className={`${darkMode ? "bg-gray-700" : "bg-white"} w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all`}>
+                        <Dialog.Panel className={`${darkMode ? "bg-gray-700" : "bg-white"} w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all z-50`}>
                             <Dialog.Title
                                 as="h1"
                                 className={`leading-6 text-gray-900 ${darkMode && "text-white"} ${textSize ? "text-2xl" : "text-xl"}`}
@@ -282,7 +312,7 @@ export default function EventFormModal() {
                                         id="description"
                                         name="description"
                                         className="mb-2 p-2 border border-gray-300 rounded-md w-full"
-                                        placeholder='Description'
+                                        placeholder='Briefly summarize your event...'
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                     />

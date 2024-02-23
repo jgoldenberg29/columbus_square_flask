@@ -17,7 +17,7 @@ const ReactCalendar = ({ events }) => {
                 events={events}
                 startAccessor="displayDate"
                 endAccessor="end"
-                style={{ fontSize: 12 }} // Adjust font size as needed
+                style={{ fontSize: 12, zIndex: 10 }} // Adjust font size as needed
             />
         </div>
     );
