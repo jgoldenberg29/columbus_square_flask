@@ -20,7 +20,7 @@ class Event(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-    poster = db.relationship('User', back_populates='posted_events')
+    event_poster = db.relationship('User', back_populates='posted_events')
 
 
     def to_dict(self):
@@ -36,7 +36,7 @@ class Event(db.Model):
             'location': self.location,
             'flyer': self.flyer,
             'description': self.description,
-            'poster': self.poster.name,
+            'poster': self.event_poster.name,
         }
 
 

@@ -16,7 +16,7 @@ class News(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-    poster = db.relationship('User', back_populates='posted_events')
+    news_poster = db.relationship('User', back_populates='posted_news')
 
 
     def to_dict(self):
@@ -27,5 +27,5 @@ class News(db.Model):
             'body': self.description,
             'image': self.image,
             'datePosted': created_at.date(),
-            'poster': self.poster.to_dict(),
+            'poster': self.event_poster.to_dict(),
         }

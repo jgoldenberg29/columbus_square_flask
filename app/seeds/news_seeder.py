@@ -1,6 +1,6 @@
 from app.models import db, News, environment, SCHEMA
 from sqlalchemy.sql import text
-from .news_seeds_seeds import news_seeds
+from .news_seeds import news_seeds
 
 
 
