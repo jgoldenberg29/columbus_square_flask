@@ -13,6 +13,7 @@ import Contact from './components/Contact';
 import Events from './components/Events';
 import { fetchAll } from './store/allData';
 import Gallery from './components/Gallery';
+import News from './components/News'
 
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/events" element={<Events />} />
                         <Route path='/gallery' element={<Gallery />} />
+                        <Route path='/news' element={<News />} />
                     </Routes>
                 </div>
                 {/* <Footer /> */}

@@ -32,13 +32,13 @@ class Event(db.Model):
             'formDate': self.date.strftime('%Y-%m-%d'),
             'formTime': self.time.strftime("%H:%M"),
             'displayTime': self.time.strftime("%I:%M %p"),
+            'calendarDateTime'
             'location': self.location,
             'flyer': self.flyer,
             'description': self.description,
-            'poster': self.poster.to_dict(),
-            'createdAt': self.created_at,
-            'updatedAt': self.updated_at
+            'poster': self.poster.name,
         }
 
 
-# jsonify({'current_time': time_str})
+def calendar_datetime(self):
+    pass

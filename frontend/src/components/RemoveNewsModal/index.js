@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import {useDispatch} from 'react-redux'
 import { useForm } from '../../context/form';
-import { removeEvent } from '../../store/events';
+import { removeNews } from '../../store/news';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
-export default function RemoveEventModal() {
+export default function RemoveNewsModal() {
     const { accessibilitySettings } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
@@ -19,8 +19,7 @@ export default function RemoveEventModal() {
     } = useForm()
 
     const handleRemove = async () => {
-        // remove event
-         const data = await dispatch(removeEvent(removeItemId))
+         const data = await dispatch(removeNews(removeItemId))
          if(data.errors) {
 
          } else {
@@ -62,7 +61,7 @@ export default function RemoveEventModal() {
                         </Dialog.Title>
                         <div className="mt-2">
                             <p className={`${textSize ? null : "text-sm"} ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                Are you sure you want to remove this event?
+                                Are you sure you want to remove this news?
                             </p>
                         </div>
                         <div className='mt-6 flex flex-col gap-4'>

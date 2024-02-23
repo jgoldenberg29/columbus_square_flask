@@ -2,6 +2,7 @@ import {configureStore, applyMiddleware } from '@reduxjs/toolkit'
 import sessionReducer from './session'
 import images from './images'
 import eventReducer from './events'
+import newsReducer from './news'
 import galleryReducer from './gallery'
 import allDataReducer from './allData'
 import { thunk } from 'redux-thunk'
@@ -13,6 +14,7 @@ const store = configureStore({
         allData: allDataReducer,
         gallery: galleryReducer,
         events: eventReducer,
+        news: newsReducer,
         images,
     },
     middleware: (getDefaultMiddleware) => {

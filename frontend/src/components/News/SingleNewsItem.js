@@ -1,17 +1,14 @@
-import eventList from './temp_events'
-import parkImage from '../Home/gallery_images/image_1.jpeg'
 import { useForm } from '../../context/form.js'
 import { useSelector } from 'react-redux'
 import { useAccessibilitySettings } from '../../context/accessibility';
-import { convertToESTFormat, formatDate } from './date_time_helpers.js'
 
 
-export default function SingleEvent({eventId, image}) {
+export default function SingleNewsItem({newsId, image}) {
     const { accessibilitySettings, headerFormat, contentFormat } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
     const user = useSelector(state => state.session.user)
-    const event = useSelector(state => state.events.all[eventId])
+    const newsItem = useSelector(state => state.news.all[newsId])
 
     const {
         setShowForm,
@@ -19,26 +16,21 @@ export default function SingleEvent({eventId, image}) {
         setShowRemove,
         setItemToUpdate,
         setRemoveItemId,
-        itemToUpdate,
     } = useForm()
 
     const subHeaderClass = 'text-left underline underline-offset-8 xxs:text-md xs:text-lg sm:text-xl md:text-2xl lg:w-3xl xl:4xl my-4'
 
-    const eventTextClass = `lg:w-md xl:md my-2 ${contentFormat}`
-
-    const formattedDate = formatDate(event.displayDate);
-    // const formattedTime = convertToESTFormat(event.time);
-    const formattedTime = event.displayTime[0] === '0' ? event.displayTime.slice(1): event.displayTime;
+    const newsTextClass = `lg:w-md xl:md my-2 ${contentFormat}`
 
     const updateOnClick = () => {
         setShowForm(true)
         setIsUpdateForm(true)
-        setItemToUpdate(event)
+        setItemToUpdate(newsItem)
     }
 
     const removeOnClick = () => {
         setShowRemove(true)
-        setRemoveItemId(event.id)
+        setRemoveItemId(newsItem.id)
     }
 
     return (
@@ -49,11 +41,8 @@ export default function SingleEvent({eventId, image}) {
                         src={image}/>
                 </div>
                 <div className="w-11/12 p-4 md:p-2 md:ml-1 pt-4 md:mt-0 md:mr-4">
-                    <p className={`font-bold text-2xl ${headerFormat}`}> {event.title}</p>
-                    <p className={eventTextClass}><span className="font-bold">date: </span>{formattedDate}</p>
-                    <p className={eventTextClass}><span className="font-bold">time: </span>{formattedTime}</p>
-                    <p className={eventTextClass}><span className="font-bold">location: </span>{event.location}</p>
-                    <p className={eventTextClass}><span className="font-bold">description: </span>{event.description}</p>
+                    <p className={`font-bold text-2xl ${headerFormat}`}> {newsItem.title}</p>
+                    <p className={newsTextClass}><span className="font-bold">description: </span>{newsItem.body}</p>
                 </div>
                 <div className='hidden md:flex md:w-1/3 rounded-sm overflow-hidden'>
                     <img className="self-center h-54 min-h-full rounded-sm object-cover object-center"
