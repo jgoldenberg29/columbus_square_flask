@@ -17,24 +17,16 @@ export default function EventFormModal() {
 
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
-    const [start, setStart] = useState('');
-    const [end, setEnd] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [time, setTime] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(true);
-    const [timeErr, setTimeErr] = useState('');
-    // const [oneDay, setOneDay] = useState(false);
-    const [multiDay, setMultiDay] = useState(false);
     const [frequency, setFrequency] = useState("DNR");
-
-    useEffect(() => {
-        // console.log(date)
-    }, [date])
+    const [timeString, setTimeString] = useState("");
 
     useEffect(() => {
         // console.log(startTime, ' and ', endTime)
@@ -61,33 +53,57 @@ export default function EventFormModal() {
             numEndHour += 12
         }
 
-        // console.log(numStartHour, " vs ", numEndHour)
-
         if (numStartHour > numEndHour) {
             const newEndHour = numStartHour + 1
             const newEndTime = newEndHour.toString() + ":" + startMin + " " + startAMPM
-            // console.log(newEndTime)
             setEndTime(newEndTime)
         }
     }, [startTime, endTime])
 
-    const formatDate = (date) => {
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        const displayHours = hours > 12 ? hours - 12 : hours;
-        const formattedHours = displayHours.toString().padStart(2, '0');
-        const formattedMinutes = minutes.toString().padStart(2, '0');
-        return `${formattedHours}:${formattedMinutes} ${ampm}`;
-    };
+    useEffect(() => {
+        // Function to format time string as "HH:mm AM/PM"
+        const formatTime = (time) => {
+            return moment(time, 'hh:mm A').format('HH:mm A');
+        };
+
+        // Function to format date as "YYYY-MM-DD"
+        const formatDate = (date) => {
+            return moment(date).format('YYYY-MM-DD');
+        };
+
+        let newTimeString = '';
+
+        if (frequency === 'consecutive') {
+            // Handle consecutive events
+            const formattedStartTime = formatTime(startTime);
+            const formattedEndTime = formatTime(endTime);
+            const consecutiveDays = [];
+            let currentDate = moment(startDate);
+            while (currentDate <= moment(endDate)) {
+                consecutiveDays.push(formatDate(currentDate) + ' ' + formattedStartTime + '+' + formattedEndTime);
+                currentDate = currentDate.add(1, 'day');
+            }
+            newTimeString = consecutiveDays.join('&');
+        } else {
+            // Handle other frequencies
+            const formattedDate = formatDate(date);
+            const formattedStartTime = formatTime(startTime);
+            const formattedEndTime = formatTime(endTime);
+            newTimeString = formattedDate + ' ' + formattedStartTime + '+' + formattedEndTime;
+        }
+
+        console.log("****TIMESTRING: ", newTimeString)
+        // Update the timeString state
+        setTimeString(newTimeString)
+    }, [frequency, date, startDate, endDate, startTime, endTime])
 
     useEffect(() => {
-        if (title && date && startTime && endTime && location && description) {
+        if (title && ((frequency === 'consecutive' && startDate && endDate) || (frequency !== 'consecutive' && date)) && startTime && endTime && location && description) {
             setDisabled(false)
         } else {
             setDisabled(true)
         }
-    }, [title, date, time, startTime, endTime, location, description])
+    }, [title, date, startDate, endDate, time, startTime, endTime, location, description])
 
     const {
         showEventForm,
