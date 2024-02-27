@@ -40,5 +40,8 @@ class Event(db.Model):
             'updatedAt': self.updated_at
         }
 
+    # def create_calendar_events(self):
+
+
 
 # jsonify({'current_time': time_str})

@@ -7,6 +7,8 @@ import { useAccessibilitySettings } from '../../context/accessibility';
 import { convertToESTFormat } from '../Events/date_time_helpers.js'
 import moment from 'moment';
 
+const frequencyOptions = ["DNR", "consecutive", "weekly", "biweekly", "monthly"]
+
 export default function EventFormModal() {
     const dispatch = useDispatch()
 
@@ -26,7 +28,9 @@ export default function EventFormModal() {
     const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(true);
     const [timeErr, setTimeErr] = useState('');
-    const [oneDay, setOneDay] = useState(true);
+    // const [oneDay, setOneDay] = useState(false);
+    const [multiDay, setMultiDay] = useState(false);
+    const [frequency, setFrequency] = useState("DNR");
 
     useEffect(() => {
         // console.log(date)
@@ -104,39 +108,6 @@ export default function EventFormModal() {
         }
     }, [eventToUpdate, isUpdateEventForm])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const event = new FormData()
-
-        if (isUpdateEventForm) event['id'] = eventToUpdate.id
-
-        event.append('title', title)
-        event.append('date', date)
-        event.append('time', time)
-        event.append('location', location)
-        event.append('description', description)
-        console.log('formdata title', event.get('title'))
-
-        let data
-        if (isUpdateEventForm) {
-            data = await dispatch(updateEvent(event))
-        } else {
-            console.log('event', event.entries())
-            data = await dispatch(addEvent(event))
-            console.log("🚀 ~ handleSubmit ~ data:", data)
-
-        }
-
-        if (data.errors) {
-
-        } else {
-            setIsUpdateEventForm(false)
-            setEventToUpdate('')
-            setShowEventForm(false)
-        }
-
-    }
-
     const onClose = () => {
         setIsUpdateEventForm(false)
         setShowEventForm(false)
@@ -169,26 +140,69 @@ export default function EventFormModal() {
 
         setStartTime(time)
 
-        console.log("time: ", time)
-
         const startTimeMoment = moment(time, 'hh:mm A');
-
-        // Parse end time into a Moment object
         const endTimeMoment = moment(endTime, 'hh:mm A');
 
-        console.log(startTimeMoment)
-        console.log(endTimeMoment)
-
-        // Compare start time and end time
         if (startTimeMoment.isAfter(endTimeMoment) || !endTime) {
-            // If start time is later than end time, update end time to start time
             setEndTime(time);
         }
+    }
 
+    const handleEndTime = (val) => {
+        const time = val;
 
+        setEndTime(time)
+
+        const startTimeMoment = moment(startTime, 'hh:mm A');
+        const endTimeMoment = moment(time, 'hh:mm A');
+
+        if (endTimeMoment.isBefore(startTimeMoment)) {
+            setStartTime(time)
+        }
     }
 
     const timeOptions = generateTimeOptions();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const event = new FormData()
+
+        if (isUpdateEventForm) event['id'] = eventToUpdate.id
+
+        event.append('title', title)
+        event.append('date', date)
+        event.append('time', time)
+        event.append('location', location)
+        event.append('description', description)
+        console.log('formdata title', event.get('title'))
+
+        let data
+        if (isUpdateEventForm) {
+            data = await dispatch(updateEvent(event))
+        } else {
+            console.log('event', event.entries())
+            data = await dispatch(addEvent(event))
+            console.log("🚀 ~ handleSubmit ~ data:", data)
+
+        }
+
+        if (data.errors) {
+
+        } else {
+            setIsUpdateEventForm(false)
+            setEventToUpdate('')
+            setShowEventForm(false)
+        }
+
+    };
+
+    const handleOneDay = () => {
+        return;
+    }
+
+    const handleMultiDay = () => {
+        return;
+    }
 
     return (
         <Transition appear show={showEventForm} as={Fragment}>
@@ -230,36 +244,56 @@ export default function EventFormModal() {
                             <form
                                 onSubmit={handleSubmit}
                                 className="mt-4">
-                                <div className='flex flex-col gap-1'>
+                                <div className="flex flex-col gap-1 my-2">
                                     <label className='text-xs ml-1 font-bold'>Title</label>
                                     <input
                                         type="title"
                                         id="title"
                                         name="title"
-                                        className="mb-2 p-2 border border-gray-300 rounded-md w-full"
+                                        className="p-2 border border-gray-300 rounded-md w-full"
                                         placeholder='e.g. "Art in the Park"'
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
                                     />
                                 </div>
-                                <div className='flex items-center gap-2 ml-4 my-2'>
-                                    <input type='checkbox' checked={oneDay} onClick={(e) => setOneDay(!oneDay)} className='' />
-                                    <label className='text-sm'>This is a one day event.</label>
-                                </div>
-                                <div className={`${oneDay ? "" : "hidden"}`}>
-                                    <div>
-                                        <label className='text-xs ml-1 font-bold'>When</label>
+                                <div className="flex flex-col">
+                                    <div className={`${frequency === 'consecutive' && 'hidden'} flex flex-col gap-1 my-2`}>
+                                        <label className='text-xs ml-1 font-bold'>Date</label>
                                         <input
                                             type="date"
                                             id="date"
                                             name="date"
-                                            className="mb-2 p-2 border border-gray-300 rounded-md w-full"
+                                            className="p-2 border border-gray-300 rounded-md w-full"
                                             value={date}
                                             onChange={(e) => setDate(e.target.value)}
                                         />
                                     </div>
-                                    <div className='grid grid-cols-2 gap-4'>
-                                        <div className='flex flex-col my-2 gap-1'>
+                                    <div className={`${frequency !== 'consecutive' && 'hidden'} grid grid-cols-2 gap-2 my-2`}>
+                                        <div>
+                                            <label className='text-xs ml-1 font-bold'>Start Date</label>
+                                            <input
+                                                type="date"
+                                                id="date"
+                                                name="date"
+                                                className="p-2 border border-gray-300 rounded-md w-full"
+                                                value={startDate}
+                                                onChange={(e) => setStartDate(e.target.value)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className='text-xs ml-1 font-bold'>End Date</label>
+                                            <input
+                                                type="date"
+                                                id="date"
+                                                name="date"
+                                                className="p-2 border border-gray-300 rounded-md w-full"
+                                                value={endDate}
+                                                onChange={(e) => setEndDate(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className='grid grid-cols-2 gap-2 my-2'>
+                                        <div className='flex flex-col gap-1'>
                                             <label className='text-xs ml-1 font-bold'>Start Time</label>
                                             <select value={startTime} onChange={(e) => handleStartTime(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full">
                                                 {timeOptions.map((time, index) => (
@@ -267,9 +301,9 @@ export default function EventFormModal() {
                                                 ))}
                                             </select>
                                         </div>
-                                        <div className='flex flex-col my-2 gap-1'>
+                                        <div className='flex flex-col gap-1'>
                                             <label className='text-xs ml-1 font-bold'>End Time</label>
-                                            <select value={endTime} onChange={(e) => setEndTime(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full">
+                                            <select value={endTime} onChange={(e) => handleEndTime(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full">
                                                 {timeOptions.map((time, index) => (
                                                     <option key={index} value={time}>{time}</option>
                                                 ))}
@@ -277,50 +311,27 @@ export default function EventFormModal() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`${oneDay ? "hidden" : ""}`}>
-                                    <div className='flex flex-col gap-1 my-2'>
-                                        <label className='text-xs ml-1 font-bold mt-1'>Start Date</label>
-                                        <div className='grid grid-cols-2 gap-4 '>
-                                            <input
-                                                type="date"
-                                                id="date"
-                                                name="date"
-                                                className="p-2 border border-gray-300 rounded-md w-full"
-                                                value={date}
-                                                onChange={(e) => setDate(e.target.value)}
-                                            />
-                                            <select value={startTime} onChange={(e) => setStartTime(e.target.value)} className="px-1 border border-gray-300 rounded-md w-full">
-                                                {timeOptions.map((time, index) => (
-                                                    <option key={index} value={time}>{time}</option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col gap-1 my-2'>
-                                        <label className='text-xs ml-1 font-bold'>End Date</label>
-                                        <div className='grid grid-cols-2 gap-4 mb-2'>
-                                            <input
-                                                type="date"
-                                                id="date"
-                                                name="date"
-                                                className="p-2 border border-gray-300 rounded-md w-full"
-                                                value={date}
-                                                onChange={(e) => setDate(e.target.value)}
-                                            />
-                                            <select value={startTime} onChange={(e) => setEndTime(e.target.value)} className="px-1 border border-gray-300 rounded-md w-full">
-                                                {timeOptions.map((time, index) => (
-                                                    <option key={index} value={time}>{time}</option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div>
+                                    <label className='text-xs ml-1 font-bold'>Reoccurence</label>
+                                    <select value={frequency} onChange={(e) => setFrequency(e.target.value)} className='py-2 px-1 mb-2 border border-gray-300 rounded-md w-full'>
+                                        <option value="DNR">Does not repeat</option>
+                                        <option value="consecutive">Consecutive days</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="biweekly">Every other week</option>
+                                        <option value="monthly">Monthly</option>
+                                    </select>
                                 </div>
+                                {/* <div className='flex justify-end'>
+                                    <button className='my-2 rounded-full py-1 px-3 text-cyan-500 text-sm border border-cyan-500'>
+                                        <span><i class="fa-solid fa-plus"></i></span> Add Day
+                                    </button>
+                                </div> */}
                                 <div className='flex flex-col my-2 gap-1'>
                                     <label className='text-xs ml-1 font-bold'>Location</label>
                                     <select
                                         id="location"
                                         name="location"
-                                        className="mb-2 p-2 border border-gray-300 rounded-md w-full"
+                                        className="mb-2 py-2 px-1 border border-gray-300 rounded-md w-full"
                                         placeholder='Location'
                                         value={location}
                                         onChange={(e) => setLocation(e.target.value)}
