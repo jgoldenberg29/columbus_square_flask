@@ -61,9 +61,9 @@ export default function EventFormModal() {
     }, [startTime, endTime])
 
     useEffect(() => {
-        // Function to format time string as "HH:mm AM/PM"
+        // Function to format time string as "HH:mm A"
         const formatTime = (time) => {
-            return moment(time, 'hh:mm A').format('HH:mm A');
+            return moment(time, 'hh:mm A').format('HH:mm:ss');
         };
 
         // Function to format date as "YYYY-MM-DD"
@@ -80,16 +80,17 @@ export default function EventFormModal() {
             const consecutiveDays = [];
             let currentDate = moment(startDate);
             while (currentDate <= moment(endDate)) {
-                consecutiveDays.push(formatDate(currentDate) + ' ' + formattedStartTime + '+' + formattedEndTime);
+                consecutiveDays.push(formatDate(currentDate) + 'T' + formattedStartTime + '+' + formatDate(currentDate) + 'T' + formattedEndTime);
                 currentDate = currentDate.add(1, 'day');
             }
             newTimeString = consecutiveDays.join('&');
         } else {
             // Handle other frequencies
-            const formattedDate = formatDate(date);
+            const formattedStartDate = formatDate(date);
+            const formattedEndDate = formatDate(date);
             const formattedStartTime = formatTime(startTime);
             const formattedEndTime = formatTime(endTime);
-            newTimeString = formattedDate + ' ' + formattedStartTime + '+' + formattedEndTime;
+            newTimeString = formattedStartDate + 'T' + formattedStartTime + '/' + formattedEndDate + 'T' + formattedEndTime;
         }
 
         console.log("****TIMESTRING: ", newTimeString)
