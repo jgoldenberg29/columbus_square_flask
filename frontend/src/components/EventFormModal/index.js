@@ -151,8 +151,6 @@ export default function EventFormModal() {
     };
 
     const handleStartTime = (val) => {
-        // e.preventDefault();
-
         const time = val
 
         setStartTime(time)
@@ -187,8 +185,8 @@ export default function EventFormModal() {
         if (isUpdateEventForm) event['id'] = eventToUpdate.id
 
         event.append('title', title)
-        event.append('date', date)
-        event.append('time', time)
+        event.append('date', timeString)
+        event.append('frequency', frequency)
         event.append('location', location)
         event.append('description', description)
         console.log('formdata title', event.get('title'))
@@ -212,14 +210,6 @@ export default function EventFormModal() {
         }
 
     };
-
-    const handleOneDay = () => {
-        return;
-    }
-
-    const handleMultiDay = () => {
-        return;
-    }
 
     return (
         <Transition appear show={showEventForm} as={Fragment}>
