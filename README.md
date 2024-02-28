@@ -27,4 +27,6 @@ The revitalized Friends of Columbus Square Park website is a beacon of modern ac
 ## Acknowledgements
 
 ## Team
-
+* Josh Goldenberg (Full-Stack): [GitHub](https://github.com/jgoldenberg29), [LinkedIn](https://www.linkedin.com/in/josh-goldenberg-252416a1/) 
+* Josh Pascual (Front-End): [GitHub](https://github.com/joshpas24), [LinkedIn](https://www.linkedin.com/in/josh-pascual/)
+* Jennifer Lee (Scrum Master/PM/UXUI): [GitHub](), [LinkedIn](https://www.linkedin.com/in/lee-pac-swe/)
