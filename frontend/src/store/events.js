@@ -7,6 +7,7 @@ const DELETE_EVENT = 'events/delete'
 
 
 export const getAllEvents = (events) => {
+    console.log("EVENTS",events)
     return {
         type: ALL_EVENTS,
         events
@@ -99,55 +100,9 @@ export const thunkDeleteEvent = (id) => async dispatch => {
     }
 }
 
-export const thunkPostComment = (comment, eventId) => async dispatch => {
-    const res = await fetch(`/api/events/${eventId}/comments`, {
-        method: 'POST',
-        body: comment,
-    })
-
-    if(res.ok) {
-        const data = await res.json()
-        dispatch(editEvent(data.event))
-        return null
-    } else {
-        const data = await res.json()
-        return data
-    }
-}
-
-export const thunkEditComment = (comment, commentId) => async dispatch => {
-    const res = await fetch(`/api/comments/${commentId}`, {
-        method: 'PUT',
-        body: comment,
-    })
-
-    if(res.ok) {
-        const data = await res.json()
-        dispatch(editEvent(data.event))
-        return null
-    } else {
-        const data = await res.json()
-        return data
-    }
-}
-
-export const thunkDeleteComment = (commentId) => async dispatch => {
-    const res = await fetch(`/api/comments/${commentId}`, {
-        method: "DELETE"
-    })
-
-    if(res.ok) {
-        const data = await res.json()
-        dispatch(editEvent(data.event))
-        return null
-    } else {
-        const data = await res.json()
-        return data
-    }
-}
-
 
 const eventReducer = (state={}, action) => {
+    console.log(action)
     switch (action.type) {
         case ALL_EVENTS:
             const allEvents = {};

@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
 // import SingleEvent from './SingleEvent'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from '../../context/form'
 import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
 import SingleNewsItem from './SingleNewsItem'
+import { getAllEvents } from '../../store/events'
+import { getAllNews } from '../../store/news'
+import fetchAll from '../../store/allData'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
 
 
 export default function News() {
+    const dispatch = useDispatch()
     const { accessibilitySettings, headerFormat } = useAccessibilitySettings();
     const { darkMode, textSize, textSpacing } = accessibilitySettings;
     const { setPage } = useNavigation();
@@ -35,6 +39,7 @@ export default function News() {
     const subHeaderClass = `text-left underline underline-offset-8 tracking-widest text-2xl my-8 ${darkMode && "text-white"}`
     const newsArray = Object.values(news)
     if (!newsArray.length) {
+        fetchAll(dispatch, getAllEvents, getAllNews)
         return null
     }
     const newsMap = newsArray.map(newsItem => {

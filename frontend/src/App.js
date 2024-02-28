@@ -11,7 +11,9 @@ import { authenticate } from './store/session';
 import { useAccessibilitySettings } from './context/accessibility';
 import Contact from './components/Contact';
 import Events from './components/Events';
-import { fetchAll } from './store/allData';
+import { getAllEvents } from './store/events';
+import { getAllNews } from './store/news';
+import fetchAll from './store/allData';
 import Gallery from './components/Gallery';
 import News from './components/News'
 
@@ -25,7 +27,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(authenticate()).then(() => setIsLoaded(true))
-        dispatch(fetchAll()).then(() => console.log('Fetched All'))
+        dispatch(fetchAll(dispatch, getAllEvents, getAllNews)).then(() => console.log('Fetched All'))
     }, [dispatch])
 
     return (

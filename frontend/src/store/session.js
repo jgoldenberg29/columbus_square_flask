@@ -97,6 +97,7 @@ export const newUser = (firstName, lastName, username, email, password) => async
 };
 
 export default function reducer(state = initialState, action) {
+	console.log(action)
 	switch (action.type) {
 		case SET_USER:
 			return { user: action.payload };

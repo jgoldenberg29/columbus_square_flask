@@ -1,7 +1,8 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import {thunk} from 'redux-thunk';
 import session from './session'
-import recipes from './recipes'
+import events from './events'
+import news from './news'
 
 const rootReducer = combineReducers({
   session,
