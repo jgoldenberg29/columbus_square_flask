@@ -25,6 +25,7 @@ The revitalized Friends of Columbus Square Park website is a beacon of modern ac
 ## Features Coming Soon
 
 ## Acknowledgements
+* Steve, President of Friends of Columbus Square
 
 ## Team
 * Josh Goldenberg (Full-Stack): [GitHub](https://github.com/jgoldenberg29), [LinkedIn](https://www.linkedin.com/in/josh-goldenberg-252416a1/) 
