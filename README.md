@@ -22,6 +22,7 @@ The revitalized Friends of Columbus Square Park website is a beacon of modern ac
 
 ## Admin Functionalities
 * Create, Read, Update, Delete Events
+* Create, Read, Update, Delete Blog Posts
 
 ## Features Coming Soon
 
