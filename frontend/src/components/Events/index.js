@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react'
 import SingleEvent from './SingleEvent'
 import eventList from './temp_events'
 import EventCalendar from './EventCalendar'
-import { useSelector } from 'react-redux'
+import { thunkGetAllEvents } from '../../store/events'
+import { getAllNews } from '../../store/news'
+// import fetchAll from '../../store/allData'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from '../../context/form'
 import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
+import { thunkGetAllData } from '../../store/allData'
 
 
 export default function Events() {
+    const dispatch = useDispatch()
     const { accessibilitySettings, headerFormat } = useAccessibilitySettings();
     const { darkMode, textSize, textSpacing } = accessibilitySettings;
     const { setPage } = useNavigation();
@@ -21,7 +26,7 @@ export default function Events() {
 
     const user = useSelector(state => state.session.user);
 
-    const events = useSelector(state => state.events.all)
+    const events = useSelector(state => state.events)
     const {
         showForm,
         setShowForm,
@@ -35,6 +40,7 @@ export default function Events() {
     const subHeaderClass = `text-left underline underline-offset-8 tracking-widest text-2xl my-8 ${darkMode && "text-white"}`
     const eventsArray = Object.values(events)
     if (!eventsArray.length) {
+        dispatch(thunkGetAllData())
         return null
     }
     const eventsMap = eventsArray.map(event => {

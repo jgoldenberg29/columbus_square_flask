@@ -8,6 +8,8 @@ from icecream import ic
 
 event_routes = Blueprint('events', __name__)
 
+
+
 @event_routes.route('', methods=['POST'])
 @login_required
 def add_event():

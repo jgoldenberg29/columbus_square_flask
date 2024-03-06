@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import { useForm } from '../../context/form.js';
 import {useDispatch} from 'react-redux'
-import { updateEvent, addEvent } from '../../store/events';
+import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
 export default function EventFormModal() {
@@ -47,15 +47,12 @@ export default function EventFormModal() {
         event.append('time', time)
         event.append('location', location)
         event.append('description', description)
-        console.log('formdata title', event.get('title'))
 
         let data
         if (isUpdateForm) {
-            data = await dispatch(updateEvent(event))
+            data = await dispatch(thunkUpdateEvent(event))
         } else {
-            console.log('event', event.entries())
-            data = await dispatch(addEvent(event))
-            console.log("🚀 ~ handleSubmit ~ data:", data)
+            data = await dispatch(thunkCreateEvent(event))
 
         }
 

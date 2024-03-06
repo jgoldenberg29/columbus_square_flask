@@ -26,7 +26,7 @@ app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(all_data_routes, url_prefix='/api/getAllData')
+app.register_blueprint(all_data_routes, url_prefix='/api/allData')
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(event_routes, url_prefix='/api/events')
 app.register_blueprint(news_routes, url_prefix='/api/news')
