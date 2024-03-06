@@ -11,7 +11,7 @@ export default function SingleEvent({eventId, image}) {
     const { darkMode, textSize } = accessibilitySettings;
 
     const user = useSelector(state => state.session.user)
-    const event = useSelector(state => state.events.all[eventId])
+    const event = useSelector(state => state.events[eventId])
 
     const {
         setShowForm,

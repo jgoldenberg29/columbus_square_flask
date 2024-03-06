@@ -8,7 +8,7 @@ export default function SingleNewsItem({newsId, image}) {
     const { darkMode, textSize } = accessibilitySettings;
 
     const user = useSelector(state => state.session.user)
-    const newsItem = useSelector(state => state.news.all[newsId])
+    const newsItem = useSelector(state => state.news[newsId])
 
     const {
         setShowForm,

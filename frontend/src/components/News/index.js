@@ -7,9 +7,10 @@ import RemoveEventModal from '../RemoveEventModal'
 import SingleNewsItem from './SingleNewsItem'
 import { getAllEvents } from '../../store/events'
 import { getAllNews } from '../../store/news'
-import fetchAll from '../../store/allData'
+// import fetchAll from '../../store/allData'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
+import { thunkGetAllData } from '../../store/allData'
 
 
 export default function News() {
@@ -24,8 +25,7 @@ export default function News() {
 
     const user = useSelector(state => state.session.user);
 
-    const news = useSelector(state => state.news.all)
-    console.log("NEWS!!!!!!", news)
+    const news = useSelector(state => state.news)
     const {
         showForm,
         setShowForm,
@@ -39,7 +39,7 @@ export default function News() {
     const subHeaderClass = `text-left underline underline-offset-8 tracking-widest text-2xl my-8 ${darkMode && "text-white"}`
     const newsArray = Object.values(news)
     if (!newsArray.length) {
-        fetchAll(dispatch, getAllEvents, getAllNews)
+        dispatch(thunkGetAllData())
         return null
     }
     const newsMap = newsArray.map(newsItem => {

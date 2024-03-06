@@ -20,12 +20,11 @@ class News(db.Model):
 
 
     def to_dict(self):
-        ic('Time object', self.time)
         return {
             'id': self.id,
             'title': self.title,
-            'body': self.description,
+            'body': self.body,
             'image': self.image,
-            'datePosted': created_at.date(),
-            'poster': self.event_poster.to_dict(),
+            'datePosted': self.created_at.date(),
+            'poster': self.news_poster.to_dict(),
         }

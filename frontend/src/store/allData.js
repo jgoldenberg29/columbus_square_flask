@@ -1,14 +1,32 @@
+import { getAllEvents } from "./events";
+import { getAllNews } from './news'
 
-const fetchAll = (dispatch, getAllEvents, getAllNews) => {
-    fetch("/api/getAllData")
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(getAllEvents(data.events));
-        // dispatch(getAllNews(data.news));
-      });
-  };
+export const thunkGetAllData = () => async dispatch => {
+  const res = await fetch('/api/allData')
 
-  export default fetchAll;
+  if(res.ok) {
+      const data = await res.json();
+      dispatch(getAllEvents(data.events))
+      dispatch(getAllNews(data.news))
+      return null
+  } else {
+      const data = await res.json();
+      return data
+  }
+}
+
+
+
+// const fetchAll = (dispatch, getAllEvents, getAllNews) => {
+//     fetch("/api/getAllData")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         dispatch(getAllEvents(data.events));
+//         // dispatch(getAllNews(data.news));
+//       });
+//   };
+
+  // export default fetchAll;
 
 // import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 

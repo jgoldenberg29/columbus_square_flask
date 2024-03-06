@@ -148,7 +148,6 @@ export const thunkDeleteComment = (commentId) => async dispatch => {
 
 
 const newsReducer = (state={}, action) => {
-    console.log(action)
     switch (action.type) {
         case ALL_NEWS:
             const allNews = {};

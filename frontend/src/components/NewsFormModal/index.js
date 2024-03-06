@@ -46,9 +46,7 @@ export default function NewsFormModal() {
         if (isUpdateForm) {
             data = await dispatch(updateNews(news))
         } else {
-            console.log('news', news.entries())
             data = await dispatch(addNews(news))
-            console.log("🚀 ~ handleSubmit ~ data:", data)
 
         }
 

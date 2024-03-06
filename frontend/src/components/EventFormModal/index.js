@@ -47,15 +47,12 @@ export default function EventFormModal() {
         event.append('time', time)
         event.append('location', location)
         event.append('description', description)
-        console.log('formdata title', event.get('title'))
 
         let data
         if (isUpdateForm) {
             data = await dispatch(thunkUpdateEvent(event))
         } else {
-            console.log('event', event.entries())
             data = await dispatch(thunkCreateEvent(event))
-            console.log("🚀 ~ handleSubmit ~ data:", data)
 
         }
 

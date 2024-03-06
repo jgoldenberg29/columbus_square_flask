@@ -13,7 +13,7 @@ import Contact from './components/Contact';
 import Events from './components/Events';
 import { getAllEvents } from './store/events';
 import { getAllNews } from './store/news';
-import fetchAll from './store/allData';
+import fetchAll, { thunkGetAllData } from './store/allData';
 import Gallery from './components/Gallery';
 import News from './components/News'
 
@@ -27,7 +27,8 @@ const App = () => {
 
     useEffect(() => {
         dispatch(authenticate()).then(() => setIsLoaded(true))
-        dispatch(fetchAll(dispatch, getAllEvents, getAllNews)).then(() => console.log('Fetched All'))
+        dispatch(thunkGetAllData())
+        // dispatch(fetchAll(dispatch, getAllEvents, getAllNews)).then(() => console.log('Fetched All'))
     }, [dispatch])
 
     return (

@@ -7,7 +7,6 @@ const DELETE_EVENT = 'events/delete'
 
 
 export const getAllEvents = (events) => {
-    console.log("EVENTS",events)
     return {
         type: ALL_EVENTS,
         events
@@ -102,7 +101,6 @@ export const thunkDeleteEvent = (id) => async dispatch => {
 
 
 const eventReducer = (state={}, action) => {
-    console.log(action)
     switch (action.type) {
         case ALL_EVENTS:
             const allEvents = {};

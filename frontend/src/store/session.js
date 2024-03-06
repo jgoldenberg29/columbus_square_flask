@@ -57,9 +57,7 @@ export const login = (credentials) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
 	const response = await fetch("/api/auth/logout", {
-		headers: {
-			"Content-Type": "application/json",
-		},
+		method: "DELETE",
 	});
 
 	if (response.ok) {
@@ -97,7 +95,6 @@ export const newUser = (firstName, lastName, username, email, password) => async
 };
 
 export default function reducer(state = initialState, action) {
-	console.log(action)
 	switch (action.type) {
 		case SET_USER:
 			return { user: action.payload };
