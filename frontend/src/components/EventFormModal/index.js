@@ -1,10 +1,9 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
-import { useEventForm } from '../../context/eventForm';
+import { useForm } from '../../context/form.js';
 import { useDispatch } from 'react-redux'
-import { updateEvent, addEvent } from '../../store/events';
+import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
-import { convertToESTFormat } from '../Events/date_time_helpers.js'
 import moment from 'moment';
 
 const frequencyOptions = ["DNR", "consecutive", "weekly", "biweekly", "monthly"]
@@ -107,27 +106,27 @@ export default function EventFormModal() {
     }, [title, date, startDate, endDate, time, startTime, endTime, location, description])
 
     const {
-        showEventForm,
-        setShowEventForm,
-        isUpdateEventForm,
-        setIsUpdateEventForm,
-        eventToUpdate,
-        setEventToUpdate,
-    } = useEventForm()
+        setShowForm,
+        isUpdateForm,
+        setIsUpdateForm,
+        setItemToUpdate,
+        showForm,
+        itemToUpdate,
+    } = useForm()
 
     useEffect(() => {
-        if (isUpdateEventForm) {
-            setTitle(eventToUpdate?.title)
-            setDate(eventToUpdate?.formDate)
-            setLocation(eventToUpdate.location)
-            setDescription(eventToUpdate.description)
-            setTime(eventToUpdate.formTime)
+        if (isUpdateForm) {
+            setTitle(itemToUpdate?.title)
+            setDate(itemToUpdate?.formDate)
+            setLocation(itemToUpdate.location)
+            setDescription(itemToUpdate.description)
+            setTime(itemToUpdate.formTime)
         }
-    }, [eventToUpdate, isUpdateEventForm])
+    }, [itemToUpdate, isUpdateForm])
 
     const onClose = () => {
-        setIsUpdateEventForm(false)
-        setShowEventForm(false)
+        setIsUpdateForm(false)
+        setShowForm(false)
         setTitle('')
         setDate('')
         setTime('')
@@ -182,37 +181,34 @@ export default function EventFormModal() {
         e.preventDefault()
         const event = new FormData()
 
-        if (isUpdateEventForm) event['id'] = eventToUpdate.id
+        if (isUpdateForm) event['id'] = itemToUpdate.id
 
         event.append('title', title)
         event.append('date', timeString)
         event.append('frequency', frequency)
         event.append('location', location)
         event.append('description', description)
-        console.log('formdata title', event.get('title'))
 
         let data
-        if (isUpdateEventForm) {
-            data = await dispatch(updateEvent(event))
+        if (isUpdateForm) {
+            data = await dispatch(thunkUpdateEvent(event))
         } else {
-            console.log('event', event.entries())
-            data = await dispatch(addEvent(event))
-            console.log("🚀 ~ handleSubmit ~ data:", data)
+            data = await dispatch(thunkCreateEvent(event))
 
         }
 
         if (data.errors) {
 
         } else {
-            setIsUpdateEventForm(false)
-            setEventToUpdate('')
-            setShowEventForm(false)
+            setIsUpdateForm(false)
+            setItemToUpdate('')
+            setShowForm(false)
         }
 
     };
 
     return (
-        <Transition appear show={showEventForm} as={Fragment}>
+        <Transition appear show={showForm} as={Fragment}>
             <Dialog as="div" className="fixed z-100" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}
@@ -370,7 +366,7 @@ export default function EventFormModal() {
                                         disabled={disabled}
                                         className={`mt-4 py-3 px-7 text-white bg-cyan-500 rounded-lg active:bg-cyan-600 ${disabled ? 'cursor-not-allowed bg-slate-400' : ''}`}
                                     >
-                                        {isUpdateEventForm ? "Update" : "Create"}
+                                        {isUpdateForm ? "Update" : "Create"}
                                     </button>
                                 </div>
                             </form>

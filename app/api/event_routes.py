@@ -1,12 +1,14 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from datetime import datetime
-from app.forms import CreateEventForm, UpdateEventForm
+from app.forms import EventForm
 from app.models import db, Event
 from icecream import ic
 
 
 event_routes = Blueprint('events', __name__)
+
+
 
 @event_routes.route('', methods=['POST'])
 @login_required
@@ -15,7 +17,7 @@ def add_event():
     Creates a new event, login required
     """
 
-    form = CreateEventForm()
+    form = EventForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
@@ -42,7 +44,7 @@ def update_event(id):
     """
     Update an event, login required
     """
-    form = UpdateEventForm()
+    form = EventForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     event = Event.query.get(id)
     if form.validate_on_submit():

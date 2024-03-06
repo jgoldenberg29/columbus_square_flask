@@ -1,6 +1,6 @@
 import eventList from './temp_events'
 import parkImage from '../Home/gallery_images/image_1.jpeg'
-import { useEventForm } from '../../context/eventForm'
+import { useForm } from '../../context/form.js'
 import { useSelector } from 'react-redux'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { convertToESTFormat, formatDate } from './date_time_helpers.js'
@@ -11,20 +11,16 @@ export default function SingleEvent({eventId, image}) {
     const { darkMode, textSize } = accessibilitySettings;
 
     const user = useSelector(state => state.session.user)
-    const event = useSelector(state => state.events.all[eventId])
+    const event = useSelector(state => state.events[eventId])
 
     const {
-        setShowEventForm,
-        setIsUpdateEventForm,
-        setShowRemoveEvent,
-        setEventToUpdate,
-        setRemoveEventId,
-        setTitle,
-        setDate,
-        setTime,
-        setLocation,
-        setDescription
-    } = useEventForm()
+        setShowForm,
+        setIsUpdateForm,
+        setShowRemove,
+        setItemToUpdate,
+        setRemoveItemId,
+        itemToUpdate,
+    } = useForm()
 
     const subHeaderClass = 'text-left underline underline-offset-8 xxs:text-md xs:text-lg sm:text-xl md:text-2xl lg:w-3xl xl:4xl my-4'
 
@@ -35,14 +31,14 @@ export default function SingleEvent({eventId, image}) {
     const formattedTime = event.displayTime[0] === '0' ? event.displayTime.slice(1): event.displayTime;
 
     const updateOnClick = () => {
-        setShowEventForm(true)
-        setIsUpdateEventForm(true)
-        setEventToUpdate(event)
+        setShowForm(true)
+        setIsUpdateForm(true)
+        setItemToUpdate(event)
     }
 
     const removeOnClick = () => {
-        setShowRemoveEvent(true)
-        setRemoveEventId(event.id)
+        setShowRemove(true)
+        setRemoveItemId(event.id)
     }
 
     return (

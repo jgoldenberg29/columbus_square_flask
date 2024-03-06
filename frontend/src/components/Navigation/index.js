@@ -58,6 +58,9 @@ export default function Navigation() {
                         <button onClick={() => navigate("/events")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
                             Events
                         </button>
+                        <button onClick={() => navigate("/news")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
+                            News
+                        </button>
                         <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
                             Donate
                         </button>
@@ -102,6 +105,9 @@ export default function Navigation() {
                                     </Menu.Item>
                                     <Menu.Item>
                                         <Link to="/events" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Events</Link>
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                        <Link to="/news" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">News</Link>
                                     </Menu.Item>
                                     <Menu.Item>
                                         <Link to="/donate" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Donate</Link>

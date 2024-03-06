@@ -20,7 +20,7 @@ class Event(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-    poster = db.relationship('User', back_populates='posted_events')
+    event_poster = db.relationship('User', back_populates='posted_events')
 
 
     def to_dict(self):
@@ -32,16 +32,16 @@ class Event(db.Model):
             'formDate': self.date.strftime('%Y-%m-%d'),
             'formTime': self.time.strftime("%H:%M"),
             'displayTime': self.time.strftime("%I:%M %p"),
+            'calendarDateTime'
             'location': self.location,
             'flyer': self.flyer,
             'description': self.description,
-            'poster': self.poster.to_dict(),
-            'createdAt': self.created_at,
-            'updatedAt': self.updated_at
+            'poster': self.event_poster.name,
         }
 
     # def create_calendar_events(self):
 
 
 
-# jsonify({'current_time': time_str})
+def calendar_datetime(self):
+    pass

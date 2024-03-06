@@ -1,5 +1,4 @@
 export function convertToESTFormat(dateTimeString) {
-    console.log("date time string", dateTimeString)
     // const dateTimeObject = new Date(dateTimeString);
 
     // // Format the time manually in Eastern Standard Time (EST)
