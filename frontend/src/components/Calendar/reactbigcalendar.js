@@ -35,7 +35,7 @@ const ReactCalendar = () => {
                 localizer={localizer}
                 events={events}
                 startAccessor="start"
-                endAccessor="end"
+                // endAccessor="end"
                 style={{ fontSize: 12, zIndex: 10 }} // Adjust font size as needed
             />
         </div>

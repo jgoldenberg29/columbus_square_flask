@@ -2,12 +2,46 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from datetime import datetime
 from app.forms import EventForm
-from app.models import db, Event
+from app.models import db, Event, CalendarEvent
 from icecream import ic
 
 
 event_routes = Blueprint('events', __name__)
 
+# create calendar event function
+def create_calendar_event(event_id, time_string, frequency):
+    [start, end] = time_string.split('/')
+    calendar_events = []
+
+    def add_calendar_event(event_id, start, end):
+        new_calendar_event = CalendarEvent(
+            event_id=event_id,
+            start=start,
+            end=end
+        )
+        db.session.add(new_calendar_event)
+        db.session.commit()
+
+    new_event = {
+        'event_id': event_id,
+        'start': start,
+        'end': end
+    }
+
+    if frequency == 'DNR':
+        add_calendar_event(event_id, start, end)
+
+    if frequency == 'consecutive':
+        return
+
+    if frequency == 'weekly':
+        return
+
+    if frequency == 'biweekly':
+        return
+
+    if frequency == 'monthly':
+        return
 
 
 @event_routes.route('', methods=['POST'])
