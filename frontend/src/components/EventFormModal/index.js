@@ -171,8 +171,7 @@ export default function EventFormModal() {
         if (isUpdateForm) event['id'] = itemToUpdate.id
 
         event.append('title', title)
-        event.append('date', timeString)
-        event.append('frequency', frequency)
+        event.append('dateString', timeString)
         event.append('location', location)
         event.append('description', description)
 
