@@ -72,30 +72,17 @@ export default function EventFormModal() {
 
         let newTimeString = '';
 
-        if (frequency === 'consecutive') {
-            // Handle consecutive events
-            const formattedStartTime = formatTime(startTime);
-            const formattedEndTime = formatTime(endTime);
-            const consecutiveDays = [];
-            let currentDate = moment(startDate);
-            while (currentDate <= moment(endDate)) {
-                consecutiveDays.push(formatDate(currentDate) + 'T' + formattedStartTime + '+' + formatDate(currentDate) + 'T' + formattedEndTime);
-                currentDate = currentDate.add(1, 'day');
-            }
-            newTimeString = consecutiveDays.join('&');
-        } else {
-            // Handle other frequencies
-            const formattedStartDate = formatDate(date);
-            const formattedEndDate = formatDate(date);
-            const formattedStartTime = formatTime(startTime);
-            const formattedEndTime = formatTime(endTime);
-            newTimeString = formattedStartDate + 'T' + formattedStartTime + '/' + formattedEndDate + 'T' + formattedEndTime;
-        }
+        const formattedStartDate = formatDate(date);
+        const formattedEndDate = formatDate(date);
+        const formattedStartTime = formatTime(startTime);
+        const formattedEndTime = formatTime(endTime);
+
+        newTimeString = formattedStartDate + 'T' + formattedStartTime + '/' + formattedEndDate + 'T' + formattedEndTime;
 
         console.log("****TIMESTRING: ", newTimeString)
         // Update the timeString state
         setTimeString(newTimeString)
-    }, [frequency, date, startDate, endDate, startTime, endTime])
+    }, [frequency, date, startTime, endTime])
 
     useEffect(() => {
         if (title && ((frequency === 'consecutive' && startDate && endDate) || (frequency !== 'consecutive' && date)) && startTime && endTime && location && description) {
@@ -260,7 +247,7 @@ export default function EventFormModal() {
                                     />
                                 </div>
                                 <div className="flex flex-col">
-                                    <div className={`${frequency === 'consecutive' && 'hidden'} flex flex-col gap-1 my-2`}>
+                                    <div className={`flex flex-col gap-1 my-2`}>
                                         <label className='text-xs ml-1 font-bold'>Date</label>
                                         <input
                                             type="date"
@@ -270,30 +257,6 @@ export default function EventFormModal() {
                                             value={date}
                                             onChange={(e) => setDate(e.target.value)}
                                         />
-                                    </div>
-                                    <div className={`${frequency !== 'consecutive' && 'hidden'} grid grid-cols-2 gap-2 my-2`}>
-                                        <div>
-                                            <label className='text-xs ml-1 font-bold'>Start Date</label>
-                                            <input
-                                                type="date"
-                                                id="date"
-                                                name="date"
-                                                className="p-2 border border-gray-300 rounded-md w-full"
-                                                value={startDate}
-                                                onChange={(e) => setStartDate(e.target.value)}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className='text-xs ml-1 font-bold'>End Date</label>
-                                            <input
-                                                type="date"
-                                                id="date"
-                                                name="date"
-                                                className="p-2 border border-gray-300 rounded-md w-full"
-                                                value={endDate}
-                                                onChange={(e) => setEndDate(e.target.value)}
-                                            />
-                                        </div>
                                     </div>
                                     <div className='grid grid-cols-2 gap-2 my-2'>
                                         <div className='flex flex-col gap-1'>
@@ -314,21 +277,6 @@ export default function EventFormModal() {
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <label className='text-xs ml-1 font-bold'>Reoccurence</label>
-                                    <select value={frequency} onChange={(e) => setFrequency(e.target.value)} className='py-2 px-1 mb-2 border border-gray-300 rounded-md w-full'>
-                                        <option value="DNR">Does not repeat</option>
-                                        <option value="consecutive">Consecutive days</option>
-                                        <option value="weekly">Weekly</option>
-                                        <option value="biweekly">Every other week</option>
-                                        <option value="monthly">Monthly</option>
-                                    </select>
-                                </div>
-                                {/* <div className='flex justify-end'>
-                                    <button className='my-2 rounded-full py-1 px-3 text-cyan-500 text-sm border border-cyan-500'>
-                                        <span><i class="fa-solid fa-plus"></i></span> Add Day
-                                    </button>
-                                </div> */}
                                 <div className='flex flex-col my-2 gap-1'>
                                     <label className='text-xs ml-1 font-bold'>Location</label>
                                     <select
