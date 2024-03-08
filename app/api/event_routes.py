@@ -21,11 +21,16 @@ def add_event():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
+
+        [start_str, end_str] = data['dateString'].split('/')
+        start = datetime.strptime(start_str, '%Y-%m-%dT%H:%M:%S')
+        end = datetime.strptime(end_str, '%Y-%m-%dT%H:%M:%S')
+
         new_event = Event(
             title=data['title'],
             description=data['description'],
-            date=data['date'],
-            time=data['time'],
+            start=start,
+            end=end,
             location=data['location'],
             flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg",
             user_id=current_user.id,

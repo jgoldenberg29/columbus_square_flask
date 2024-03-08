@@ -7,18 +7,20 @@ from .event_seeds import event_seeds
 # Adds a demo user, you can add other users here if you want
 def seed_events():
     for event in event_seeds:
-        new_event = Event(
-            title=event['title'],
-            description=event['description'],
-            date=event['date'],
-            time=event['time'],
-            location=event['location'],
-            flyer=event['flyer'],
-            user_id=event['user_id'],
-            created_at=event['created_at'],
-            updated_at=event['updated_at']
-            )
-        db.session.add(new_event)
+        # new_event = Event(
+        #     title=event['title'],
+        #     description=event['description'],
+        #     date=event['date'],
+        #     time=event['time'],
+        #     location=event['location'],
+        #     flyer=event['flyer'],
+        #     user_id=event['user_id'],
+        #     created_at=event['created_at'],
+        #     updated_at=event['updated_at']
+        #     )
+        # db.session.add(new_event)
+        event = Event(**event)
+        db.session.add(event)
     db.session.commit()
 
 

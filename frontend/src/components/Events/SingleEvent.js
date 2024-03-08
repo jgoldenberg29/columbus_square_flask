@@ -28,7 +28,7 @@ export default function SingleEvent({eventId, image}) {
 
     const formattedDate = formatDate(event.displayDate);
     // const formattedTime = convertToESTFormat(event.time);
-    const formattedTime = event.displayTime[0] === '0' ? event.displayTime.slice(1): event.displayTime;
+    // const formattedTime = event.displayTime[0] === '0' ? event.displayTime.slice(1): event.displayTime;
 
     const updateOnClick = () => {
         setShowForm(true)
@@ -51,8 +51,8 @@ export default function SingleEvent({eventId, image}) {
                 <div className="w-11/12 p-4 md:p-2 md:ml-1 pt-4 md:mt-0 md:mr-4 col-span-3">
                     <p className="font-bold text-3xl">{event.title}</p>
                     <p className={`${eventTextClass} flex gap-3`}>
-                        <div>{formattedDate} at {formattedTime}</div>
-                        <div className='pl-3 border-l border-black'>{event.location}</div>
+                        {/* <div>{formattedDate} at {formattedTime}</div> */}
+                        {/* <div className='pl-3 border-l border-black'>{event.location}</div> */}
                     </p>
                     <p className={`${eventTextClass} mt-6`}>{event.description}</p>
                 </div>

@@ -172,7 +172,7 @@ export default function EventFormModal() {
 
         event.append('title', title)
         event.append('dateString', timeString)
-        event.append('location', location)
+        // event.append('location', location)
         event.append('description', description)
 
         let data
@@ -195,7 +195,7 @@ export default function EventFormModal() {
 
     return (
         <Transition appear show={showForm} as={Fragment}>
-            <Dialog as="div" className="fixed z-100" onClose={onClose}>
+            <Dialog as="div" className="fixed z-[100]" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -276,7 +276,7 @@ export default function EventFormModal() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='flex flex-col my-2 gap-1'>
+                                {/* <div className='flex flex-col my-2 gap-1'>
                                     <label className='text-xs ml-1 font-bold'>Location</label>
                                     <select
                                         id="location"
@@ -295,8 +295,8 @@ export default function EventFormModal() {
                                         <option value="Reed street">Reed street</option>
                                         <option value="13th street">13th Street</option>
                                     </select>
-                                </div>
-                                <div className='flex flex-col gap-1'>
+                                </div> */}
+                                <div className='flex flex-col gap-1 my-2'>
                                     <label className='text-xs ml-1 font-bold'>Description</label>
                                     <textarea
                                         id="description"

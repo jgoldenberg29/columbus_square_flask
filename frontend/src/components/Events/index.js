@@ -76,7 +76,7 @@ export default function Events() {
                         <ReactCalendar events={eventsArray} />
                     </div>
                     <div className='flex flex-col items-center md:items-stretch md:w-full'>
-                        {eventsMap}
+                        {eventsMap.length ? eventsMap : null}
                     </div>
                 </div>
             </div>
