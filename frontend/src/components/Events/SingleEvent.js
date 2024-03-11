@@ -72,7 +72,7 @@ export default function SingleEvent({event, image}) {
                     <p className={`${eventTextClass} mt-6`}>{event.description}</p>
                 </div>
                 <div className='hidden md:flex rounded-md overflow-hidden md:col-span-2 max-h-56'>
-                    <img className="self-center min-h-full object-cover object-center"
+                    <img className="self-center min-w-full h-auto object-cover object-center"
                         src={image}/>
                 </div>
             </div>
