@@ -6,12 +6,12 @@ import { useAccessibilitySettings } from '../../context/accessibility';
 import { convertToESTFormat, formatDate } from './date_time_helpers.js'
 
 
-export default function SingleEvent({eventId, image}) {
+export default function SingleEvent({event, image}) {
     const { accessibilitySettings, headerFormat, contentFormat } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
     const user = useSelector(state => state.session.user)
-    const event = useSelector(state => state.events[eventId])
+    // const event = useSelector(state => state.events[eventId])
 
     const {
         setShowForm,
@@ -26,9 +26,24 @@ export default function SingleEvent({eventId, image}) {
 
     const eventTextClass = `lg:w-md xl:md my-2 ${contentFormat}`
 
-    const formattedDate = formatDate(event.displayDate);
+    // const formattedDate = formatDate(event.displayDate);
     // const formattedTime = convertToESTFormat(event.time);
     // const formattedTime = event.displayTime[0] === '0' ? event.displayTime.slice(1): event.displayTime;
+
+    const startDate = new Date(event.start)
+
+    const formattedDate = startDate.toLocaleString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+    });
+
+    const formattedTime = startDate.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+
 
     const updateOnClick = () => {
         setShowForm(true)
@@ -51,7 +66,7 @@ export default function SingleEvent({eventId, image}) {
                 <div className="w-11/12 p-4 md:p-2 md:ml-1 pt-4 md:mt-0 md:mr-4 col-span-3">
                     <p className="font-bold text-3xl">{event.title}</p>
                     <p className={`${eventTextClass} flex gap-3`}>
-                        {/* <div>{formattedDate} at {formattedTime}</div> */}
+                        <div>{formattedDate} at {formattedTime}</div>
                         {/* <div className='pl-3 border-l border-black'>{event.location}</div> */}
                     </p>
                     <p className={`${eventTextClass} mt-6`}>{event.description}</p>

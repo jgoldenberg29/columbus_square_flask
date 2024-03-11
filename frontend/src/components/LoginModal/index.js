@@ -38,7 +38,7 @@ export default function LoginModal() {
 
     return (
         <Transition appear show={showLogin} as={Fragment}>
-            <Dialog as="div" className="fixed z-100" onClose={() => setShowLogin(false)}>
+            <Dialog as="div" className="fixed z-[100]" onClose={() => setShowLogin(false)}>
             <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"

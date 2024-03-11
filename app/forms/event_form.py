@@ -19,7 +19,7 @@ locations = [
 class EventForm(FlaskForm):
     title=StringField('title', validators=[DataRequired(), Length(4, 255)])
     description=TextAreaField('description', validators=[DataRequired(), Length(10, 4000)])
-    start=DateTimeField('date', validators=[])
-    end=DateTimeField('date', validators=[])
+    start=StringField('start', validators=[])
+    end=StringField('end', validators=[])
     # location=SelectField('location', choices=locations, validators=[DataRequired()])
     flyer=FileField('flyer', validators=[FileAllowed(list(ALLOWED_IMG_EXTENSIONS))])

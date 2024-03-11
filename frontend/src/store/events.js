@@ -1,6 +1,7 @@
 import { setUser } from "./session"
 
 const ALL_EVENTS = 'events/getAll'
+const SORTED_EVENTS = 'events/getSorted'
 const ADD_EVENT = 'events/createOne'
 const UPDATE_EVENT = 'events/edit'
 const DELETE_EVENT = 'events/delete'
@@ -10,6 +11,13 @@ export const getAllEvents = (events) => {
     return {
         type: ALL_EVENTS,
         events
+    }
+}
+
+export const getSortedEvents = (sorted) => {
+    return {
+        type: SORTED_EVENTS,
+        sorted
     }
 }
 
@@ -48,9 +56,24 @@ export const thunkGetAllEvents = () => async dispatch => {
     }
 }
 
+export const thunkGetSortedEvents = () => async dispatch => {
+    const res = await fetch('/api/events/sorted')
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(getSortedEvents(data['sorted']));
+        return;
+    } else {
+        const data = res.json();
+        return data
+    }
+}
+
 export const thunkCreateEvent = (event) => async dispatch => {
+    console.log('HELLO')
     const res = await fetch('/api/events', {
         method: "POST",
+        // headers: { 'Content-Type': 'application/json'},
         body: event
     })
 
@@ -98,14 +121,19 @@ export const thunkDeleteEvent = (id) => async dispatch => {
     }
 }
 
-const eventReducer = (state={}, action) => {
+const initialState = { all: [], sorted: [], single: {} }
+
+const eventReducer = (state=initialState, action) => {
     switch (action.type) {
         case ALL_EVENTS:
             const allEvents = {};
             action.events.forEach(event => {
                 allEvents[event.id] = event
             });
-            return allEvents;
+            // return allEvents;
+            return {...state, all: allEvents}
+        case SORTED_EVENTS:
+            return { ...state, sorted: action.sorted }
         case ADD_EVENT:
             return {...state, [action.event.id]: action.event};
         case UPDATE_EVENT:

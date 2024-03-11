@@ -16,11 +16,10 @@ export default function EventFormModal() {
 
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [time, setTime] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
+    const [start, setStart] = useState('');
+    const [end, setEnd] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(true);
@@ -70,27 +69,26 @@ export default function EventFormModal() {
             return moment(date).format('YYYY-MM-DD');
         };
 
-        let newTimeString = '';
-
         const formattedStartDate = formatDate(date);
         const formattedEndDate = formatDate(date);
         const formattedStartTime = formatTime(startTime);
         const formattedEndTime = formatTime(endTime);
 
-        newTimeString = formattedStartDate + 'T' + formattedStartTime + '/' + formattedEndDate + 'T' + formattedEndTime;
+        const startString = formattedStartDate + 'T' + formattedStartTime;
+        const endString = formattedEndDate + 'T' + formattedEndTime;
 
-        console.log("****TIMESTRING: ", newTimeString)
-        // Update the timeString state
-        setTimeString(newTimeString)
+        setStart(startString);
+        setEnd(endString);
+        console.log(startString)
     }, [frequency, date, startTime, endTime])
 
     useEffect(() => {
-        if (title && ((frequency === 'consecutive' && startDate && endDate) || (frequency !== 'consecutive' && date)) && startTime && endTime && location && description) {
+        if (title && date && startTime && endTime && description) {
             setDisabled(false)
         } else {
             setDisabled(true)
         }
-    }, [title, date, startDate, endDate, time, startTime, endTime, location, description])
+    }, [title, date, startTime, endTime, location, description])
 
     const {
         setShowForm,
@@ -107,7 +105,7 @@ export default function EventFormModal() {
             setDate(itemToUpdate?.formDate)
             setLocation(itemToUpdate.location)
             setDescription(itemToUpdate.description)
-            setTime(itemToUpdate.formTime)
+            // setTime(itemToUpdate.formTime)
         }
     }, [itemToUpdate, isUpdateForm])
 
@@ -116,7 +114,7 @@ export default function EventFormModal() {
         setShowForm(false)
         setTitle('')
         setDate('')
-        setTime('')
+        // setTime('')
         setLocation('')
         setDescription('')
     }
@@ -171,25 +169,40 @@ export default function EventFormModal() {
         if (isUpdateForm) event['id'] = itemToUpdate.id
 
         event.append('title', title)
-        event.append('dateString', timeString)
+        event.append('start', start)
+        event.append('end', end)
         // event.append('location', location)
         event.append('description', description)
 
         let data
         if (isUpdateForm) {
             data = await dispatch(thunkUpdateEvent(event))
-        } else {
-            data = await dispatch(thunkCreateEvent(event))
+                .then((res) => {
+                    if (!res.errors) {
+                        setIsUpdateForm(false)
+                        setItemToUpdate('')
+                        setShowForm(false)
+                    } else {
 
+                    }
+                })
+        } else {
+            // data = await dispatch(thunkCreateEvent(event))
+            //     .then((res) => {
+            //         if (!res.errors) {
+            //             setIsUpdateForm(false)
+            //             setItemToUpdate('')
+            //             setShowForm(false)
+            //         } else {
+
+            //         }
+            //     })
+            dispatch(thunkCreateEvent(event))
         }
 
-        if (data.errors) {
-
-        } else {
-            setIsUpdateForm(false)
-            setItemToUpdate('')
-            setShowForm(false)
-        }
+        setIsUpdateForm(false)
+        setItemToUpdate('')
+        setShowForm(false)
 
     };
 
