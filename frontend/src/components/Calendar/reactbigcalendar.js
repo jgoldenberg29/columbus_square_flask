@@ -43,7 +43,7 @@ const ReactCalendar = ({ events }) => {
         views={['month', 'week']}
         style={{ }}
         components={{
-          toolbar: CustomToolbar // Custom toolbar component
+          toolbar: CustomToolbar
         }}
       />
     </div>

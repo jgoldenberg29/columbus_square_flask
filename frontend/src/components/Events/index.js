@@ -94,10 +94,8 @@ export default function Events() {
                             </button>}
                 </div>
                 <div className='flex flex-col gap-10'>
-                    <div>
-                        {/* <FullCalendar /> */}
+                    <div className='hidden md:block'>
                         <ReactCalendar events={eventsArray} />
-                        {/* <ReactCalendar events={sortedEvents} /> */}
                     </div>
                     <div className='flex flex-col items-center md:items-stretch md:w-full'>
                         {/* {eventsMap.length ? eventsMap : null} */}
