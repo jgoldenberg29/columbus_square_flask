@@ -11,8 +11,6 @@ import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
-import MyCalendar from '../Calendar/fullcalendar'
-import FullCalendar from '../Calendar/fullcalendar'
 import ReactCalendar from '../Calendar/reactbigcalendar'
 import { thunkGetAllData } from '../../store/allData'
 
