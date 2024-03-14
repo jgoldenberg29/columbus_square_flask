@@ -11,8 +11,8 @@ export default function Donate() {
     }, [])
 
     return (
-        <div className='w-full h-screen flex justify-center items-center'>
-            <h1>Help me I'm poor</h1>
+        <div className='px-4 md:w-4/5 mx-auto mb-20'>
+            <h1>Donate! Woo!</h1>
         </div>
     )
 };

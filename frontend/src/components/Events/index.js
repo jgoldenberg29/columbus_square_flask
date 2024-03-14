@@ -81,7 +81,7 @@ export default function Events() {
     // console.log('********: ', sortedEvents)
 
     return (
-        <div className="mt-6 px-4 mb-20">
+        <div className="px-4 md:w-4/5 mx-auto mb-20 ">
             <div className='flex flex-col w-full my-4'>
                 <div className="flex justify-between pb-3 mb-6 border-b border-gray-300">
                     <h2 className="text-3xl" >Upcoming Events</h2>

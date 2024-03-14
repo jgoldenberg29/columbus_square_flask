@@ -56,12 +56,12 @@ export default function Home() {
     }
 
     return (
-        <div data-testid='home-1' className='mb-20 flex flex-col gap-14'>
-            <div class="h-80">
+        <div data-testid='home-1' className='min-h-screen flex flex-col gap-14'>
+            <div class="h-80 min-w-screen">
                 <ImageCarousel images={images} />
             </div>
 
-            <div className='flex flex-row md:grid grid-cols-3 gap-16'>
+            <div className='px-4 pb-10 md:w-4/5 mx-auto flex flex-row md:grid grid-cols-3 gap-16'>
                 <div className='col-span-2 flex flex-col gap-8 max-h-100'>
                     <div>
                         <h2 className='text-2xl font-bold text-cyan-800 tracking-wide pl-1 pb-1 mb-2 border-b border-cyan-800'>
