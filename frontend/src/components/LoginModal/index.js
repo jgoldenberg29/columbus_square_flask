@@ -15,6 +15,7 @@ export default function LoginModal() {
     const { showLogin, setShowLogin } = useLogin()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [disabled, setDisabled] = useState(true);
     // const [errors, setErrors] = useState("");
 
     const user = useSelector(state => state.session.user)
@@ -35,6 +36,14 @@ export default function LoginModal() {
             return () => clearTimeout(timeout);
           }
     }, [user])
+
+    useEffect(() => {
+        if (email && password) {
+            setDisabled(false)
+        } else {
+            setDisabled(true)
+        }
+    }, [email, password])
 
     return (
         <Transition appear show={showLogin} as={Fragment}>
@@ -93,6 +102,7 @@ export default function LoginModal() {
                                 className="my-2 p-2 border border-gray-300 rounded-md w-full"
                                 placeholder='Email'
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                             <input
                                 type="password"
@@ -101,9 +111,10 @@ export default function LoginModal() {
                                 className="my-2 p-2 border border-gray-300 rounded-md w-full"
                                 placeholder='Password'
                                 onChange={(e) => setPassword(e.target.value)}
+                                required
                             />
                             <div className='flex justify-center'>
-                                <button onClick={() => handleSubmit(email, password)} className={`mt-6 py-3 px-8 bg-cyan-600 text-white rounded-xl active:bg-gray-300 ${textSize ? 'text-lg' : null}`}>
+                                <button onClick={() => handleSubmit(email, password)} disabled={disabled} className={`mt-6 py-3 px-8 bg-cyan-600 text-white rounded-xl active:bg-gray-300 hover:bg-cyan-500 disabled:cursor-not-allowed`}>
                                     Login
                                 </button>
                             </div>

@@ -58,7 +58,7 @@ export default function Home() {
     return (
         <div data-testid='home-1' className='mb-20 flex flex-col gap-14'>
             <div class="h-80">
-                <ImageCarousel images={images.slice(0, 5)} />
+                <ImageCarousel images={images} />
             </div>
 
             <div className='flex flex-row md:grid grid-cols-3 gap-16'>
@@ -121,15 +121,17 @@ export default function Home() {
                     <h3 className='text-2xl font-bold text-rose-600 tracking-wide pl-1 pb-1 mb-2 border-b border-rose-600'>UPCOMING EVENTS</h3>
                     <div className='overflow-x-scroll py-6'>
                             <div className='flex flex-col gap-4'>
-                                {events.map(event => (
-                                    <div key={event.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 max-h-32 w-full justify-between'>
+                                {events.length ? events.map(event => (
+                                    <div key={event.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 min-h-fit-content w-full justify-between'>
                                         <div className='flex flex-col gap-4'>
                                             <p className='text-xl font-bold'>{event.title}</p>
                                             <p>{event.description}</p>
                                         </div>
                                         <p className='text-sm text-slate-600'>{formattedDatetime(event.start, 'event')}</p>
                                     </div>
-                                ))}
+                                )) : (
+                                    <h1 className='flex justify-center'>No upcoming events.</h1>
+                                )}
                             </div>
                         </div>
                 </div>
