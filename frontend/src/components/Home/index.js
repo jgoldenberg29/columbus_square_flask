@@ -62,7 +62,7 @@ export default function Home() {
             </div>
 
             <div className='flex flex-row md:grid grid-cols-3 gap-16'>
-                <div className='col-span-2 flex flex-col gap-8'>
+                <div className='col-span-2 flex flex-col gap-8 max-h-100'>
                     <div>
                         <h2 className='text-2xl font-bold text-cyan-800 tracking-wide pl-1 pb-1 mb-2 border-b border-cyan-800'>
                             HEADLINES
@@ -117,12 +117,13 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className='flex-grow'>
                     <h3 className='text-2xl font-bold text-rose-600 tracking-wide pl-1 pb-1 mb-2 border-b border-rose-600'>UPCOMING EVENTS</h3>
-                    <div className='overflow-x-scroll py-6'>
-                            <div className='flex flex-col gap-4'>
+                    <div className='py-6'>
+                        <div className='max-h-[560px] overflow-y-scroll overflow-hidden'>
+                            <div className='flex flex-col gap-4 pr-6'>
                                 {events.length ? events.map(event => (
-                                    <div key={event.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 min-h-fit-content w-full justify-between'>
+                                    <div key={event.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 h-48 w-full justify-between'>
                                         <div className='flex flex-col gap-4'>
                                             <p className='text-xl font-bold'>{event.title}</p>
                                             <p>{event.description}</p>
@@ -134,6 +135,7 @@ export default function Home() {
                                 )}
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
 

@@ -45,7 +45,7 @@ const App = () => {
                         <Route path='/news' element={<News />} />
                     </Routes>
                 </div>
-                {/* <Footer /> */}
+                <Footer />
             </div>
         </Router>
     );

@@ -78,7 +78,7 @@ export default function Events() {
         return Math.floor(Math.random() * max);
     }
 
-    console.log('********: ', sortedEvents)
+    // console.log('********: ', sortedEvents)
 
     return (
         <div className="mt-6 px-4 mb-20">
