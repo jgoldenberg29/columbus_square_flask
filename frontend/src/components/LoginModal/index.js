@@ -16,16 +16,27 @@ export default function LoginModal() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [disabled, setDisabled] = useState(true);
-    // const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState("");
 
     const user = useSelector(state => state.session.user)
-    const errors = useSelector(state => state.session.errors)
+    // const errors = useSelector(state => state.session.errors)
 
-    const handleSubmit = async (email, password) => {
+    const handleSubmit = (email, password) => {
         const credentials = {email, password}
-        const data = await dispatch(login(credentials))
-        return;
+        const data = dispatch(login(credentials))
+            .then((res) => {
+                if (res.errors) {
+                    setErrors(res.errors)
+                } else {
+                    setErrors("")
+                    return;
+                }
+            })
     }
+
+    useEffect(() => {
+        console.log(errors)
+    }, [errors])
 
     useEffect(() => {
         if (user) {
@@ -102,7 +113,6 @@ export default function LoginModal() {
                                 className="my-2 p-2 border border-gray-300 rounded-md w-full"
                                 placeholder='Email'
                                 onChange={(e) => setEmail(e.target.value)}
-                                required
                             />
                             <input
                                 type="password"
@@ -111,7 +121,6 @@ export default function LoginModal() {
                                 className="my-2 p-2 border border-gray-300 rounded-md w-full"
                                 placeholder='Password'
                                 onChange={(e) => setPassword(e.target.value)}
-                                required
                             />
                             <div className='flex justify-center'>
                                 <button onClick={() => handleSubmit(email, password)} disabled={disabled} className={`mt-6 py-3 px-8 bg-cyan-600 text-white rounded-xl active:bg-gray-300 hover:bg-cyan-500 disabled:cursor-not-allowed`}>

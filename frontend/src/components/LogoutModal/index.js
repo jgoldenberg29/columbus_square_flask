@@ -14,6 +14,7 @@ export default function LogoutModal() {
     const { showLogout, setShowLogout } = useLogout();
 
     const handleLogout = () => {
+        console.log('hello')
         dispatch(logout())
         setShowLogout(false)
         return;

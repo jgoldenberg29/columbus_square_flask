@@ -135,8 +135,8 @@ export default function Navigation() {
                 </div>
             </div>
 
-            {showLogin && <LoginModal />}
-            {showLogout && <LogoutModal />}
+            {/* {showLogin && <LoginModal />}
+            {showLogout && <LogoutModal />} */}
         </div>
     )
 }
