@@ -99,7 +99,7 @@ export default function Home() {
                             <button className='hover:shadow-md hover:shadow-amber-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate()}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-amber-600'><i class="fa-solid fa-address-book"></i></h3>
-                                    <h3 className='text-lg tracking-wide font-bold'>Contact Information</h3>
+                                    <h3 className='text-lg tracking-wide font-bold'>Contact Info</h3>
                                 </div>
                             </button>
                             <button className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate()}>

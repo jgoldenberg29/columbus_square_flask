@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 const ImageCarousel = ({ images }) => {
-
+    // console.log(images[0])
     return (
         <Swiper
             spaceBetween={30}
@@ -26,7 +26,7 @@ const ImageCarousel = ({ images }) => {
         >
             {images.map((image, index) => (
                 <SwiperSlide key={index} className="overflow-hidden">
-                    <img src={image[index]} id="carousel" className="object-cover object-center min-w-full" />
+                    <img src={image[index]} className="object-cover object-center min-w-full" />
                 </SwiperSlide>
             ))}
         </Swiper>
