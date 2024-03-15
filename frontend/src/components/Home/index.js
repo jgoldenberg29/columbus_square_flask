@@ -61,10 +61,10 @@ export default function Home() {
                 <ImageCarousel images={images} />
             </div>
 
-            <div className='px-4 pb-10 md:w-4/5 mx-auto flex flex-row md:grid grid-cols-3 gap-16'>
+            <div className='px-8 pb-10 xl:w-4/5 mx-auto flex flex-col md:grid grid-cols-3 gap-16 w-screen'>
                 <div className='col-span-2 flex flex-col gap-8 max-h-100'>
-                    <div>
-                        <div className='px-1 pb-1 mb-2 border-b border-cyan-700 flex gap-4 justify-between items-center'>
+                    <div className='w-full'>
+                        <div className='px-1 pb-1 mb-2 border-b border-cyan-700 flex gap-4 justify-between items-center max-w-full'>
                             <h2 className='text-2xl font-bold text-cyan-700 tracking-wide'>
                                 HEADLINES
                             </h2>
@@ -72,8 +72,8 @@ export default function Home() {
                                 View All
                             </a>
                         </div>
-                        <div className='pr-6 overflow-x-scroll py-6'>
-                            <div className='flex flex-row gap-4'>
+                        <div className='pr-6 overflow-x-scroll py-6 max-w-full'>
+                            <div className='flex flex-row gap-4' style={{ maxWidth: '100vw' }}>
                                 {newsArray.map(article => (
                                     <div key={article.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 min-w-64 justify-between'>
                                         <div className='flex flex-col gap-4'>
@@ -86,9 +86,27 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
+                    <div className='flex flex-col md:hidden'>
+                        <h3 className='text-2xl font-bold text-rose-600 tracking-wide pl-1 pb-1 mb-2 border-b border-rose-600'>UPCOMING EVENTS</h3>
+                        <div className='pr-6 overflow-x-scroll py-6 w-full'>
+                            <div className='flex flex-row gap-4'>
+                                {events.length ? events.map(event => (
+                                    <div key={event.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 h-48 min-w-64 justify-between'>
+                                        <div className='flex flex-col gap-4'>
+                                            <p className='text-xl font-bold'>{event.title}</p>
+                                            <p>{event.description}</p>
+                                        </div>
+                                        <p className='text-sm text-slate-600'>{formattedDatetime(event.start, 'event')}</p>
+                                    </div>
+                                )) : (
+                                    <h1 className='flex justify-center'>No upcoming events.</h1>
+                                )}
+                            </div>
+                        </div>
+                    </div>
                     <div>
-                    <h2 className='text-2xl font-bold text-green-700 tracking-wide pl-1 pb-1 mb-2 border-b border-green-700'>QUICK LINKS</h2>
-                        <div className='grid grid-cols-3 gap-4 pt-6'>
+                        <h2 className='text-2xl font-bold text-green-700 tracking-wide pl-1 pb-1 mb-2 border-b border-green-700'>QUICK LINKS</h2>
+                        <div className='flex flex-col md:grid grid-cols-3 gap-4 pt-6'>
                             <button className='hover:shadow-md hover:shadow-yellow-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/about')}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-yellow-600'><i class="fa-solid fa-landmark"></i></h3>
@@ -122,7 +140,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className='flex-grow'>
+                <div className='hidden md:flex md: flex-col flex-grow'>
                     <h3 className='text-2xl font-bold text-rose-600 tracking-wide pl-1 pb-1 mb-2 border-b border-rose-600'>UPCOMING EVENTS</h3>
                     <div className='py-6'>
                         <div className='max-h-[560px] overflow-y-scroll overflow-hidden'>

@@ -40,7 +40,7 @@ export default function Navigation() {
     }
 
     return (
-        <div className='z-50 fixed top-0 w-full bg-white/85 px-4 lg:px-6 xl:px-16 shadow-lg lg:shadow-none '>
+        <div className='z-50 fixed top-0 w-full bg-white/85 px-4 lg:px-6 xl:px-16'>
             <div className='flex justify-between items-center py-6 md:py-6 w-full'>
                 <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end h-3/5'>
                     {/* <img src={desktopLogo1} className='hidden md:flex h-14' /> */}
@@ -98,7 +98,7 @@ export default function Navigation() {
                             leaveFrom="opacity-100 translate-y-0 scale-100"
                             leaveTo="opacity-0 -translate-y-full scale-95"
                         >
-                            <Menu.Items className="fixed top-24 right-0 w-screen md:w-1/2 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black/5">
+                            <Menu.Items className="fixed top-28 right-0 w-screen md:w-1/2 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black/5">
                                 <div className='flex flex-col border rounded-lg'>
                                     <Menu.Item>
                                         <Link to="/about" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">About</Link>
@@ -119,8 +119,8 @@ export default function Navigation() {
                                         <Link to="/contact" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Contact</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <button onClick={() => null} className='py-3 text-center font-semibold focus:bg-slate-200'>
-                                            Login
+                                        <button onClick={() => {user ? setShowLogout(true) : setShowLogin(true)}} className='py-3 text-center font-semibold focus:bg-slate-200'>
+                                            {user ? 'Logout' : 'Login'}
                                         </button>
                                     </Menu.Item>
                                     {/* <Menu.Item>
