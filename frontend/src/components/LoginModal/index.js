@@ -15,16 +15,28 @@ export default function LoginModal() {
     const { showLogin, setShowLogin } = useLogin()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [errors, setErrors] = useState("");
+    const [disabled, setDisabled] = useState(true);
+    const [errors, setErrors] = useState("");
 
     const user = useSelector(state => state.session.user)
-    const errors = useSelector(state => state.session.errors)
+    // const errors = useSelector(state => state.session.errors)
 
-    const handleSubmit = async (email, password) => {
+    const handleSubmit = (email, password) => {
         const credentials = {email, password}
-        const data = await dispatch(login(credentials))
-        return;
+        const data = dispatch(login(credentials))
+            .then((res) => {
+                if (res.errors) {
+                    setErrors(res.errors)
+                } else {
+                    setErrors("")
+                    return;
+                }
+            })
     }
+
+    useEffect(() => {
+        console.log(errors)
+    }, [errors])
 
     useEffect(() => {
         if (user) {
@@ -36,9 +48,17 @@ export default function LoginModal() {
           }
     }, [user])
 
+    useEffect(() => {
+        if (email && password) {
+            setDisabled(false)
+        } else {
+            setDisabled(true)
+        }
+    }, [email, password])
+
     return (
         <Transition appear show={showLogin} as={Fragment}>
-            <Dialog as="div" className="fixed z-100" onClose={() => setShowLogin(false)}>
+            <Dialog as="div" className="fixed z-[100]" onClose={() => setShowLogin(false)}>
             <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -103,7 +123,7 @@ export default function LoginModal() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <div className='flex justify-center'>
-                                <button onClick={() => handleSubmit(email, password)} className={`mt-6 py-3 px-8 bg-cyan-600 text-white rounded-xl active:bg-gray-300 ${textSize ? 'text-lg' : null}`}>
+                                <button onClick={() => handleSubmit(email, password)} disabled={disabled} className={`mt-6 py-3 px-8 bg-cyan-600 text-white rounded-xl active:bg-gray-300 hover:bg-cyan-500 disabled:cursor-not-allowed`}>
                                     Login
                                 </button>
                             </div>

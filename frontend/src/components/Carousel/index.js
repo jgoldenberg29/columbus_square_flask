@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 const ImageCarousel = ({ images }) => {
-
+    // console.log(images[0])
     return (
         <Swiper
-            spaceBetween={10}
-            slidesPerView={1}
-            modules={[Navigation, Pagination]}
-            navigation={true}
-            pagination={{ dynamicBullets: true }}
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+            }}
+            pagination={{
+                clickable: true,
+            }}
+            // navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
             style={{ width: '100%', height: '100%' }}
             className="-z-10"
         >
             {images.map((image, index) => (
-                <SwiperSlide key={index} className="overflow-hidden">
-                    <img src={image} className="object-cover min-h-full" />
+                <SwiperSlide key={index} className="overflow-hidden flex justify-center items-center">
+                    <img src={image} className="object-cover object-center min-w-full" style={{ maxHeight: '100%', maxWidth: '100%' }} />
                 </SwiperSlide>
             ))}
         </Swiper>

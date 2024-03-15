@@ -40,27 +40,27 @@ export default function Navigation() {
     }
 
     return (
-        <div className='z-50 fixed top-0 w-full bg-white/85 px-4 md:px-20 shadow-lg lg:shadow-none '>
+        <div className='z-50 fixed top-0 w-full bg-white/85 px-4 lg:px-6 xl:px-16'>
             <div className='flex justify-between items-center py-6 md:py-6 w-full'>
                 <button onClick={() => navigate("/")} className='flex gap-2 md:gap-3 items-end h-3/5'>
                     {/* <img src={desktopLogo1} className='hidden md:flex h-14' /> */}
-                    <img src={desktopLogo2} className='hidden md:flex h-16' />
-                    {/* <img src={mobileLogo1} className='md:hidden h-14' /> */}
-                    <img src={mobileLogo2} className='md:hidden h-16' />
+                    <img src={desktopLogo2} className='hidden xl:flex h-16' />
+                    {/* <img src={mobileLogo1} className='xl:hidden h-14' /> */}
+                    <img src={mobileLogo2} className='xl:hidden h-16' />
                 </button>
 
                 {/* Desktop */}
                 <div className='hidden lg:flex h-full'>
-                    <div className='flex gap-2 mr-4'>
+                    <div className='flex mr-4'>
                         <button onClick={() => navigate("/about")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "about" && "text-cyan-600"}`}>
                             About
                         </button>
                         <button onClick={() => navigate("/events")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
                             Events
                         </button>
-                        <button onClick={() => navigate("/news")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
+                        {/* <button onClick={() => navigate("/news")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "news" && "text-cyan-600"}`}>
                             News
-                        </button>
+                        </button> */}
                         <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
                             Donate
                         </button>
@@ -98,7 +98,7 @@ export default function Navigation() {
                             leaveFrom="opacity-100 translate-y-0 scale-100"
                             leaveTo="opacity-0 -translate-y-full scale-95"
                         >
-                            <Menu.Items className="fixed top-24 right-0 w-screen md:w-1/2 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black/5">
+                            <Menu.Items className="fixed top-28 right-0 w-screen md:w-1/2 origin-top divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black/5">
                                 <div className='flex flex-col border rounded-lg'>
                                     <Menu.Item>
                                         <Link to="/about" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">About</Link>
@@ -119,8 +119,8 @@ export default function Navigation() {
                                         <Link to="/contact" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Contact</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <button onClick={() => null} className='py-3 text-center font-semibold focus:bg-slate-200'>
-                                            Login
+                                        <button onClick={() => {user ? setShowLogout(true) : setShowLogin(true)}} className='py-3 text-center font-semibold focus:bg-slate-200'>
+                                            {user ? 'Logout' : 'Login'}
                                         </button>
                                     </Menu.Item>
                                     {/* <Menu.Item>
@@ -135,8 +135,8 @@ export default function Navigation() {
                 </div>
             </div>
 
-            {showLogin && <LoginModal />}
-            {showLogout && <LogoutModal />}
+            {/* {showLogin && <LoginModal />}
+            {showLogout && <LogoutModal />} */}
         </div>
     )
 }

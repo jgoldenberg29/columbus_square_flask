@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react'
 // import SingleEvent from './SingleEvent'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from '../../context/form'
 import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
 import SingleNewsItem from './SingleNewsItem'
+import { getAllEvents } from '../../store/events'
+import { getAllNews } from '../../store/news'
+// import fetchAll from '../../store/allData'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
+import { thunkGetAllData } from '../../store/allData'
 
 
 export default function News() {
+    const dispatch = useDispatch()
     const { accessibilitySettings, headerFormat } = useAccessibilitySettings();
     const { darkMode, textSize, textSpacing } = accessibilitySettings;
     const { setPage } = useNavigation();
@@ -20,8 +25,7 @@ export default function News() {
 
     const user = useSelector(state => state.session.user);
 
-    const news = useSelector(state => state.news.all)
-    console.log("NEWS!!!!!!", news)
+    const news = useSelector(state => state.news)
     const {
         showForm,
         setShowForm,
@@ -35,6 +39,7 @@ export default function News() {
     const subHeaderClass = `text-left underline underline-offset-8 tracking-widest text-2xl my-8 ${darkMode && "text-white"}`
     const newsArray = Object.values(news)
     if (!newsArray.length) {
+        dispatch(thunkGetAllData())
         return null
     }
     const newsMap = newsArray.map(newsItem => {
@@ -51,13 +56,13 @@ export default function News() {
     })
 
     return (
-        <div className="mt-6 px-4 mb-20">
+        <div className="px-4 md:w-4/5 mx-auto">
             <div className='flex flex-col w-full my-4'>
-                <div className="flex justify-between gap-8">
-                    <h2 className={`${headerFormat} underline ${textSpacing ? "underline-offset-4" : "underlin-offset-1"} pb-4`} >Park News</h2>
+                <div className="pb-3 mb-6 border-b border-gray-300 flex justify-between gap-8">
+                    <h2 className={`text-3xl`} >Park News</h2>
                     {user && <button
                                 onClick={() => setShowForm(true)}
-                                className="self-center py-1 px-2 md:px-4 bg-fun text-white rounded-xl border border-fun active:bg-secondary active:border active:border-white">
+                                className="self-center py-2 px-4 md:px-4 bg-cyan-500 text-white rounded-lg border border-cyan-500 hover:bg-cyan-600 hover:border-cyan-600 active:bg-cyan-300 active:border active:border-white">
                                 Add News
                             </button>}
                 </div>

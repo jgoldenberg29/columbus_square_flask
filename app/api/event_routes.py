@@ -8,6 +8,14 @@ from icecream import ic
 
 event_routes = Blueprint('events', __name__)
 
+@event_routes.route('/sorted', methods=['GET'])
+def get_sorted_events():
+    today = datetime.now().date()
+    events = Event.query.filter(Event.start >= today).order_by(Event.start)
+
+    return { 'sorted': [event.to_dict() for event in events] }
+
+
 @event_routes.route('', methods=['POST'])
 @login_required
 def add_event():
@@ -19,13 +27,19 @@ def add_event():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
+        # print('********', data)
+        start_str = form['start'].data
+        end_str = form['end'].data
+        start = datetime.strptime(start_str, '%Y-%m-%dT%H:%M:%S')
+        end = datetime.strptime(end_str, '%Y-%m-%dT%H:%M:%S')
+
         new_event = Event(
             title=data['title'],
             description=data['description'],
-            date=data['date'],
-            time=data['time'],
-            location=data['location'],
-            flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg",
+            start=start,
+            end=end,
+            # location=data['location'],
+            # flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg",
             user_id=current_user.id,
             created_at=datetime.now(),
             updated_at=datetime.now(),
@@ -33,7 +47,8 @@ def add_event():
         db.session.add(new_event)
         db.session.commit()
         return {'event': new_event.to_dict(), 'user': current_user.to_dict()}
-    return {'errors': form.errors}, 400
+    # return {'errors': form.errors}, 400
+    return form.errors, 400
 
 @event_routes.route('/<int:id>', methods=['PUT'])
 @login_required

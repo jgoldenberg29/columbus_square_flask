@@ -16,16 +16,15 @@ class News(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-    poster = db.relationship('User', back_populates='posted_events')
+    news_poster = db.relationship('User', back_populates='posted_news')
 
 
     def to_dict(self):
-        ic('Time object', self.time)
         return {
             'id': self.id,
             'title': self.title,
-            'body': self.description,
+            'body': self.body,
             'image': self.image,
-            'datePosted': created_at.date(),
-            'poster': self.poster.to_dict(),
+            'datePosted': self.created_at.date(),
+            'poster': self.news_poster.to_dict(),
         }
