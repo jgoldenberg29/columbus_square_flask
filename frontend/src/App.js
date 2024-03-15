@@ -16,11 +16,17 @@ import { getAllNews } from './store/news';
 import fetchAll, { thunkGetAllData } from './store/allData';
 import Gallery from './components/Gallery';
 import News from './components/News'
-
+import Donate from './components/Donate';
+import LoginModal from './components/LoginModal';
+import LogoutModal from './components/LogoutModal';
+import { useLogin, useLogout } from './context/login';
 
 const App = () => {
     const dispatch = useDispatch()
     const [isLoaded, setIsLoaded] = useState()
+
+    const { showLogin, setShowLogin } = useLogin();
+    const { showLogout, setShowLogout } = useLogout();
 
     const { accessibilitySettings, setAccessibilitySettings } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
@@ -34,18 +40,21 @@ const App = () => {
     return (
         <Router>
             <div className="">
+                {showLogin && <LoginModal />}
+                {showLogout && <LogoutModal />}
                 <Navigation />
-                <div className={`px-4 md:w-4/5 mx-auto mt-32`}>
+                <div className={`mt-[116px] min-h-screen`}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/events" element={<Events />} />
+                        <Route path="/donate" element={<Donate />} />
                         <Route path='/gallery' element={<Gallery />} />
                         <Route path='/news' element={<News />} />
                     </Routes>
                 </div>
-                {/* <Footer /> */}
+                <Footer />
             </div>
         </Router>
     );

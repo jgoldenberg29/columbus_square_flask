@@ -22,7 +22,7 @@ export default function About() {
     }, [])
 
     return (
-        <div>
+        <div className='px-4 md:w-4/5 mx-auto mb-20'>
             <section className='mb-8'>
                 <h1 className='text-3xl pb-3 mb-6 border-b border-gray-300'>About the Friends</h1>
                 <p className='mb-4'>The Board comprises Park neighbors who have volunteered to be the leaders of Friends of Columbus Square, a not-for-profit organization dedicated to supporting our park with activities, care for its landscaping and cleaning, and to engage with the Philadelphia Parks and Recreation Department and the Columbus Square Advisory Committee.</p>

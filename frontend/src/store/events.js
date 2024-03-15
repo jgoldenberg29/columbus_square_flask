@@ -81,6 +81,7 @@ export const thunkCreateEvent = (event) => async dispatch => {
         const data = await res.json()
         dispatch(createEvent(data.event))
         dispatch(setUser(data.user))
+        dispatch(thunkGetSortedEvents())
         return null
     } else {
         const data = await res.json()
@@ -121,7 +122,7 @@ export const thunkDeleteEvent = (id) => async dispatch => {
     }
 }
 
-const initialState = { all: [], sorted: [], single: {} }
+const initialState = { all: {}, sorted: [], single: {} }
 
 const eventReducer = (state=initialState, action) => {
     switch (action.type) {
@@ -135,12 +136,12 @@ const eventReducer = (state=initialState, action) => {
         case SORTED_EVENTS:
             return { ...state, sorted: action.sorted }
         case ADD_EVENT:
-            return {...state, [action.event.id]: action.event};
+            return {...state, all: { ...state.all, [action.event.id]: action.event } };
         case UPDATE_EVENT:
-            return {...state, [action.event.id]: action.event};
+            return {...state, all: { ...state.all, [action.event.id]: action.event } };
         case DELETE_EVENT:
-            const newState = {...state};
-            delete newState[action.eventId];
+            const newState = { ...state };
+            delete newState.all[action.eventId];
             return newState
         default:
             return state
