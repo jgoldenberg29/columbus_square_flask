@@ -36,7 +36,7 @@ export default function Footer() {
                         </div>
                         <div className='flex gap-3 mb-2 content-end items-center'>
                             <i class="fa-solid fa-envelope"></i>
-                            info@mycolumbussquarepark.org
+                            friends@columbussquare.org
                         </div>
                         <div className='flex gap-3 mb-2 content-end items-center'>
                             <i class="fa-brands fa-facebook"></i>

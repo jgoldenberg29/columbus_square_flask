@@ -25,8 +25,8 @@ const ImageCarousel = ({ images }) => {
             className="-z-10"
         >
             {images.map((image, index) => (
-                <SwiperSlide key={index} className="overflow-hidden">
-                    <img src={image[index]} className="object-cover object-center min-w-full" />
+                <SwiperSlide key={index} className="overflow-hidden flex justify-center items-center">
+                    <img src={image} className="object-cover object-center min-w-full" style={{ maxHeight: '100%', maxWidth: '100%' }} />
                 </SwiperSlide>
             ))}
         </Swiper>

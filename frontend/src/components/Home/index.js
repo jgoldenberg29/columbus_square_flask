@@ -11,7 +11,7 @@ import { thunkGetSortedEvents } from '../../store/events';
 
 const importAll = (context) => context.keys().map(context);
 
-const imagesContext = require.context('./gallery_images', false, /\.(png|jpg|jpeg|gif|svg)$/);
+const imagesContext = require.context('./fb_images', false, /\.(png|jpg|jpeg|gif|svg)$/);
 const imagesArr = importAll(imagesContext);
 const images = imagesArr.reverse();
 
@@ -64,9 +64,14 @@ export default function Home() {
             <div className='px-4 pb-10 md:w-4/5 mx-auto flex flex-row md:grid grid-cols-3 gap-16'>
                 <div className='col-span-2 flex flex-col gap-8 max-h-100'>
                     <div>
-                        <h2 className='text-2xl font-bold text-cyan-800 tracking-wide pl-1 pb-1 mb-2 border-b border-cyan-800'>
-                            HEADLINES
-                        </h2>
+                        <div className='px-1 pb-1 mb-2 border-b border-cyan-700 flex gap-4 justify-between items-center'>
+                            <h2 className='text-2xl font-bold text-cyan-700 tracking-wide'>
+                                HEADLINES
+                            </h2>
+                            <a href='/news' className='text-sm pr-2 text-blue-500 underline hover:no-underline underline-offset-2 hover:text-blue-400'>
+                                View All
+                            </a>
+                        </div>
                         <div className='pr-6 overflow-x-scroll py-6'>
                             <div className='flex flex-row gap-4'>
                                 {newsArray.map(article => (
@@ -84,36 +89,36 @@ export default function Home() {
                     <div>
                     <h2 className='text-2xl font-bold text-green-700 tracking-wide pl-1 pb-1 mb-2 border-b border-green-700'>QUICK LINKS</h2>
                         <div className='grid grid-cols-3 gap-4 pt-6'>
-                            <button className='hover:shadow-md hover:shadow-yellow-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate()}>
+                            <button className='hover:shadow-md hover:shadow-yellow-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/about')}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-yellow-600'><i class="fa-solid fa-landmark"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>About</h3>
                                 </div>
                             </button>
-                            <button className='hover:shadow-md hover:shadow-green-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate()}>
+                            <button className='hover:shadow-md hover:shadow-green-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/donate')}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-green-600'> <i class="fa-solid fa-hand-holding-dollar"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Donate</h3>
                                 </div>
                             </button>
-                            <button className='hover:shadow-md hover:shadow-amber-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate()}>
+                            <button className='hover:shadow-md hover:shadow-amber-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/contact')}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-amber-600'><i class="fa-solid fa-address-book"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Contact Info</h3>
                                 </div>
                             </button>
-                            <button className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate()}>
+                            <a href='' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-blue-500'><i class="fa-brands fa-facebook"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Facebook</h3>
                                 </div>
-                            </button>
-                            <button className='hover:shadow-md hover:shadow-rose-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate()}>
+                            </a>
+                            <a href='' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-rose-400'><i class="fa-brands fa-instagram"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Instagram</h3>
                                 </div>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
