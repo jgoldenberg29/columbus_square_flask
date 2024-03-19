@@ -50,14 +50,9 @@ def authenticate():
 
     '''
 
-    res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token={os.environ.get("IG_ACCESS_KEY")}')
+    res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp&access_token={os.environ.get("IG_ACCESS_KEY")}')
+    
     parsed_res = res.json()
-    ic(parsed_res)
     data = parsed_res['data']
-    # ic(data[0])
-    # ic(data[0]['id'])
-
-    images = {item['id']:item for item in data}
-    ic(images)
 
     return {'images': data}
