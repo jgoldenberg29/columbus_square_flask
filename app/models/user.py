@@ -13,6 +13,9 @@ class User(db.Model, UserMixin):
     admin = db.Column(db.Boolean, default=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    ig_access_token = db.Column(db.String(255), nullable=True)
+    token_expiration = db.Column(db.DateTime, nullable=True)
+    ig_fetched = db.Column(db.Boolean, default=False, nullable=True)
 
     posted_events = db.relationship('Event', back_populates='event_poster')
     posted_news = db.relationship('News', back_populates='news_poster')

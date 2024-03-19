@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import events from './events'
 import news from './news'
+import images from './gallery'
 
 const rootReducer = combineReducers({
   session,
   events,
   news,
+  images,
 });
 
 
@@ -27,4 +29,3 @@ const configureStore = (preloadedState) => {
 };
 
 export default configureStore;
-
