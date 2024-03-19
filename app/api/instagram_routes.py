@@ -1,8 +1,10 @@
 from flask import Blueprint, session, request
+from sqlalchemy.sql import text
 import requests
 import os
-from app.models import db
+from app.models import db, User, Image, environment
 from flask_login import login_required, current_user
+from datetime import datetime
 from icecream import ic
 
 instagram_routes = Blueprint('instagram', __name__)
@@ -50,9 +52,42 @@ def authenticate():
 
     '''
 
-    res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp&access_token={os.environ.get("IG_ACCESS_KEY")}')
-    
-    parsed_res = res.json()
-    data = parsed_res['data']
+    user = User.query.filter(User.email == 'columbussquarepark@gmail.com').first()
 
-    return {'images': data}
+    present = datetime.now()
+    exp_date = user.token_expiration
+    if exp_date >= present:
+        # helper function?
+        # fetch for new token using cURL request
+        # replace old ig_access_token with new one
+        # use "expires_in" value from response to calculate 2 days before token expires
+        # replace token_expireation with new datetime
+        # commit to database
+        pass
+
+    today_noon = present.replace(hour=12, minute=0, second=0, microsecond=0)
+    if present > today_noon:
+        res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp&access_token={user.ig_access_token}')
+        # check for errors
+        parsed_res = res.json()
+        data = parsed_res['data']
+        ic(data)
+
+        if environment == "production":
+            db.session.execute(f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
+        else:
+            db.session.execute(text("DELETE FROM images"))
+
+        for item in data:
+            image = Image(
+                caption=item['caption'] if 'caption' in item else None,
+                image_url=item["media_url"],
+                timestamp=item["timestamp"]
+            )
+            db.session.add(image)
+        db.session.commit()
+
+    images = Image.query.all()
+    image_list = [image.to_dict() for image in images]
+
+    return {'images': image_list}
