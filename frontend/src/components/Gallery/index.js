@@ -38,7 +38,7 @@ export default function Gallery() {
         console.log("IMAGES", image)
         return (
             <div>
-                <ImageCard image={image.media_url} />
+                <ImageCard image={image.imageUrl} />
             </div>
         )
     })

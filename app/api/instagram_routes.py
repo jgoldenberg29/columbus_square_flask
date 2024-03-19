@@ -66,7 +66,7 @@ def authenticate():
         pass
 
     today_noon = present.replace(hour=12, minute=0, second=0, microsecond=0)
-    if present > today_noon:
+    if present > today_noon and not user.ig_fetched:
         res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp&access_token={user.ig_access_token}')
         # check for errors
         parsed_res = res.json()
@@ -85,7 +85,9 @@ def authenticate():
                 timestamp=item["timestamp"]
             )
             db.session.add(image)
+        user.ig_fetched = True
         db.session.commit()
+
 
     images = Image.query.all()
     image_list = [image.to_dict() for image in images]
