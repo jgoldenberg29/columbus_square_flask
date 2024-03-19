@@ -23,3 +23,15 @@ export const thunkGetAllImages = () => async dispatch => {
         return data
     }
 }
+
+
+const imagesReducer = (state={}, action) => {
+    switch(action.type) {
+        case ALL_IMAGES:
+            return {...images}
+        default:
+            return state
+    }
+}
+
+export default imagesReducer
