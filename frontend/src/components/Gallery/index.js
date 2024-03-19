@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { useAccessibilitySettings } from '../../context/accessibility';
 import ImageCard from '../ImageCard'
 // import { useNavigation } from '../../context/navigation';
 import { useNavigation } from '../../context/navigation';
+import { thunkGetAllImages } from '../../store/gallery';
 
 const importAll = (context) => context.keys().map(context);
 
@@ -12,12 +14,14 @@ const imagesArr = importAll(imagesContext);
 const images = imagesArr.reverse();
 
 export default function Gallery() {
+    const dispatch = useDispatch()
     const { accessibilitySettings, headerFormat } = useAccessibilitySettings();
     const { darkMode, textSize, textSpacing } = accessibilitySettings;
     const { setPage } = useNavigation();
 
     useEffect(() => {
         setPage('gallery')
+        dispatch(thunkGetAllImages())
     }, []);
 
     const navigate = useNavigate();

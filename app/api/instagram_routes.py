@@ -1,4 +1,5 @@
 from flask import Blueprint, session, request
+import requests
 import os
 from app.models import db
 from flask_login import login_required, current_user
@@ -49,5 +50,10 @@ def authenticate():
 
     '''
 
-    data = get.request(f'https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token={os.environ.get(IG_ACCESS_KEY)}')
-    ic(data)
+    res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token={os.environ.get("IG_ACCESS_KEY")}')
+    data = res.json()
+
+    images = {item.id:item for item in data}
+    ic(images)
+
+    return {'images': images}

@@ -5,6 +5,7 @@ import GalleryPreview from './GalleryPreview'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation';
 import ImageCarousel from '../Carousel';
+import { thunkGetAllImages } from '../../store/gallery';
 
 const importAll = (context) => context.keys().map(context);
 
@@ -19,6 +20,7 @@ export default function Home() {
 
     useEffect(() => {
         setPage('home')
+        thunkGetAllImages()
     }, []);
 
     const navigate = useNavigate();
