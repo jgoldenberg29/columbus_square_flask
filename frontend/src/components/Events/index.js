@@ -11,8 +11,6 @@ import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
-import MyCalendar from '../Calendar/fullcalendar'
-import FullCalendar from '../Calendar/fullcalendar'
 import ReactCalendar from '../Calendar/reactbigcalendar'
 import { thunkGetAllData } from '../../store/allData'
 
@@ -80,10 +78,10 @@ export default function Events() {
         return Math.floor(Math.random() * max);
     }
 
-    console.log('********: ', sortedEvents)
+    // console.log('********: ', sortedEvents)
 
     return (
-        <div className="mt-6 px-4 mb-20">
+        <div className="px-4 md:w-4/5 mx-auto mb-20 ">
             <div className='flex flex-col w-full my-4'>
                 <div className="flex justify-between pb-3 mb-6 border-b border-gray-300">
                     <h2 className="text-3xl" >Upcoming Events</h2>
