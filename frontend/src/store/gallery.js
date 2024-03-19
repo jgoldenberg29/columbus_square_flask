@@ -28,7 +28,7 @@ export const thunkGetAllImages = () => async dispatch => {
 const imagesReducer = (state={}, action) => {
     switch(action.type) {
         case ALL_IMAGES:
-            return {...action.images}
+            return [...action.images]
         default:
             return state
     }

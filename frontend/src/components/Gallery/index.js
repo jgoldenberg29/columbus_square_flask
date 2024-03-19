@@ -15,23 +15,30 @@ const images = imagesArr.reverse();
 
 export default function Gallery() {
     const dispatch = useDispatch()
+    const igImages = useSelector(state => state.images)
     const { accessibilitySettings, headerFormat } = useAccessibilitySettings();
     const { darkMode, textSize, textSpacing } = accessibilitySettings;
     const { setPage } = useNavigation();
 
     useEffect(() => {
         setPage('gallery')
-        dispatch(thunkGetAllImages())
+
     }, []);
 
-    const navigate = useNavigate();
 
+
+    const navigate = useNavigate();
+    if(!igImages.length) {
+        dispatch(thunkGetAllImages())
+        return null
+    }
     const subHeaderClass = `text-left underline underline-offset-8 tracking-widest text-2xl my-8 ${darkMode && "text-white"}`
 
-    const galleryMap = images.map(image => {
+    const galleryMap = igImages.map(image => {
+        console.log("IMAGES", image)
         return (
             <div>
-                <ImageCard image={image} />
+                <ImageCard image={image.media_url} />
             </div>
         )
     })
@@ -40,13 +47,14 @@ export default function Gallery() {
         <div className='flex flex-col my-4 gap-8 w-full px-4'>
             <h1 className="text-3xl pb-3 mb-4 border-b border-gray-300">Gallery</h1>
             <div data-testid='home-1' className='container mb-20 flex flex-wrap justify-center md:grid md:grid-cols-5 lg:grid-cols-6 gap-2'>
-                {images.map((image) => (
+                {/* {igImages.map((image) => (
                     <div className='rounded overflow-hidden'>
                         <img src={image} className='cursor-pointer object-cover min-h-full rounded transition-transform transform-gpu hover:scale-110'
                             onClick={() => {}}
                         />
                     </div>
-                ))}
+                ))} */}
+                {galleryMap}
             </div>
         </div>
     )
