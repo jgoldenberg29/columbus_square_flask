@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from '../../context/form';
 import EventFormModal from '../EventFormModal'
+import AdminCreateEvent from './event';
+import AdminNews from './news';
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -30,7 +32,7 @@ export default function Dashboard() {
                     <button onClick={() => setView('account')} className={`py-3 rounded-lg hover:bg-gray-100 hover:text-rose-500  ${view === 'account' && 'text-cyan-700 bg-cyan-100'}`}>
                         Manage Account
                     </button>
-                    <button onClick={() => setShowForm(true)} className={`py-3 rounded-lg hover:bg-gray-100 hover:text-rose-500 ${view === 'event' && 'text-cyan-700 bg-cyan-100'}`}>
+                    <button onClick={() => setView('event')} className={`py-3 rounded-lg hover:bg-gray-100 hover:text-rose-500 ${view === 'event' && 'text-cyan-700 bg-cyan-100'}`}>
                         Create Event
                     </button>
                     <button onClick={() => setView('news')} className={`py-3 rounded-lg hover:bg-gray-100 hover:text-rose-500 ${view === 'news' && 'text-cyan-700 bg-cyan-100'}`}>
@@ -51,11 +53,13 @@ export default function Dashboard() {
                         <option value={'admin'} style={{ top: '0', left: '0' }}>Manage Admins</option>
                     </select>
                 </div>
-                <div className='pl-12 md:col-span-3 pt-10 md:min-h-screen md:border-l md:border-gray-300'>
+                <div className='md:pl-12 md:col-span-3 pt-6 md:pt-10 md:min-h-screen md:border-l md:border-gray-300'>
                     {view === 'account' && <ManageAccount />}
+                    {view === 'event' && <AdminCreateEvent />}
+                    {view === 'news' && <AdminNews />}
                 </div>
             </div>
-            {showForm && <EventFormModal/>}
+            {/* {showForm && <EventFormModal/>} */}
         </div>
     )
 };

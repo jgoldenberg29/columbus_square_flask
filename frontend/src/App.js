@@ -6,7 +6,7 @@ import './App.css'
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import About from './components/About';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { authenticate } from './store/session';
 import { useAccessibilitySettings } from './context/accessibility';
 import Contact from './components/Contact';
@@ -38,6 +38,8 @@ const App = () => {
         // dispatch(fetchAll(dispatch, getAllEvents, getAllNews)).then(() => console.log('Fetched All'))
     }, [dispatch])
 
+    const user = useSelector(state => state.session.user)
+
     return (
         <Router>
             <div className="">
@@ -53,7 +55,7 @@ const App = () => {
                         <Route path="/donate" element={<Donate />} />
                         <Route path='/gallery' element={<Gallery />} />
                         <Route path='/news' element={<News />} />
-                        <Route path='/dashboard' element={<Dashboard />} />
+                        {user && <Route path='/dashboard' element={<Dashboard />} />}
                     </Routes>
                 </div>
                 <Footer />
