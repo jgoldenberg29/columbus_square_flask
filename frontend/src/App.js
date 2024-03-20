@@ -20,6 +20,7 @@ import Donate from './components/Donate';
 import LoginModal from './components/LoginModal';
 import LogoutModal from './components/LogoutModal';
 import { useLogin, useLogout } from './context/login';
+import Dashboard from './components/Dashboard';
 
 const App = () => {
     const dispatch = useDispatch()
@@ -43,7 +44,7 @@ const App = () => {
                 {showLogin && <LoginModal />}
                 {showLogout && <LogoutModal />}
                 <Navigation />
-                <div className={`mt-[116px] min-h-screen`}>
+                <div className={`mt-[120px] min-h-screen`}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
@@ -52,6 +53,7 @@ const App = () => {
                         <Route path="/donate" element={<Donate />} />
                         <Route path='/gallery' element={<Gallery />} />
                         <Route path='/news' element={<News />} />
+                        <Route path='/dashboard' element={<Dashboard />} />
                     </Routes>
                 </div>
                 <Footer />

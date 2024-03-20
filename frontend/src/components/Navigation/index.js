@@ -33,7 +33,7 @@ export default function Navigation() {
 
     const handleUser = () => {
         if (user) {
-            setShowLogout(true)
+            navigate('/dashboard')
         } else {
             setShowLogin(true)
         }
@@ -72,7 +72,7 @@ export default function Navigation() {
                         </button>
                     </div>
                     <div className='border-l border-gray-300'>
-                        <button onClick={() => handleUser()} className='rounded-full py-1 px-2 ml-5 text-2xl hover:bg-gray-200' title='Admin Login'>
+                        <button onClick={() => handleUser()} className='rounded-full py-1 px-2 ml-5 text-2xl hover:bg-gray-200' title={user ? 'View Dashboard' : 'Admin Login'}>
                             {/* <i class="fa-solid fa-circle-user"></i> */}
                             <i class="fa-regular fa-circle-user"></i>
                         </button>
@@ -119,8 +119,8 @@ export default function Navigation() {
                                         <Link to="/contact" className="py-3 text-center font-semibold focus:bg-slate-200 border-b border-slate-200">Contact</Link>
                                     </Menu.Item>
                                     <Menu.Item>
-                                        <button onClick={() => {user ? setShowLogout(true) : setShowLogin(true)}} className='py-3 text-center font-semibold focus:bg-slate-200'>
-                                            {user ? 'Logout' : 'Login'}
+                                        <button onClick={() => {user ? navigate('/dashboard') : setShowLogin(true)}} className='py-3 text-center font-semibold focus:bg-slate-200'>
+                                            {user ? 'View Dashboard' : 'Login'}
                                         </button>
                                     </Menu.Item>
                                     {/* <Menu.Item>
