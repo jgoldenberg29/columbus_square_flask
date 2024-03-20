@@ -66,7 +66,7 @@ export default function Home() {
                     <div className='w-full'>
                         <div className='px-1 pb-1 mb-2 border-b border-cyan-700 flex gap-4 justify-between items-center max-w-full'>
                             <h2 className='text-2xl font-bold text-cyan-700 tracking-wide'>
-                                HEADLINES
+                                ANNOUNCEMENTS
                             </h2>
                             <a href='/news' className='text-sm pr-2 text-blue-500 underline hover:no-underline underline-offset-2 hover:text-blue-400'>
                                 View All

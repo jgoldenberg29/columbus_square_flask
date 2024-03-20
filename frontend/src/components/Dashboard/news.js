@@ -50,7 +50,7 @@ export default function AdminNews() {
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
-                <div className='flex flex-col gap-1 my-2'>
+                <div className='flex flex-col gap-1'>
                     <label className='text-xs ml-1 font-bold'>Description</label>
                     <textarea
                         id="description"

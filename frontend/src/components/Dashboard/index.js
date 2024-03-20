@@ -36,7 +36,7 @@ export default function Dashboard() {
                         Create Event
                     </button>
                     <button onClick={() => setView('news')} className={`py-3 rounded-lg hover:bg-gray-100 hover:text-rose-500 ${view === 'news' && 'text-cyan-700 bg-cyan-100'}`}>
-                        Add News Article
+                        Post Announcement
                     </button>
                     <button onClick={() => setView('admins')} className={`py-3 rounded-lg hover:bg-gray-100 hover:text-rose-500 ${view === 'admins' && 'text-cyan-700 bg-cyan-100'}`}>
                         Manage Admins
@@ -49,7 +49,7 @@ export default function Dashboard() {
                     <select value={view} onChange={(e) => setView(e.target.value)} className="py-2 px-1 border border-gray-300 rounded-md w-full" style={{ position: 'relative' }}>
                         <option value={'account'} style={{ top: '0', left: '0' }}>Manage Account</option>
                         <option value={'event'} style={{ top: '0', left: '0' }}>Create Event</option>
-                        <option value={'news'} style={{ top: '0', left: '0' }}>Add News Article</option>
+                        <option value={'news'} style={{ top: '0', left: '0' }}>Post Announcement</option>
                         <option value={'admin'} style={{ top: '0', left: '0' }}>Manage Admins</option>
                     </select>
                 </div>

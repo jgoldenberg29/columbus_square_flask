@@ -32,7 +32,7 @@ export default function ManageAccount() {
                             {!editName ?
                                 <h1 className="text-lg md:text-xl">{user.name}</h1>
                                 :
-                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="px-2 py-1 border rounded-lg text-lg md:text-xl" />
+                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="px-2 py-1 border rounded-lg text-lg md:text-xl w-full" />
                             }
                             <button onClick={() => setEditName(!editName)} className={`rounded-lg py-1 px-2 ${editName ? 'hover:text-red-500' : 'hover:text-green-500'}`}>
                                 {!editName ?
@@ -51,7 +51,7 @@ export default function ManageAccount() {
                             {!editEmail ?
                                 <h1 className="text-lg md:text-xl">{user.email}</h1>
                                 :
-                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="px-2 py-1 border rounded-lg text-lg md:text-xl" />
+                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="px-2 py-1 border rounded-lg text-lg md:text-xl w-full" />
                             }
                             <button onClick={() => setEditEmail(!editEmail)} className={`rounded-lg py-1 px-2 ${editEmail ? 'hover:text-red-500' : 'hover:text-green-500'}`}>
                                 {!editEmail ?
