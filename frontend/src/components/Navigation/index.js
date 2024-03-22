@@ -55,15 +55,15 @@ export default function Navigation() {
                         <button onClick={() => navigate("/about")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "about" && "text-cyan-600"}`}>
                             About
                         </button>
+                        <button onClick={() => navigate("/news")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "news" && "text-cyan-600"}`}>
+                            News
+                        </button>
                         <button onClick={() => navigate("/events")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "events" && "text-cyan-600"}`}>
                             Events
                         </button>
-                        {/* <button onClick={() => navigate("/news")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "news" && "text-cyan-600"}`}>
-                            News
-                        </button> */}
-                        <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
+                        {/* <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
                             Donate
-                        </button>
+                        </button> */}
                         <button onClick={() => navigate("/gallery")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "gallery" && "text-cyan-600"}`}>
                             Gallery
                         </button>

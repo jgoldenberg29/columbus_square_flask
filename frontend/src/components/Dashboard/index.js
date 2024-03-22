@@ -7,6 +7,7 @@ import { useForm } from '../../context/form';
 import EventFormModal from '../EventFormModal'
 import AdminCreateEvent from './event';
 import AdminNews from './news';
+import ManageAdmins from './admin';
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -50,13 +51,14 @@ export default function Dashboard() {
                         <option value={'account'} style={{ top: '0', left: '0' }}>Manage Account</option>
                         <option value={'event'} style={{ top: '0', left: '0' }}>Create Event</option>
                         <option value={'news'} style={{ top: '0', left: '0' }}>Post Announcement</option>
-                        <option value={'admin'} style={{ top: '0', left: '0' }}>Manage Admins</option>
+                        <option value={'admins'} style={{ top: '0', left: '0' }}>Manage Admins</option>
                     </select>
                 </div>
                 <div className='md:pl-12 md:col-span-3 pt-6 md:pt-10 md:min-h-screen md:border-l md:border-gray-300'>
                     {view === 'account' && <ManageAccount />}
                     {view === 'event' && <AdminCreateEvent />}
                     {view === 'news' && <AdminNews />}
+                    {view === 'admins' && <ManageAdmins />}
                 </div>
             </div>
             {/* {showForm && <EventFormModal/>} */}

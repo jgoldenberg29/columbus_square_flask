@@ -44,9 +44,9 @@ export default function Gallery() {
     })
 
     return (
-        <div className='flex flex-col my-4 gap-8 w-full px-4'>
+        <div className='flex flex-col my-4 gap-8 w-full px-4 lg:w-4/5 mx-auto mb-20'>
             <h1 className="text-3xl pb-3 mb-4 border-b border-gray-300">Gallery</h1>
-            <div data-testid='home-1' className='container mb-20 flex flex-wrap justify-center md:grid md:grid-cols-5 lg:grid-cols-6 gap-2'>
+            <div data-testid='home-1' className='container mb-20 justify-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
                 {/* {igImages.map((image) => (
                     <div className='rounded overflow-hidden'>
                         <img src={image} className='cursor-pointer object-cover min-h-full rounded transition-transform transform-gpu hover:scale-110'

@@ -9,7 +9,7 @@ import { thunkGetAllImages } from '../../store/gallery';
 import { useDispatch, useSelector } from 'react-redux';
 import SingleNewsItem from '../News/SingleNewsItem'
 import { thunkGetSortedEvents } from '../../store/events';
-
+import moment from 'moment';
 
 const importAll = (context) => context.keys().map(context);
 
@@ -36,7 +36,9 @@ export default function Home() {
     const events = useSelector(state => state.events.sorted);
 
     const formattedDatetime = (datetime, type) => {
-        const date = new Date(datetime)
+        const date = new Date(datetime);
+        const pastDate = moment(date);
+        const relativeDate = pastDate.fromNow();
 
         const formattedDate = date.toLocaleString('en-US', {
             weekday: 'short',
@@ -51,7 +53,7 @@ export default function Home() {
         });
 
         if (type === 'news') {
-            return formattedDate
+            return relativeDate
         } else {
             return formattedDate + ' at ' + formattedTime
         }
@@ -109,18 +111,18 @@ export default function Home() {
                     <div>
                         <h2 className='text-2xl font-bold text-green-700 tracking-wide pl-1 pb-1 mb-2 border-b border-green-700'>QUICK LINKS</h2>
                         <div className='flex flex-col md:grid grid-cols-3 gap-4 pt-6'>
-                            <button className='hover:shadow-md hover:shadow-yellow-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/about')}>
+                            {/* <button className='hover:shadow-md hover:shadow-yellow-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/about')}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-yellow-600'><i class="fa-solid fa-landmark"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>About</h3>
                                 </div>
-                            </button>
-                            <button className='hover:shadow-md hover:shadow-green-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/donate')}>
+                            </button> */}
+                            {/* <button className='hover:shadow-md hover:shadow-green-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/donate')}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-green-600'> <i class="fa-solid fa-hand-holding-dollar"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Donate</h3>
                                 </div>
-                            </button>
+                            </button> */}
                             <button className='hover:shadow-md hover:shadow-amber-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/contact')}>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-amber-600'><i class="fa-solid fa-address-book"></i></h3>

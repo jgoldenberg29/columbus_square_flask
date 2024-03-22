@@ -2,76 +2,68 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import { useForm } from '../../context/form.js';
 import {useDispatch} from 'react-redux'
-import { updateNews, addNews } from '../../store/news.js';
+import { useNavigate } from 'react-router-dom';
+import { thunkGetAllNews, thunkCreateNews } from '../../store/news.js';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
 export default function NewsFormModal() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { accessibilitySettings } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+    const [disabled, setDisabled] = useState(true);
 
     const {
-        setShowForm,
+        setShowNewsForm,
         isUpdateForm,
         setIsUpdateForm,
         setItemToUpdate,
-        showForm,
+        showNewsForm,
         itemToUpdate,
     } = useForm()
 
+    // useEffect(() => {
+    //     if (isUpdateForm) {
+    //         setTitle(itemToUpdate?.title)
+    //         setDate(itemToUpdate?.formDate)
+    //         setLocation(itemToUpdate.location)
+    //         setBody(itemToUpdate.body)
+    //         setTime(itemToUpdate.formTime)
+    //     }
+    // }, [itemToUpdate, isUpdateForm])
+
     useEffect(() => {
-        if (isUpdateForm) {
-            setTitle(itemToUpdate?.title)
-            setDate(itemToUpdate?.formDate)
-            setLocation(itemToUpdate.location)
-            setBody(itemToUpdate.body)
-            setTime(itemToUpdate.formTime)
-        }
-    }, [itemToUpdate, isUpdateForm])
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const news = new FormData()
-
-        if (isUpdateForm) news['id'] = itemToUpdate.id
-
-        news.append('title', title)
-        news.append('body', body)
-
-        let data
-        if (isUpdateForm) {
-            data = await dispatch(updateNews(news))
+        if (title && body) {
+            setDisabled(false)
         } else {
-            data = await dispatch(addNews(news))
-
+            setDisabled(true)
         }
+    }, [title, body])
 
-        if (data.errors) {
+    const handleSubmit = () => {
+        const article = new FormData();
 
-        } else {
-            setIsUpdateForm(false)
-            setItemToUpdate('')
-            setShowForm(false)
-        }
+        article.append('title', title)
+        article.append('body', body)
 
+        dispatch(thunkCreateNews(article));
+        navigate('/');
+        return;
     }
 
     const onClose = () => {
         setIsUpdateForm(false)
-        setShowForm(false)
+        // setShowForm(false)
         setTitle('')
-        setDate('')
-        setTime('')
-        setLocation('')
         setBody('')
     }
 
     return (
-        <Transition appear show={showForm} as={Fragment}>
+        <Transition appear show={showNewsForm} as={Fragment}>
             <Dialog as="div" className="fixed z-100" onClose={onClose}>
             <Transition.Child
                 as={Fragment}
@@ -100,11 +92,11 @@ export default function NewsFormModal() {
                             as="h1"
                             className={`leading-6 text-gray-900 ${darkMode && "text-white"} ${textSize ? "text-2xl" : "text-xl"}`}
                         >
-                            Add Event
+                            Add Announcement
                         </Dialog.Title>
                         <div className="mt-2">
                             <p className={`${textSize ? null : "text-sm"} ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                Please enter your news details below.
+                                Please enter your announcement details below.
                             </p>
                         </div>
                         <form
