@@ -1,5 +1,7 @@
 from app.models import db, User, environment, SCHEMA
+import os
 from sqlalchemy.sql import text
+from datetime import datetime
 
 
 # Adds a demo user, you can add other users here if you want
@@ -8,7 +10,10 @@ def seed_users():
         email='columbussquarepark@gmail.com',
         name='Steve',
         admin=True,
-        password='AtThePark99')
+        password='AtThePark99',
+        ig_access_token=os.environ.get('IG_ACCESS_KEY'),
+        token_expiration=datetime(2024, 5, 10)
+        )
 
     db.session.add(admin)
     db.session.commit()

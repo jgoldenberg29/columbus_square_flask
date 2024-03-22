@@ -4,6 +4,7 @@ from flask_login import login_required
 from app.forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
 from icecream import ic
+from datetime import datetime
 
 
 auth_routes = Blueprint('auth', __name__)
@@ -14,6 +15,14 @@ def authenticate():
     """
     Authenticates a user.
     """
+    present = datetime.now()
+    today_noon = present.replace(hour=12, minute=0, second=0, microsecond=0)
+    if present < today_noon:
+        user = User.query.filter(User.email == 'columbussquarepark@gmail.com').first()
+        user.ig_fetched = False
+        db.session.add()
+        db.session.commit()
+        
     if current_user.is_authenticated:
         return {'user': current_user.to_dict()}
 

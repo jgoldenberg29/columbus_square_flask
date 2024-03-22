@@ -5,9 +5,11 @@ import GalleryPreview from './GalleryPreview'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation';
 import ImageCarousel from '../Carousel';
+import { thunkGetAllImages } from '../../store/gallery';
 import { useDispatch, useSelector } from 'react-redux';
 import SingleNewsItem from '../News/SingleNewsItem'
 import { thunkGetSortedEvents } from '../../store/events';
+
 
 const importAll = (context) => context.keys().map(context);
 

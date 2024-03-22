@@ -2,11 +2,14 @@
 
 
 export default function ImageCard({image}) {
-
+    console.log(image)
     return (
-        <>
-            <img className='px-2 w-auto aspect-[4/3] sm:px-0 sm:min-w-60 sm:max-w-72 rounded-sm
-            ' src={image}/>
-        </>
+        <div className='rounded overflow-hidden'>
+            <img
+                src={image}
+                className='cursor-pointer object-cover min-h-full rounded transition-transform transform-gpu hover:scale-110'
+                onClick={() => {}}
+            />
+        </div>
     )
 }

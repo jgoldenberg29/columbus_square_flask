@@ -37,6 +37,7 @@ jmespath = "==1.0.1"
 pygments = "==2.16.1"
 s3transfer = "==0.7.0"
 urllib3 = "==1.26.18"
+requests = "*"
 
 [dev-packages]
 
