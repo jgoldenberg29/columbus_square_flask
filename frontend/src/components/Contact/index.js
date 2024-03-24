@@ -14,8 +14,8 @@ export default function Contact() {
     }, [])
 
     return (
-        <div className='px-4 md:w-4/5 mx-auto'>
-            <div className='mt-10'>
+        <div className='px-4 lg:w-4/5 mx-auto'>
+            <div className='my-10'>
                 <h1 className='text-3xl pb-3 mb-6 border-b border-gray-300'>Contact Us</h1>
                 <div className='flex flex-col lg:grid grid-cols-2 gap-10'>
                     <div className='px-4'>

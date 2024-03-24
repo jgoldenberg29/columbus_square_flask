@@ -12,7 +12,7 @@ class News(db.Model):
     title = db.Column(db.String(255), nullable=False)
     body = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-    image = db.Column(db.String(255), nullable=False)
+    image = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
@@ -24,7 +24,7 @@ class News(db.Model):
             'id': self.id,
             'title': self.title,
             'body': self.body,
-            'image': self.image,
+            'image': self.image or None,
             'datePosted': self.created_at.date(),
             'poster': self.news_poster.to_dict(),
         }

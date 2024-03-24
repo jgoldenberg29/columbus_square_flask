@@ -11,6 +11,7 @@ import { getAllNews } from '../../store/news'
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
 import { thunkGetAllData } from '../../store/allData'
+import NewsFormModal from '../NewsFormModal'
 
 
 export default function News() {
@@ -27,8 +28,8 @@ export default function News() {
 
     const news = useSelector(state => state.news)
     const {
-        showForm,
-        setShowForm,
+        showNewsForm,
+        setShowNewsForm,
         showRemove,
     } = useForm()
 
@@ -61,7 +62,7 @@ export default function News() {
                 <div className="pb-3 mb-6 border-b border-gray-300 flex justify-between gap-8">
                     <h2 className={`text-3xl`} >Park News</h2>
                     {user && <button
-                                onClick={() => setShowForm(true)}
+                                onClick={() => setShowNewsForm(true)}
                                 className="self-center py-2 px-4 md:px-4 bg-cyan-500 text-white rounded-lg border border-cyan-500 hover:bg-cyan-600 hover:border-cyan-600 active:bg-cyan-300 active:border active:border-white">
                                 Add News
                             </button>}
@@ -73,7 +74,7 @@ export default function News() {
             {/* <div>
                 <EventCalendar/>
             </div> */}
-            {showForm && <EventFormModal/>}
+            {showNewsForm && <NewsFormModal/>}
             {showRemove && <RemoveEventModal/>}
         </div>
     )

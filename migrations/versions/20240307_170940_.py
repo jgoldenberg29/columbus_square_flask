@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 3761d306d4ff
-Revises: 
+Revises:
 Create Date: 2024-03-07 17:09:40.603948
 
 """
@@ -57,7 +57,7 @@ def upgrade():
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('body', sa.Text(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('image', sa.String(length=255), nullable=False),
+    sa.Column('image', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

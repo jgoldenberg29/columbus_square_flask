@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import {useDispatch} from 'react-redux'
 import { useForm } from '../../context/form';
-import { thunkDeleteEvent } from '../../store/events';
+import { thunkDeleteEvent, thunkGetSortedEvents } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
 export default function RemoveEventModal() {
@@ -20,12 +20,9 @@ export default function RemoveEventModal() {
 
     const handleRemove = async () => {
         // remove event
-         const data = await dispatch(thunkDeleteEvent(removeItemId))
-         if(data.errors) {
-
-         } else {
-            setShowRemove(false)
-         }
+         dispatch(thunkDeleteEvent(removeItemId))
+         dispatch(thunkGetSortedEvents())
+         setShowRemove(false)
     }
 
     return (
@@ -66,7 +63,7 @@ export default function RemoveEventModal() {
                             </p>
                         </div>
                         <div className='mt-6 flex flex-col gap-4'>
-                            <button onClick={handleRemove} className='rounded-lg bg-primary hover:bg-secondary active:bg-slate-200 px-6 py-2'>
+                            <button onClick={handleRemove} className='rounded-lg text-white bg-rose-700 hover:bg-rose-600 active:bg-white active:text-rose-700 px-6 py-2'>
                                 Remove Event
                             </button>
                             <button onClick={() => setShowRemove(false)} className='rounded-lg bg-slate-300 hover:bg-slate-400 active:bg-slate-200 px-6 py-2'>

@@ -4,6 +4,7 @@ const FormContext = createContext();
 
 export function FormProvider({children}) {
     const [showForm, setShowForm] = useState(false);
+    const [showNewsForm, setShowNewsForm] = useState(false);
     const [isUpdateForm, setIsUpdateForm] = useState(false)
     const [showRemove, setShowRemove] = useState(false)
     const [itemToUpdate, setItemToUpdate] = useState('')
@@ -12,6 +13,8 @@ export function FormProvider({children}) {
     const contextProps = {
         showForm,
         setShowForm,
+        showNewsForm,
+        setShowNewsForm,
         isUpdateForm,
         setIsUpdateForm,
         showRemove,
