@@ -6,7 +6,7 @@ import './App.css'
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import About from './components/About';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { authenticate } from './store/session';
 import { useAccessibilitySettings } from './context/accessibility';
 import Contact from './components/Contact';
@@ -20,6 +20,7 @@ import Donate from './components/Donate';
 import LoginModal from './components/LoginModal';
 import LogoutModal from './components/LogoutModal';
 import { useLogin, useLogout } from './context/login';
+import Dashboard from './components/Dashboard';
 
 const App = () => {
     const dispatch = useDispatch()
@@ -37,13 +38,15 @@ const App = () => {
         // dispatch(fetchAll(dispatch, getAllEvents, getAllNews)).then(() => console.log('Fetched All'))
     }, [dispatch])
 
+    const user = useSelector(state => state.session.user)
+
     return (
         <Router>
             <div className="">
                 {showLogin && <LoginModal />}
                 {showLogout && <LogoutModal />}
                 <Navigation />
-                <div className={`mt-[116px] min-h-screen`}>
+                <div className={`mt-[120px] min-h-screen`}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
@@ -52,6 +55,7 @@ const App = () => {
                         <Route path="/donate" element={<Donate />} />
                         <Route path='/gallery' element={<Gallery />} />
                         <Route path='/news' element={<News />} />
+                        {user && <Route path='/dashboard' element={<Dashboard />} />}
                     </Routes>
                 </div>
                 <Footer />

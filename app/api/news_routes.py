@@ -29,7 +29,7 @@ def add_news():
         )
         db.session.add(new_news)
         db.session.commit()
-        return {'event': new_news.to_dict()}
+        return {'news': new_news.to_dict()}
     return {'errors': form.errors}, 400
 
 @news_routes.route('/<int:id>', methods=['PUT'])

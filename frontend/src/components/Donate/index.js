@@ -12,7 +12,7 @@ export default function Donate() {
 
     return (
         <div className='px-4 md:w-4/5 mx-auto mb-20'>
-            <h1>Donate! Woo!</h1>
+            <h1 className='text-3xl pb-3 border-b border-gray-300'>Donate</h1>
         </div>
     )
 };
