@@ -121,7 +121,7 @@ export default function NewsFormModal() {
                                 onChange={(e) => setBody(e.target.value)}
                             />
                             <div className='flex justify-center'>
-                                <button type='submit' className='mt-4 py-3 px-8 text-white bg-cyan-500 hover:bg-cyan-400 rounded-xl active:bg-cyan-300'>
+                                <button type='submit' disabled={disabled} className='mt-4 py-3 px-8 text-white disabled:cursor-not-allowed bg-cyan-500 hover:bg-cyan-400 rounded-xl active:bg-cyan-300'>
                                     {isUpdateForm ? "Update" : "Create"}
                                 </button>
                             </div>
