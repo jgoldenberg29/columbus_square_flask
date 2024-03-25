@@ -11,11 +11,11 @@ export default function SingleNewsItem({newsId, image}) {
     const newsItem = useSelector(state => state.news[newsId])
 
     const {
-        setShowForm,
-        setIsUpdateForm,
-        setShowRemove,
-        setItemToUpdate,
-        setRemoveItemId,
+        setShowNewsForm,
+        setNewsUpdate,
+        setShowNewsRemove,
+        setNewsToUpdate,
+        setNewsToDelete,
     } = useForm()
 
     const subHeaderClass = 'text-left underline underline-offset-8 xxs:text-md xs:text-lg sm:text-xl md:text-2xl lg:w-3xl xl:4xl my-4'
@@ -23,14 +23,14 @@ export default function SingleNewsItem({newsId, image}) {
     const newsTextClass = `lg:w-md xl:md my-2 ${contentFormat}`
 
     const updateOnClick = () => {
-        setShowForm(true)
-        setIsUpdateForm(true)
-        setItemToUpdate(newsItem)
+        setNewsToUpdate(newsItem)
+        setShowNewsForm(true)
+        setNewsUpdate(true)
     }
 
     const removeOnClick = () => {
-        setShowRemove(true)
-        setRemoveItemId(newsItem.id)
+        setShowNewsRemove(true)
+        setNewsToDelete(newsItem.id)
     }
 
     const date = new Date(newsItem.datePosted)

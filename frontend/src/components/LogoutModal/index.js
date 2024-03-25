@@ -4,9 +4,11 @@ import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import { useLogout } from '../../context/login';
 import { useAccessibilitySettings } from '../../context/accessibility';
 import { login, logout } from '../../store/session';
-import {useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function LogoutModal() {
+    const navigate = useNavigate();
     const { accessibilitySettings } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
@@ -14,9 +16,10 @@ export default function LogoutModal() {
     const { showLogout, setShowLogout } = useLogout();
 
     const handleLogout = () => {
-        console.log('hello')
-        dispatch(logout())
-        setShowLogout(false)
+        // console.log('hello')
+        dispatch(logout());
+        setShowLogout(false);
+        navigate('/');
         return;
     }
 

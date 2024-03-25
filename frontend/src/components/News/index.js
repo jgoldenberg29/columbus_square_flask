@@ -12,6 +12,7 @@ import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
 import { thunkGetAllData } from '../../store/allData'
 import NewsFormModal from '../NewsFormModal'
+import RemoveNewsModal from '../RemoveNewsModal'
 
 
 export default function News() {
@@ -30,7 +31,8 @@ export default function News() {
     const {
         showNewsForm,
         setShowNewsForm,
-        showRemove,
+        showNewsRemove,
+        setShowNewsRemove,
     } = useForm()
 
     const importAll = (context) => context.keys().map(context);
@@ -74,8 +76,8 @@ export default function News() {
             {/* <div>
                 <EventCalendar/>
             </div> */}
-            {showNewsForm && <NewsFormModal/>}
-            {showRemove && <RemoveEventModal/>}
+            {showNewsForm && <NewsFormModal />}
+            {showNewsRemove && <RemoveNewsModal />}
         </div>
     )
 }
