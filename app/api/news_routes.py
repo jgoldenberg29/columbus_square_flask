@@ -4,8 +4,10 @@ from datetime import datetime
 from app.forms import NewsForm
 from app.models import db, News
 from icecream import ic
+import pytz
 
-# file_template = %%(year)d%%(month).2d%%(day).2d_%%(hour).2d%%(minute).2d%%(second).2d_%%(slug)s
+# Get Eastern Time (ET) timezone
+# eastern_timezone = pytz.timezone('America/New_York')
 
 news_routes = Blueprint('news', __name__)
 

@@ -25,6 +25,6 @@ class News(db.Model):
             'title': self.title,
             'body': self.body,
             'image': self.image or None,
-            'datePosted': self.created_at.date(),
+            'datePosted': self.created_at,
             'poster': self.news_poster.to_dict(),
         }

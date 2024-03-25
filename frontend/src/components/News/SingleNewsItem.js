@@ -35,26 +35,27 @@ export default function SingleNewsItem({newsId, image}) {
 
     const date = new Date(newsItem.datePosted)
     const pastDate = moment(date);
-    const relativeDate = pastDate.fromNow();
+    const relativeDate = pastDate.local().fromNow();
 
     return (
         <div className='flex flex-col md:flex-row gap-2 md:gap-3 mb-6 w-fit md:w-full'>
-            <div className={`container rounded-lg border border-gray-300 hover:shadow-md md:p-2 flex flex-col flex-grow align-center md:grid md:grid-cols-5 lg:gap-8 xl:gap-16 overflow-hidden`}>
-                <div className='md:hidden flex flex-col w-full'>
+            {/* <div className={`container rounded-lg border border-gray-300 hover:shadow-md md:p-2 flex flex-col flex-grow align-center md:grid md:grid-cols-5 lg:gap-8 xl:gap-16 overflow-hidden`}> */}
+            <div className={`container rounded-lg border border-gray-300 hover:shadow-md md:p-2 flex flex-col flex-grow align-center overflow-hidden`}>
+                {/* <div className='md:hidden flex flex-col w-full'>
                     <img className="w-full self-center max-w-96 xl:min-w-70 object-cover"
                         src={image}/>
-                </div>
-                <div className="w-11/12 p-4 md:p-2 md:ml-1 pt-4 md:mt-0 md:mr-4 col-span-3 flex flex-col justify-between">
+                </div> */}
+                <div className="w-11/12 p-4 md:p-2 md:ml-1 pt-4 md:mt-0 md:mr-4 col-span-3 flex flex-col gap-8 justify-between">
                     <div>
                         <p className={`font-bold text-2xl ${headerFormat}`}> {newsItem.title}</p>
                         <p className={newsTextClass}>{newsItem.body}</p>
                     </div>
                     <p className='text-sm text-gray-500'>{relativeDate}</p>
                 </div>
-                <div className='hidden md:flex rounded-md overflow-hidden md:col-span-2 max-h-56'>
+                {/* <div className='hidden md:flex rounded-md overflow-hidden md:col-span-2 max-h-56'>
                     <img className="self-center h-54 min-h-full rounded-sm object-cover object-center"
                         src={image}/>
-                </div>
+                </div> */}
             </div>
             {user && <div className="flex flex-row md:flex-col justify-end md:justify-start gap-2 mt-1">
                 <button

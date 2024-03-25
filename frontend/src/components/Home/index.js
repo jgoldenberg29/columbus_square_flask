@@ -35,6 +35,14 @@ export default function Home() {
     const newsArray = Object.values(newsState);
     const events = useSelector(state => state.events.sorted);
 
+    const sortedNews = newsArray.sort((a, b) => {
+        const dateA = new Date(a.datePosted);
+        const dateB = new Date(b.datePosted);
+
+        // Compare the dates
+        return dateB - dateA;
+    });
+
     const formattedDatetime = (datetime, type) => {
         const date = new Date(datetime);
         const pastDate = moment(date);
@@ -78,7 +86,7 @@ export default function Home() {
                         </div>
                         <div className='pr-6 overflow-x-scroll py-6 max-w-full'>
                             <div className='flex flex-row gap-4' style={{ maxWidth: '100vw' }}>
-                                {newsArray.map(article => (
+                                {sortedNews.map(article => (
                                     <div key={article.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 min-w-64 justify-between'>
                                         <div className='flex flex-col gap-4'>
                                             <p className='text-xl font-bold'>{article.title}</p>
