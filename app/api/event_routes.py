@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from datetime import datetime
 from app.forms import EventForm
-from app.models import db, Event
+from app.models import db, Event, Image
 from icecream import ic
 
 
@@ -15,6 +15,12 @@ def get_sorted_events():
 
     return { 'sorted': [event.to_dict() for event in events] }
 
+@login_required
+def upload_image():
+    file = request.files['image']
+    new_image = Image(
+        image
+    )
 
 @event_routes.route('', methods=['POST'])
 @login_required

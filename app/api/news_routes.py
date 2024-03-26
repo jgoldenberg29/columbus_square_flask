@@ -4,7 +4,10 @@ from datetime import datetime
 from app.forms import NewsForm
 from app.models import db, News
 from icecream import ic
+import pytz
 
+# Get Eastern Time (ET) timezone
+# eastern_timezone = pytz.timezone('America/New_York')
 
 news_routes = Blueprint('news', __name__)
 
@@ -44,11 +47,11 @@ def update_news(id):
     if form.validate_on_submit():
         data = form.data
 
-        event.title=data['title']
-        event.body=data['body']
-        event.image=data['image'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg"
-        event.user_id=current_user.id
-        event.updated_at=datetime.now()
+        news.title=data['title']
+        news.body=data['body']
+        news.image=data['image'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg"
+        news.user_id=current_user.id
+        news.updated_at=datetime.now()
 
         db.session.commit()
         return {'news': news.to_dict()}

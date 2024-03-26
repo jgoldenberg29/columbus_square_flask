@@ -58,7 +58,7 @@ export const thunkCreateNews = (news) => async dispatch => {
     if (res.ok) {
         const data = await res.json()
         dispatch(createNews(data.news))
-        dispatch(setUser(data.user))
+        // dispatch(setUser(data.user))
         return null
     } else {
         const data = await res.json()
@@ -75,7 +75,7 @@ export const thunkUpdateNews = (news, id) => async dispatch => {
     if (res.ok) {
         const data = await res.json()
         dispatch(editNews(data.news))
-        dispatch(setUser(data.user))
+        // dispatch(setUser(data.user))
         return null
     } else {
         const data = await res.json()
@@ -91,7 +91,7 @@ export const thunkDeleteNews = (id) => async dispatch => {
     if(res.ok) {
         const data = await res.json()
         dispatch(deleteNews(id))
-        dispatch(setUser(data.user))
+        // dispatch(setUser(data.user))
         return null
     } else {
         const data = await res.json()

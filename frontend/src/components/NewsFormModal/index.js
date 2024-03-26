@@ -3,7 +3,7 @@ import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import { useForm } from '../../context/form.js';
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { thunkGetAllNews, thunkCreateNews } from '../../store/news.js';
+import { thunkGetAllNews, thunkCreateNews, thunkEditComment, thunkUpdateNews } from '../../store/news.js';
 import { useAccessibilitySettings } from '../../context/accessibility';
 
 export default function NewsFormModal() {
@@ -19,22 +19,19 @@ export default function NewsFormModal() {
 
     const {
         setShowNewsForm,
-        isUpdateForm,
-        setIsUpdateForm,
-        setItemToUpdate,
+        newsUpdate,
+        setNewsUpdate,
         showNewsForm,
-        itemToUpdate,
+        newsToUpdate,
+        setNewsToUpdate,
     } = useForm()
 
-    // useEffect(() => {
-    //     if (isUpdateForm) {
-    //         setTitle(itemToUpdate?.title)
-    //         setDate(itemToUpdate?.formDate)
-    //         setLocation(itemToUpdate.location)
-    //         setBody(itemToUpdate.body)
-    //         setTime(itemToUpdate.formTime)
-    //     }
-    // }, [itemToUpdate, isUpdateForm])
+    useEffect(() => {
+        if (newsUpdate) {
+            setTitle(newsToUpdate?.title)
+            setBody(newsToUpdate.body)
+        }
+    }, [newsToUpdate, newsUpdate])
 
     useEffect(() => {
         if (title && body) {
@@ -50,17 +47,21 @@ export default function NewsFormModal() {
         article.append('title', title)
         article.append('body', body)
 
-        dispatch(thunkCreateNews(article));
+        if (!newsUpdate) {
+            dispatch(thunkCreateNews(article));
+        } else {
+            dispatch(thunkUpdateNews(article, newsToUpdate.id))
+        }
         // navigate('/');
         setShowNewsForm(false);
         return;
     }
 
     const onClose = () => {
-        setIsUpdateForm(false)
+        setNewsUpdate(false)
         setShowNewsForm(false);
-        setTitle('')
-        setBody('')
+        setTitle('');
+        setBody('');
     }
 
     return (
@@ -122,7 +123,7 @@ export default function NewsFormModal() {
                             />
                             <div className='flex justify-center'>
                                 <button type='submit' disabled={disabled} className='mt-4 py-3 px-8 text-white disabled:cursor-not-allowed bg-cyan-500 hover:bg-cyan-400 rounded-xl active:bg-cyan-300'>
-                                    {isUpdateForm ? "Update" : "Create"}
+                                    {newsUpdate ? "Update" : "Create"}
                                 </button>
                             </div>
                         </form>

@@ -5,10 +5,14 @@ const FormContext = createContext();
 export function FormProvider({children}) {
     const [showForm, setShowForm] = useState(false);
     const [showNewsForm, setShowNewsForm] = useState(false);
-    const [isUpdateForm, setIsUpdateForm] = useState(false)
-    const [showRemove, setShowRemove] = useState(false)
-    const [itemToUpdate, setItemToUpdate] = useState('')
+    const [isUpdateForm, setIsUpdateForm] = useState(false);
+    const [newsUpdate, setNewsUpdate] = useState(false);
+    const [showRemove, setShowRemove] = useState(false);
+    const [showNewsRemove, setShowNewsRemove] = useState(false);
+    const [itemToUpdate, setItemToUpdate] = useState('');
     const [removeItemId, setRemoveItemId] = useState('')
+    const [newsToUpdate, setNewsToUpdate] = useState('');
+    const [newsToDelete, setNewsToDelete] = useState('');
 
     const contextProps = {
         showForm,
@@ -17,12 +21,20 @@ export function FormProvider({children}) {
         setShowNewsForm,
         isUpdateForm,
         setIsUpdateForm,
+        newsUpdate,
+        setNewsUpdate,
         showRemove,
         setShowRemove,
+        showNewsRemove,
+        setShowNewsRemove,
         removeItemId,
         setRemoveItemId,
         itemToUpdate,
         setItemToUpdate,
+        newsToUpdate,
+        setNewsToUpdate,
+        newsToDelete,
+        setNewsToDelete,
     }
 
     return (
