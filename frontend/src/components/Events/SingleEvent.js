@@ -73,7 +73,7 @@ export default function SingleEvent({event, image}) {
                 </div>
                 <div className='hidden md:flex rounded-md overflow-hidden md:col-span-2 max-h-56'>
                     <img className="self-center min-w-full h-auto object-cover object-center"
-                        src={image}/>
+                        src={event.image ? `data:image/jpeg;base64, ${event.image}` : image}/>
                 </div>
             </div>
             {user && <div className="flex flex-row md:flex-col justify-end md:justify-start gap-2 mt-1">
