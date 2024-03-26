@@ -25,6 +25,8 @@ export default function EventFormModal() {
     const [disabled, setDisabled] = useState(true);
     const [frequency, setFrequency] = useState("DNR");
     const [timeString, setTimeString] = useState("");
+    const [image, setImage] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
         // console.log(startTime, ' and ', endTime)
@@ -160,6 +162,21 @@ export default function EventFormModal() {
         }
     }
 
+    const handleImageChange = (e) => {
+        if (e.target.files.length > 0) {
+            const selectedFile = e.target.files[0];
+            setImage(URL.createObjectURL(selectedFile));
+            setImageFile(selectedFile);
+        }
+    };
+
+    const handleDeleteImage = () => {
+        setImage(null);
+        setImageFile(null);
+        // Reset the file input value to clear the file name
+        document.getElementById('image').value = '';
+    };
+
     const timeOptions = generateTimeOptions();
 
     const handleSubmit = async (e) => {
@@ -174,6 +191,10 @@ export default function EventFormModal() {
         // event.append('location', location)
         event.append('description', description)
 
+        if (imageFile) {
+            event.append('image', imageFile)
+        }
+        console.log('event: ', event)
         let data
         if (isUpdateForm) {
             data = await dispatch(thunkUpdateEvent(event))
@@ -231,7 +252,7 @@ export default function EventFormModal() {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <Dialog.Panel className={`${darkMode ? "bg-gray-700" : "bg-white"} w-full max-w-md transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all z-50`}>
+                        <Dialog.Panel className={`${darkMode ? "bg-gray-700" : "bg-white"} w-full max-w-md transform overflow-scroll rounded-2xl p-6 text-left align-middle shadow-xl transition-all z-50`}>
                             <Dialog.Title
                                 as="h1"
                                 className={`leading-6 text-gray-900 ${darkMode && "text-white"} ${textSize ? "text-2xl" : "text-xl"}`}
@@ -245,7 +266,7 @@ export default function EventFormModal() {
                             </div>
                             <form
                                 onSubmit={handleSubmit}
-                                className="mt-4">
+                                className="mt-4 max-h-[500px] overflow-y-auto">
                                 <div className="flex flex-col gap-1 my-2">
                                     <label className='text-xs ml-1 font-bold'>Title</label>
                                     <input
@@ -319,6 +340,29 @@ export default function EventFormModal() {
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                     />
+                                </div>
+                                <div className='flex flex-col gap-1 my-2'>
+                                    <label className='text-xs ml-1 font-bold'>Image (optional)</label>
+                                    <input
+                                        type="file"
+                                        id="image"
+                                        name="image"
+                                        className="mb-2 border border-gray-300 rounded-md"
+                                        onChange={handleImageChange}
+                                    />
+                                    {image && (
+                                        <div className="relative">
+                                            <img src={image} alt='Preview Image' className='w-full'/>
+                                            <div className="absolute top-0 right-0 m-2">
+                                                <button
+                                                    className="text-white bg-gray-300 hover:bg-red-400 rounded-full text-sm px-2 py-1"
+                                                    onClick={handleDeleteImage}
+                                                >
+                                                    <i className="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className='flex justify-center'>
                                     <button

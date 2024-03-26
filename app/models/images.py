@@ -13,6 +13,7 @@ class Image(db.Model):
     image_url = db.Column(db.String(255), nullable=False)
     timestamp = db.Column(db.String(100), nullable=False)
 
+    # image_event = db.relationship('Event', back_populates='event_image')
 
     def to_dict(self):
         return {

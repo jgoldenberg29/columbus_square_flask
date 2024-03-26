@@ -61,7 +61,7 @@ export default function SingleEvent({event, image}) {
             <div className={`container rounded-lg border border-gray-300 hover:shadow-md md:p-2 flex flex-col flex-grow align-center md:grid md:grid-cols-5 lg:gap-8 xl:gap-16 overflow-hidden`}>
                 <div className='md:hidden flex flex-col w-full'>
                     <img className="w-full self-center max-w-96 xl:min-w-70 object-cover"
-                        src={image}/>
+                        src={event.image ? `data:image/jpeg;base64, ${event.image}` : image}/>
                 </div>
                 <div className="w-11/12 p-4 md:p-2 md:ml-1 pt-4 md:mt-0 md:mr-4 col-span-3">
                     <p className="font-bold text-3xl">{event.title}</p>
@@ -73,7 +73,7 @@ export default function SingleEvent({event, image}) {
                 </div>
                 <div className='hidden md:flex rounded-md overflow-hidden md:col-span-2 max-h-56'>
                     <img className="self-center min-w-full h-auto object-cover object-center"
-                        src={image}/>
+                        src={event.image ? `data:image/jpeg;base64, ${event.image}` : image}/>
                 </div>
             </div>
             {user && <div className="flex flex-row md:flex-col justify-end md:justify-start gap-2 mt-1">

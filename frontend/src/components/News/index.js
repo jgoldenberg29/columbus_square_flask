@@ -12,6 +12,7 @@ import { useAccessibilitySettings } from '../../context/accessibility';
 import { useNavigation } from '../../context/navigation'
 import { thunkGetAllData } from '../../store/allData'
 import NewsFormModal from '../NewsFormModal'
+import RemoveNewsModal from '../RemoveNewsModal'
 
 
 export default function News() {
@@ -30,7 +31,8 @@ export default function News() {
     const {
         showNewsForm,
         setShowNewsForm,
-        showRemove,
+        showNewsRemove,
+        setShowNewsRemove,
     } = useForm()
 
     const importAll = (context) => context.keys().map(context);
@@ -39,10 +41,19 @@ export default function News() {
 
     const subHeaderClass = `text-left underline underline-offset-8 tracking-widest text-2xl my-8 ${darkMode && "text-white"}`
     const newsArray = Object.values(news)
-    if (!newsArray.length) {
-        dispatch(thunkGetAllData())
-        return null
-    }
+    // if (!newsArray.length) {
+    //     dispatch(thunkGetAllData())
+    //     return null
+    // }
+
+    const sorted = newsArray.sort((a, b) => {
+        const dateA = new Date(a.datePosted);
+        const dateB = new Date(b.datePosted);
+
+        // Compare the dates
+        return dateB - dateA;
+    });
+
     const newsMap = newsArray.map(newsItem => {
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
@@ -68,14 +79,16 @@ export default function News() {
                             </button>}
                 </div>
                 <div className='flex flex-col items-center md:items-stretch md:w-full'>
-                    {newsMap}
+                    {sorted.map((article) => (
+                        <SingleNewsItem newsId={article.id} />
+                    ))}
                 </div>
             </div>
             {/* <div>
                 <EventCalendar/>
             </div> */}
-            {showNewsForm && <NewsFormModal/>}
-            {showRemove && <RemoveEventModal/>}
+            {showNewsForm && <NewsFormModal />}
+            {showNewsRemove && <RemoveNewsModal />}
         </div>
     )
 }
