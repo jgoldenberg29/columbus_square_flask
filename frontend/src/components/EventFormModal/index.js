@@ -28,6 +28,7 @@ export default function EventFormModal() {
     const [image, setImage] = useState(null);
     const [imageFile, setImageFile] = useState(null);
 
+
     useEffect(() => {
         // console.log(startTime, ' and ', endTime)
 
@@ -194,7 +195,6 @@ export default function EventFormModal() {
         if (imageFile) {
             event.append('image', imageFile)
         }
-        console.log('event: ', event)
         let data
         if (isUpdateForm) {
             data = await dispatch(thunkUpdateEvent(event))
