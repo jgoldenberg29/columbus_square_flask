@@ -107,7 +107,7 @@ export default function Events() {
                         {listView === 'upcoming' && sortedEvents.map( event => (
                             <SingleEvent event={event} image={images[getRandomInt(45)]}/>
                         ))}
-                        {listView === 'past' && pastEvents.map((event) => (
+                        {listView === 'past' && pastEvents.reverse().map((event) => (
                             <SingleEvent event={event} image={images[getRandomInt(45)]}/>
                         ))}
                         {listView === 'select' && (
