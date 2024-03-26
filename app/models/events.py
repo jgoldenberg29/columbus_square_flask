@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from icecream import ic
 from sqlalchemy import DateTime
+import base64
 
 
 class Event(db.Model):
@@ -17,12 +18,14 @@ class Event(db.Model):
     # location = db.Column(db.String(40), nullable=False)
     # flyer = db.Column(db.String(255), nullable=True)
     description = db.Column(db.Text, nullable=False)
+    # image_id = db.Column(db.Integer, db.ForeighKey(add_prefix_for_prod('images.id')))
+    image = db.Column(db.BLOB, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
     event_poster = db.relationship('User', back_populates='posted_events')
-
+    # event_image = db.relationship('Image', back_populates='image_event')
 
     def to_dict(self):
         # ic('Time object', self.time)
@@ -38,6 +41,7 @@ class Event(db.Model):
             # 'calendarDateTime'
             # 'location': self.location,
             # 'flyer': self.flyer,
+            'image': base64.b64encode(self.image).decode('utf-8') or None,
             'description': self.description,
             'poster': self.event_poster.name,
             'user_id': self.user_id

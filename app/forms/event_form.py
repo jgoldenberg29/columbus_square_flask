@@ -21,5 +21,6 @@ class EventForm(FlaskForm):
     description=TextAreaField('description', validators=[DataRequired(), Length(10, 4000)])
     start=StringField('start', validators=[])
     end=StringField('end', validators=[])
+    image=FileField('image', validators=[FileAllowed(list(ALLOWED_IMG_EXTENSIONS))])
     # location=SelectField('location', choices=locations, validators=[DataRequired()])
-    flyer=FileField('flyer', validators=[FileAllowed(list(ALLOWED_IMG_EXTENSIONS))])
+    # flyer=FileField('flyer', validators=[FileAllowed(list(ALLOWED_IMG_EXTENSIONS))])

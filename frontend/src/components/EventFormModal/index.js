@@ -26,6 +26,8 @@ export default function EventFormModal() {
     const [frequency, setFrequency] = useState("DNR");
     const [timeString, setTimeString] = useState("");
     const [image, setImage] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
+
 
     useEffect(() => {
         // console.log(startTime, ' and ', endTime)
@@ -165,11 +167,13 @@ export default function EventFormModal() {
         if (e.target.files.length > 0) {
             const selectedFile = e.target.files[0];
             setImage(URL.createObjectURL(selectedFile));
+            setImageFile(selectedFile);
         }
     };
 
     const handleDeleteImage = () => {
         setImage(null);
+        setImageFile(null);
         // Reset the file input value to clear the file name
         document.getElementById('image').value = '';
     };
@@ -188,10 +192,9 @@ export default function EventFormModal() {
         // event.append('location', location)
         event.append('description', description)
 
-        if (image) {
-            event.append('image', image)
+        if (imageFile) {
+            event.append('image', imageFile)
         }
-
         let data
         if (isUpdateForm) {
             data = await dispatch(thunkUpdateEvent(event))
