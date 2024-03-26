@@ -188,6 +188,10 @@ export default function EventFormModal() {
         // event.append('location', location)
         event.append('description', description)
 
+        if (image) {
+            event.append('image', image)
+        }
+
         let data
         if (isUpdateForm) {
             data = await dispatch(thunkUpdateEvent(event))
