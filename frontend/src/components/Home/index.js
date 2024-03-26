@@ -141,13 +141,13 @@ export default function Home() {
                                     <h3 className='text-lg tracking-wide font-bold'>Contact Info</h3>
                                 </div>
                             </button>
-                            <a href='' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
+                            <a href='https://www.facebook.com/friendsofcolumbussquare/' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-blue-500'><i class="fa-brands fa-facebook"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Facebook</h3>
                                 </div>
                             </a>
-                            <a href='' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
+                            <a href='https://www.instagram.com/friendsofcolumbussq/' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
                                 <div className='flex justify-center gap-4 items-center'>
                                     <h3 className='text-3xl text-rose-400'><i class="fa-brands fa-instagram"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Instagram</h3>
