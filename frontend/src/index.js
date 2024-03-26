@@ -10,6 +10,7 @@ import { LoginProvider } from "./context/login.js"
 import { FormProvider } from './context/form.js';
 import { NavigationProvider } from './context/navigation';
 import configureStore from "./store";
+import { CalendarProvider } from './context/calendar';
 
 // // If you want to start measuring performance in your app, pass a function
 // // to log results (for example: reportWebVitals(console.log))
@@ -26,9 +27,11 @@ root.render(
       <AccessibilityProvider>
         <NavigationProvider>
           <LoginProvider>
-            <Provider store={store}>
-              <App />
-            </Provider>
+            <CalendarProvider>
+              <Provider store={store}>
+                <App />
+              </Provider>
+            </CalendarProvider>
           </LoginProvider>
         </NavigationProvider>
       </AccessibilityProvider>

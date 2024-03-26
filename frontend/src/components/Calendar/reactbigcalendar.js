@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { useCalendar } from '../../context/calendar';
 
 const localizer = momentLocalizer(moment);
 
 const ReactCalendar = ({ events }) => {
+  const { selectedEvent, setSelectedEvent } = useCalendar();
 
   const newEvents = events.map((event) => {
     const start = new Date(event.start);
@@ -33,6 +35,11 @@ const ReactCalendar = ({ events }) => {
     </div>
   );
 
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+  };
+
+
   return (
     <div style={{ height: 700 }}>
       <Calendar
@@ -45,6 +52,7 @@ const ReactCalendar = ({ events }) => {
         components={{
           toolbar: CustomToolbar
         }}
+        onSelectEvent={handleEventClick}
       />
     </div>
   );
