@@ -2,8 +2,8 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import { useForm } from '../../context/form.jsx';
 import { useDispatch } from 'react-redux'
-import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events';
-import { useAccessibilitySettings } from '../../context/accessibility';
+import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events.js';
+import { useAccessibilitySettings } from '../../context/accessibility.jsx';
 import moment from 'moment';
 
 const frequencyOptions = ["DNR", "consecutive", "weekly", "biweekly", "monthly"]

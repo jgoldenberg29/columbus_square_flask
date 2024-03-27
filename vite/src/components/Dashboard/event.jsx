@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { useForm } from '../../context/form.jsx';
 import { useDispatch } from 'react-redux'
-import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events';
+import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events.js';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
