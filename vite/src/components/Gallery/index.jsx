@@ -7,12 +7,6 @@ import ImageCard from '../ImageCard'
 import { useNavigation } from '../../context/navigation';
 import { thunkGetAllImages } from '../../store/gallery';
 
-const importAll = (context) => context.keys().map(context);
-
-const imagesContext = require.context('../Home/gallery_images', false, /\.(png|jpg|jpeg|gif|svg)$/);
-const imagesArr = importAll(imagesContext);
-const images = imagesArr.reverse();
-
 export default function Gallery() {
     const dispatch = useDispatch()
     const igImages = useSelector(state => state.images)

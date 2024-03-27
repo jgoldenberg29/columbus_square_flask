@@ -48,10 +48,6 @@ export default function Events() {
         showRemove,
     } = useForm()
 
-    const importAll = (context) => context.keys().map(context);
-    const imagesContext = require.context('../Home/gallery_images', false, /\.(png|jpg|jpeg|gif|svg)$/);
-    const images = importAll(imagesContext);
-
     const eventsArray = Object.values(events)
 
     const today = new Date();

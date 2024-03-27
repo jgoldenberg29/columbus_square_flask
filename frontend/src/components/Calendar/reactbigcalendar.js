@@ -19,10 +19,10 @@ const ReactCalendar = ({ events }) => {
     <div className="flex justify-between mb-4">
       <div className="flex items-center border rounded z-10">
           <button type="button" onClick={() => onNavigate('PREV')} className="px-3 py-1 hover:text-blue-500 hover:bg-slate-200 border-r">
-            <i class="fa-solid fa-caret-left"></i>
+            <i className="fa-solid fa-caret-left"></i>
           </button>
           <button type="button" onClick={() => onNavigate('NEXT')} className="px-3 py-1 hover:text-blue-500 hover:bg-slate-200">
-            <i class="fa-solid fa-caret-right"></i>
+            <i className="fa-solid fa-caret-right"></i>
           </button>
       </div>
       <div className="absolute inset-x-0 absolute inset-x-0 flex justify-center">

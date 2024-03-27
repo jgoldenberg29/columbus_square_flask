@@ -1,22 +1,30 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}"
-  ],
+export default {
+  purge: {
+    enabled: process.env.NODE_ENV ==='production',
+    content: [
+      './src/**/*.html',
+      './src/**/*.jsx',
+      './src/**/*.js'
+    ],
+  },
   theme: {
     extend: {
-      fontFamily: {
-        'newspaper': ['Cinzel', 'serif'],
-        'logo': ['Tajawal', 'serif']
-      },
-      colors: {
-        'fun': '#6CBD91',
-        'primary': '#A0C6B1',
-        'secondary': '#ACD2BD',
-        'csp-yellow': '#FF7C03',
-        'csp-yellow-2': '',
-      },
+      // fontFamily: {
+      //   'newspaper': ['Cinzel', 'serif'],
+      //   'logo': ['Tajawal', 'serif']
+      // },
     },
   },
   plugins: [],
 }
+
+
+// tailwind.config.js
+
+module.exports = {
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: ['./src/**/*.html', './src/**/*.jsx', './src/**/*.js'],
+  },
+  // Other Tailwind CSS configurations...
+};

@@ -72,7 +72,7 @@ export default function Navigation() {
                     <div className='border-l border-gray-300'>
                         <button onClick={() => handleUser()} className='rounded-full py-1 px-2 ml-5 text-2xl hover:bg-gray-200' title={user ? 'View Dashboard' : 'Admin Login'}>
                             {/* <i class="fa-solid fa-circle-user"></i> */}
-                            <i class="fa-regular fa-circle-user"></i>
+                            <i className="fa-regular fa-circle-user"></i>
                         </button>
                     </div>
                 </div>

@@ -30,15 +30,15 @@ export default function Footer() {
                     <h2 className='text-2xl font-newspaper'>Contact</h2>
                     <div>
                         <div className='flex gap-3 mb-2 content-end items-center'>
-                            <i class="fa-solid fa-phone"></i>
+                            <i className="fa-solid fa-phone"></i>
                             (215) 685-1590
                         </div>
                         <div className='flex gap-3 mb-2 content-end items-center'>
-                            <i class="fa-solid fa-envelope"></i>
+                            <i className="fa-solid fa-envelope"></i>
                             friends@columbussquare.org
                         </div>
                         <div className='flex gap-3 mb-2 content-end items-center'>
-                            <i class="fa-brands fa-facebook"></i>
+                            <i className="fa-brands fa-facebook"></i>
                             <Link to="https://www.facebook.com/friendsofcolumbussquare/" className='hover:underline'>Join us on Facebook!</Link>
                         </div>
                     </div>

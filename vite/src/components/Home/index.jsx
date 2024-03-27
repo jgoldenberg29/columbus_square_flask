@@ -66,7 +66,7 @@ export default function Home() {
 
     return (
         <div data-testid='home-1' className='min-h-screen flex flex-col gap-14'>
-            <div class="h-80 min-w-screen">
+            <div className="h-80 min-w-screen">
                 <ImageCarousel images={images} />
             </div>
 
@@ -122,31 +122,31 @@ export default function Home() {
                         <div className='flex flex-col md:grid grid-cols-3 gap-4 pt-6'>
                             {/* <button className='hover:shadow-md hover:shadow-yellow-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/about')}>
                                 <div className='flex justify-center gap-4 items-center'>
-                                    <h3 className='text-3xl text-yellow-600'><i class="fa-solid fa-landmark"></i></h3>
+                                    <h3 className='text-3xl text-yellow-600'><i className="fa-solid fa-landmark"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>About</h3>
                                 </div>
                             </button> */}
                             {/* <button className='hover:shadow-md hover:shadow-green-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/donate')}>
                                 <div className='flex justify-center gap-4 items-center'>
-                                    <h3 className='text-3xl text-green-600'> <i class="fa-solid fa-hand-holding-dollar"></i></h3>
+                                    <h3 className='text-3xl text-green-600'> <i className="fa-solid fa-hand-holding-dollar"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Donate</h3>
                                 </div>
                             </button> */}
                             <button className='hover:shadow-md hover:shadow-amber-200 border border-gray-300 rounded-lg py-4' onClick={() => navigate('/contact')}>
                                 <div className='flex justify-center gap-4 items-center'>
-                                    <h3 className='text-3xl text-amber-600'><i class="fa-solid fa-address-book"></i></h3>
+                                    <h3 className='text-3xl text-amber-600'><i className="fa-solid fa-address-book"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Contact Info</h3>
                                 </div>
                             </button>
                             <a href='https://www.facebook.com/friendsofcolumbussquare/' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
                                 <div className='flex justify-center gap-4 items-center'>
-                                    <h3 className='text-3xl text-blue-500'><i class="fa-brands fa-facebook"></i></h3>
+                                    <h3 className='text-3xl text-blue-500'><i className="fa-brands fa-facebook"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Facebook</h3>
                                 </div>
                             </a>
                             <a href='https://www.instagram.com/friendsofcolumbussq/' target='_blank' className='hover:shadow-md hover:shadow-blue-200 border border-gray-300 rounded-lg py-4'>
                                 <div className='flex justify-center gap-4 items-center'>
-                                    <h3 className='text-3xl text-rose-400'><i class="fa-brands fa-instagram"></i></h3>
+                                    <h3 className='text-3xl text-rose-400'><i className="fa-brands fa-instagram"></i></h3>
                                     <h3 className='text-lg tracking-wide font-bold'>Instagram</h3>
                                 </div>
                             </a>

@@ -60,7 +60,7 @@ export default function SingleNewsItem({newsId}) {
                     onClick={removeOnClick}
                     className={`h-10 w-10 text-red-500 rounded-lg border border-red-500 ${darkMode ? "hover:bg-gray-600" : "hover:bg-gray-200"}`}
                 >
-                    <i class="fa-solid fa-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                 </button>
             </div>}
         </div>
