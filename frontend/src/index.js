@@ -5,9 +5,9 @@ import { Provider } from 'react-redux'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import { AccessibilityProvider } from "./context/accessibility.js"
-import { LoginProvider } from "./context/login.js"
-import { FormProvider } from './context/form.js';
+import { AccessibilityProvider } from "./context/accessibility.jsx"
+import { LoginProvider } from "./context/login.jsx"
+import { FormProvider } from './context/form.jsx';
 import { NavigationProvider } from './context/navigation';
 import configureStore from "./store";
 import { CalendarProvider } from './context/calendar';
