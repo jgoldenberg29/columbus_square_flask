@@ -41,7 +41,7 @@ class Event(db.Model):
             # 'calendarDateTime'
             # 'location': self.location,
             # 'flyer': self.flyer,
-            'image': base64.b64encode(self.image).decode('utf-8') or None,
+            'image': base64.b64encode(self.image).decode('utf-8') if self.image else None,
             'description': self.description,
             'poster': self.event_poster.name,
             'user_id': self.user_id
