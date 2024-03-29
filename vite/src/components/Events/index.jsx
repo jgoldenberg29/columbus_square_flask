@@ -99,13 +99,13 @@ export default function Events() {
                     </div>
                     <div className='flex flex-col items-center md:items-stretch md:w-full'>
                         {listView === 'upcoming' && sortedEvents.map( event => (
-                            <SingleEvent event={event} image={images[getRandomInt(45)]}/>
+                            <SingleEvent event={event}/>
                         ))}
                         {listView === 'past' && pastEvents.reverse().map((event) => (
-                            <SingleEvent event={event} image={images[getRandomInt(45)]}/>
+                            <SingleEvent event={event}/>
                         ))}
                         {listView === 'select' && (
-                            <SingleEvent event={selectedEvent} image={images[getRandomInt(45)]} />
+                            <SingleEvent event={selectedEvent} />
                         )}
                     </div>
                 </div>

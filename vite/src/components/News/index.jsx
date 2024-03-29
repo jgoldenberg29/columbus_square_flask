@@ -54,11 +54,11 @@ export default function News() {
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
           }
-        const image = images[getRandomInt(45)]
+        // const image = images[getRandomInt(45)]
 
         return (
             <>
-                <SingleNewsItem newsId={newsItem.id} image={image}/>
+                <SingleNewsItem newsId={newsItem.id}/>
             </>
         )
     })
