@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, send_from_directory
 from app.config import Config
 from flask_login import LoginManager
 from flask_cors import CORS
@@ -70,22 +70,49 @@ def api_help():
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def react_root(path):
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def react_root(path):
+#     """
+#     This route will direct to the public directory in our
+#     react builds in the production environment for favicon
+#     or index.html requests
+#     """
+#     if path and path != 'favicon.ico':  # Check if path is not empty and not favicon.ico
+#         # If the path is not empty and not favicon.ico, serve the requested file from the Vite frontend folder
+#         return app.send_static_file(os.path.join('..', 'vite', path))
+
+#     # For favicon.ico or root path, serve index.html from the Vite frontend folder
+#     return app.send_static_file(os.path.join('..', 'vite', 'index.html'))
+
+
+# @app.errorhandler(404)
+# def not_found(e):
+#     return app.send_static_file(os.path.join('..', 'vite', 'index.html'))
+
+# Route for serving the index.html file
+@app.route('/')
+def react_root():
     """
-    This route will direct to the public directory in our
-    react builds in the production environment for favicon
-    or index.html requests
+    This route serves the index.html file from the Vite frontend folder.
     """
-    if path and path != 'favicon.ico':  # Check if path is not empty and not favicon.ico
-        # If the path is not empty and not favicon.ico, serve the requested file from the Vite frontend folder
-        return app.send_static_file(os.path.join('..', 'vite', path))
+    return send_from_directory(app.static_folder, 'index.html')
 
-    # For favicon.ico or root path, serve index.html from the Vite frontend folder
-    return app.send_static_file(os.path.join('..', 'vite', 'index.html'))
+# Route for serving static files (e.g., JS, CSS, images) from the Vite frontend folder
+@app.route('/<path:filename>')
+def serve_static(filename):
+    """
+    This route serves static files from the Vite frontend folder.
+    """
+    return send_from_directory(app.static_folder, filename)
 
-
+# Route for handling 404 errors by serving the index.html file
 @app.errorhandler(404)
 def not_found(e):
-    return app.send_static_file(os.path.join('..', 'vite', 'index.html'))
+    """
+    This function handles 404 errors by serving the index.html file for all routes.
+    """
+    return send_from_directory(app.static_folder, 'index.html')
+
+if __name__ == '__main__':
+    app.run()
