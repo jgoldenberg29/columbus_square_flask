@@ -15,7 +15,7 @@ from .api.news_routes import news_routes
 from .api.images_routes import images_routes
 from .seeds import seed_commands
 
-app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
+app = Flask(__name__, static_folder='../vite', static_url_path='/')
 
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
