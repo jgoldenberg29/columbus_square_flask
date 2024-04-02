@@ -87,7 +87,7 @@ export default function SingleEvent({event, image}) {
                     onClick={removeOnClick}
                     className={`h-10 w-10 text-red-500 rounded-lg border border-red-500 hover:text-red-300 hover:border-red-300`}
                 >
-                    <i class="fa-solid fa-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                 </button>
             </div>}
         </div>

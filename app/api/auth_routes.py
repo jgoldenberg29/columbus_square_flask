@@ -20,9 +20,9 @@ def authenticate():
     if present < today_noon:
         user = User.query.filter(User.email == 'columbussquarepark@gmail.com').first()
         user.ig_fetched = False
-        db.session.add()
+        db.session.add(user)
         db.session.commit()
-        
+
     if current_user.is_authenticated:
         return {'user': current_user.to_dict()}
 

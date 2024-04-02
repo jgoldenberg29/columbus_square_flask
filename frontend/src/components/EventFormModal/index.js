@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
-import { useForm } from '../../context/form.js';
+import { useForm } from '../../context/form';
 import { useDispatch } from 'react-redux'
 import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
