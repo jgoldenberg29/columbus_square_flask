@@ -1,20 +1,20 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
+# from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-class DocumentItem(db.Model):
-    __tablename__ = 'document_items'
+# class DocumentItem(db.Model):
+#     __tablename__ = 'document_items'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+#     if environment == "production":
+#         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(255), nullable=False)
-    document_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('documents.id')))
-    # is_sub_header = db.Column(db.Boolean, nullable=False, defaults=False)
+#     id = db.Column(db.Integer, primary_key=True)
+#     text = db.Column(db.String(255), nullable=False)
+#     document_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('documents.id')))
+#     # is_sub_header = db.Column(db.Boolean, nullable=False, defaults=False)
 
-    document = db.relationship('Document', back_populates = 'document_items')
+#     document = db.relationship('Document', back_populates = 'document_items')
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'text': self.text
-        }
+#     def to_dict(self):
+#         return {
+#             'id': self.id,
+#             'text': self.text
+#         }
