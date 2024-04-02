@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events.js';
 import { useAccessibilitySettings } from '../../context/accessibility.jsx';
 import moment from 'moment';
+import { createImageFileAndUrl } from '../../store/images.js';
 
 const frequencyOptions = ["DNR", "consecutive", "weekly", "biweekly", "monthly"]
 
@@ -31,33 +32,34 @@ export default function EventFormModal() {
 
     useEffect(() => {
         // console.log(startTime, ' and ', endTime)
+        if (!isUpdateForm) {
+            const alpha = startTime.split(' ')
+            const beta = endTime.split(' ')
 
-        const alpha = startTime.split(' ')
-        const beta = endTime.split(' ')
+            const startHour = alpha[0].split(':')[0]
+            const endHour = beta[0].split(':')[0]
+            const startMin = alpha[0].split(':')[1]
+            const endMin = beta[0].split(':')[1]
 
-        const startHour = alpha[0].split(':')[0]
-        const endHour = beta[0].split(':')[0]
-        const startMin = alpha[0].split(':')[1]
-        const endMin = beta[0].split(':')[1]
+            const startAMPM = alpha[1]
+            const endAMPM = beta[1]
 
-        const startAMPM = alpha[1]
-        const endAMPM = beta[1]
+            let numStartHour = parseInt(startHour)
+            let numEndHour = parseInt(endHour)
 
-        let numStartHour = parseInt(startHour)
-        let numEndHour = parseInt(endHour)
+            if (startAMPM === 'PM' && numStartHour !== 12) {
+                numStartHour += 12
+            }
 
-        if (startAMPM === 'PM' && numStartHour !== 12) {
-            numStartHour += 12
-        }
+            if (endAMPM === 'PM' && numEndHour !== 12) {
+                numEndHour += 12
+            }
 
-        if (endAMPM === 'PM' && numEndHour !== 12) {
-            numEndHour += 12
-        }
-
-        if (numStartHour > numEndHour) {
-            const newEndHour = numStartHour + 1
-            const newEndTime = newEndHour.toString() + ":" + startMin + " " + startAMPM
-            setEndTime(newEndTime)
+            if (numStartHour > numEndHour) {
+                const newEndHour = numStartHour + 1
+                const newEndTime = newEndHour.toString() + ":" + startMin + " " + startAMPM
+                setEndTime(newEndTime)
+            }
         }
     }, [startTime, endTime])
 
@@ -103,12 +105,33 @@ export default function EventFormModal() {
     } = useForm()
 
     useEffect(() => {
-        if (isUpdateForm) {
-            setTitle(itemToUpdate?.title)
-            setDate(itemToUpdate?.formDate)
-            setLocation(itemToUpdate.location)
-            setDescription(itemToUpdate.description)
-            // setTime(itemToUpdate.formTime)
+        // console.log('Item to update: ', itemToUpdate)
+        const formatTime = (timestamp) => {
+            const hour = timestamp.split(':')[0];
+            const minute = timestamp.split(':')[1];
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const displayHour = hour > 12 ? hour - 12 : hour;
+            const paddedHour = displayHour.toString().padStart(2, '0');
+            const paddedMinute = minute.toString().padStart(2, '0');
+            const time = `${paddedHour}:${paddedMinute} ${ampm}`;
+            return time;
+        }
+
+        if (isUpdateForm && itemToUpdate) {
+            setTitle(itemToUpdate.title);
+            setDescription(itemToUpdate.description);
+
+            // Extracting date, start time, and end time
+            const dayDate = itemToUpdate.start.split('T')[0];
+            const startMoment = formatTime(itemToUpdate.start.split('T')[1]);
+            const endMoment = formatTime(itemToUpdate.end.split('T')[1]);
+
+            // Updating state variables
+            setDate(dayDate);
+            setStartTime(startMoment);
+            setEndTime(endMoment);
+
+            console.log(startMoment, " ///// ", endMoment)
         }
     }, [itemToUpdate, isUpdateForm])
 
@@ -192,12 +215,21 @@ export default function EventFormModal() {
         // event.append('location', location)
         event.append('description', description)
 
+        let imageUrl;
+
         if (imageFile) {
-            event.append('image', imageFile)
+            imageUrl = await dispatch(createImageFileAndUrl(imageFile))
+                .then((res) => {
+                    console.log('RES FROM THUNK: ', res)
+                    if (res.url) event.append('image', res.url)
+                })
+            // event.append('image', imageUrl)
         }
-        let data
+
+        let data;
+
         if (isUpdateForm) {
-            data = await dispatch(thunkUpdateEvent(event))
+            data = await dispatch(thunkUpdateEvent(event, itemToUpdate.id))
                 .then((res) => {
                     if (!res.errors) {
                         setIsUpdateForm(false)
@@ -352,7 +384,7 @@ export default function EventFormModal() {
                                     />
                                     {image && (
                                         <div className="relative">
-                                            <img src={image} alt='Preview Image' className='w-full'/>
+                                            <img src={image} alt='Preview Image' className='w-full' />
                                             <div className="absolute top-0 right-0 m-2">
                                                 <button
                                                     className="text-white bg-gray-300 hover:bg-red-400 rounded-full text-sm px-2 py-1"

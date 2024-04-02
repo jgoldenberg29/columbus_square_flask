@@ -15,12 +15,6 @@ def get_sorted_events():
 
     return { 'sorted': [event.to_dict() for event in events] }
 
-@login_required
-def upload_image():
-    file = request.files['image']
-    new_image = Image(
-        image
-    )
 
 @event_routes.route('', methods=['POST'])
 @login_required
@@ -37,9 +31,6 @@ def add_event():
         start_str = form['start'].data
         end_str = form['end'].data
 
-        image_file = form['image'].data
-        image_data = image_file.read()
-
         start = datetime.strptime(start_str, '%Y-%m-%dT%H:%M:%S')
         end = datetime.strptime(end_str, '%Y-%m-%dT%H:%M:%S')
 
@@ -50,7 +41,7 @@ def add_event():
             end=end,
             # location=data['location'],
             # flyer=data['flyer'] or "https://parkvillelivingcenter.org/wp-content/uploads/2021/05/Flyer-scaled.jpg",
-            image=image_data,
+            image=data['image'],
             user_id=current_user.id,
             created_at=datetime.now(),
             updated_at=datetime.now(),

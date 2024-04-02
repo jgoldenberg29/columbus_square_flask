@@ -4,6 +4,7 @@ import { thunkGetAllEvents, thunkGetSortedEvents } from '../../store/events'
 import { getAllNews } from '../../store/news'
 // import fetchAll from '../../store/allData'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../context/form'
 import EventFormModal from '../EventFormModal'
 import RemoveEventModal from '../RemoveEventModal'
@@ -14,16 +15,21 @@ import { thunkGetAllData } from '../../store/allData'
 import { useCalendar } from '../../context/calendar'
 
 export default function Events() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { setPage } = useNavigation();
     const { selectedEvent, setSelectedEvent } = useCalendar();
 
     const [listView, setListView] = useState('upcoming');
 
     useEffect(() => {
-        dispatch(thunkGetSortedEvents())
-        setPage('events')
+        if (!sortedEvents.length) dispatch(thunkGetSortedEvents())
+        // setPage('events')
     }, []);
+
+    useEffect(() => {
+        setPage('events')
+    }, [navigate])
 
     useEffect(() => {
         if (selectedEvent) {
@@ -98,13 +104,13 @@ export default function Events() {
                         </div>
                     </div>
                     <div className='flex flex-col items-center md:items-stretch md:w-full'>
-                        {listView === 'upcoming' && sortedEvents.map( event => (
+                        {listView === 'upcoming' && sortedEvents.map((event) => (
                             <SingleEvent event={event}/>
                         ))}
                         {listView === 'past' && pastEvents.reverse().map((event) => (
                             <SingleEvent event={event}/>
                         ))}
-                        {listView === 'select' && (
+                        {listView === 'select' && selectedEvent && (
                             <SingleEvent event={selectedEvent} />
                         )}
                     </div>

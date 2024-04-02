@@ -2,7 +2,7 @@
 
 
 export default function ImageCard({image}) {
-    console.log(image)
+    // console.log(image)
     return (
         <div className='rounded overflow-hidden'>
             <img
