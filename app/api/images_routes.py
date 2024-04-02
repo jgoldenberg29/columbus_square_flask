@@ -1,8 +1,7 @@
 from flask import Blueprint, request
 from app.models import db
 from flask_login import current_user, login_required
-from .aws_helpers import (
-    upload_file_to_s3, get_unique_filename, remove_file_from_s3)
+from .aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from ..forms.aws_form import ImageForm
 # from ..models.db import db, User, Restaurant, MenuItem
 
