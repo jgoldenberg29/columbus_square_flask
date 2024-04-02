@@ -3,7 +3,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, DateField, TimeField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Email, ValidationError, Length, URL
 from app.models import Event
-from ..api.AWS_helpers import ALLOWED_IMG_EXTENSIONS
+# from ..api.aws_helpers import ALLOWED_EXTENSIONS
 
 locations = [
     "Whole Park",
@@ -22,4 +22,4 @@ class UpdateEventForm(FlaskForm):
     date=DateField('date')
     time=TimeField('time')
     location=SelectField('location', choices=locations)
-    flyer=FileField('flyer', validators=[FileAllowed(list(ALLOWED_IMG_EXTENSIONS))])
+    # flyer=FileField('flyer', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
