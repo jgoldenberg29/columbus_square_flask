@@ -19,7 +19,7 @@ class Event(db.Model):
     # flyer = db.Column(db.String(255), nullable=True)
     description = db.Column(db.Text, nullable=False)
     # image_id = db.Column(db.Integer, db.ForeighKey(add_prefix_for_prod('images.id')))
-    image = db.Column(db.BLOB, nullable=True)
+    image = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
@@ -41,7 +41,7 @@ class Event(db.Model):
             # 'calendarDateTime'
             # 'location': self.location,
             # 'flyer': self.flyer,
-            'image': base64.b64encode(self.image).decode('utf-8') or None,
+            'image': self.image,
             'description': self.description,
             'poster': self.event_poster.name,
             'user_id': self.user_id

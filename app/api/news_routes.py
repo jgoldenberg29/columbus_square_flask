@@ -4,7 +4,7 @@ from datetime import datetime
 from app.forms import NewsForm
 from app.models import db, News
 from icecream import ic
-import pytz
+# import pytz
 
 # Get Eastern Time (ET) timezone
 # eastern_timezone = pytz.timezone('America/New_York')

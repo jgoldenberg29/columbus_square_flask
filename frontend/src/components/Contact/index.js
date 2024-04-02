@@ -22,7 +22,7 @@ export default function Contact() {
                         <div className='py-4'>
                             <h2 className='text-xl font-bold mb-3'>Friends of Columbus Square</h2>
                             <p className='ml-2 flex items-center gap-3'>
-                                <i class="fa-solid fa-envelope"></i>
+                                <i className="fa-solid fa-envelope"></i>
                                 <a href='mailto:friends@columbussquare.org' target='_blank' className='hover:text-rose-600'>friends@columbussquare.org</a>
                             </p>
                         </div>
@@ -32,11 +32,11 @@ export default function Contact() {
                                 During the Fall, Winter, and Spring most centers operate between 2:00 PM and 10:00 PM. Some centers have limited hours on Saturdays.
                             </p>
                             <p className='ml-2 flex items-center gap-3 mb-3'>
-                                <i class="fa-solid fa-phone"></i>
+                                <i className="fa-solid fa-phone"></i>
                                 <a href='' target='_blank' className='hover:text-rose-600'>(215) 685-1890</a>
                             </p>
                             <p className='ml-2 flex items-center gap-3 mb-3'>
-                                <i class="fa-solid fa-envelope"></i>
+                                <i className="fa-solid fa-envelope"></i>
                                 <a href='mailto:shara.gordon@phila.gov' target='_blank' className='hover:text-rose-600'>shara.gordon@phila.gov</a>
                             </p>
                             <div className='mt-3 ml-2'>
@@ -54,11 +54,11 @@ export default function Contact() {
                                 Friends of Columbus Square works with, but is not part of, the City of Philadelphia’s Parks and Recreation Department. The Columbus Square Recreation Center coordinates club, team, and individual use of the recreation facilities at Columbus Square Park.
                             </p>
                             <p className='ml-2 flex items-center gap-3 mb-3'>
-                                <i class="fa-solid fa-phone"></i>
+                                <i className="fa-solid fa-phone"></i>
                                 <a href='' target='_blank' className='hover:text-rose-600'>(215) 683-3600</a>
                             </p>
                             <p className='ml-2 flex items-center gap-3'>
-                                <i class="fa-solid fa-envelope"></i>
+                                <i className="fa-solid fa-envelope"></i>
                                 <a href='mailto:parksandrecreation@phila.gov' target='_blank' className='hover:text-rose-600'>parksandrecreation@phila.gov</a>
                             </p>
                         </div>
@@ -104,7 +104,7 @@ export default function Contact() {
                             </div>
                             <div>
                                 <div className={`flex gap-3 mb-2 content-end items-center ${contentFormat}`}>
-                                    <i class="fa-solid fa-phone"></i>
+                                    <i className="fa-solid fa-phone"></i>
                                     (215) 685-1590
                                 </div>
                                 <div className={`flex gap-3 mb-2 content-end items-center ${contentFormat}`}>

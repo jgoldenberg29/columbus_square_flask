@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import { useForm } from '../../context/form.js';
+import { useForm } from '../../context/form';
 import { useDispatch } from 'react-redux'
 import { thunkUpdateEvent, thunkCreateEvent } from '../../store/events';
 import moment from 'moment';
