@@ -14,8 +14,11 @@ from .api.event_routes import event_routes
 from .api.news_routes import news_routes
 from .api.images_routes import images_routes
 from .seeds import seed_commands
+import mimetypes
 
 app = Flask(__name__, static_folder='../vite', static_url_path='/')
+
+mimetypes.add_type('application/javascript', '.js')
 
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
