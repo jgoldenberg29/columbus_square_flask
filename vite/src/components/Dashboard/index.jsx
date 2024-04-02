@@ -12,7 +12,7 @@ import ManageAdmins from './admin';
 export default function Dashboard() {
     const navigate = useNavigate();
 
-    const user = useSelector(state => state.session.user.user) || null
+    const user = useSelector(state => state.session.user)
 
     if (!user) navigate('/')
 

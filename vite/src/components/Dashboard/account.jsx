@@ -3,7 +3,7 @@ import { useState } from "react";
 import defaultImage from './default-profile.jpeg';
 
 export default function ManageAccount() {
-    const user = useSelector(state => state.session.user.user) || {};
+    const user = useSelector(state => state.session.user);
 
     const [editName, setEditName] = useState(false);
     const [name, setName] = useState(user.name);

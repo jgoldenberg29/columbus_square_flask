@@ -30,7 +30,8 @@ export default function Home() {
 
     const newsState = useSelector(state => state.news);
     const newsArray = Object.values(newsState);
-    const events = useSelector(state => state.events.sorted);
+    const sortedEvents = useSelector(state => state.events.sorted);
+    // const eventsArray = Object.values(events)
 
     const sortedNews = newsArray.sort((a, b) => {
         const dateA = new Date(a.datePosted);
@@ -39,6 +40,20 @@ export default function Home() {
         // Compare the dates
         return dateB - dateA;
     });
+
+    // const today = new Date();
+
+    // const sortedEvents = eventsArray
+    //     .filter(event => {
+    //         const startDate = new Date(event.start);
+    //         return startDate > today; // Filter out events that haven't started yet
+    //     })
+    //     .sort((a, b) => {
+    //         const startDateA = new Date(a.start);
+    //         const startDateB = new Date(b.start);
+    //         return startDateA - startDateB; // Sort events by start date
+    //     });
+
 
     const formattedDatetime = (datetime, type) => {
         const date = new Date(datetime);
@@ -103,7 +118,7 @@ export default function Home() {
                         <h3 className='text-2xl font-bold text-rose-600 tracking-wide pl-1 pb-1 mb-2 border-b border-rose-600'>UPCOMING EVENTS</h3>
                         <div className='pr-6 overflow-x-scroll py-6 w-full'>
                             <div className='flex flex-row gap-4'>
-                                {events.length ? events.map(event => (
+                                {sortedEvents.length ? sortedEvents.map(event => (
                                     <div key={event.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 h-48 min-w-64 justify-between'>
                                         <div className='flex flex-col gap-4'>
                                             <p className='text-xl font-bold'>{event.title}</p>
@@ -158,7 +173,7 @@ export default function Home() {
                     <div className='py-6'>
                         <div className='max-h-[560px] overflow-y-scroll overflow-hidden'>
                             <div className='flex flex-col gap-4 pr-6'>
-                                {events.length ? events.map(event => (
+                                {sortedEvents.length ? sortedEvents.map(event => (
                                     <div key={event.id} className='rounded-lg border-2 border-gray-300 md:border hover:shadow-lg p-4 flex flex-col gap-2 h-48 w-full justify-between'>
                                         <div className='flex flex-col gap-4'>
                                             <p className='text-xl font-bold'>{event.title}</p>

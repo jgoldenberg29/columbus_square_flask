@@ -44,9 +44,7 @@ export default function Events() {
     }, [listView])
 
     const user = useSelector(state => state.session.user);
-
     const events = useSelector(state => state.events.all)
-    const sortedEvents = useSelector(state => state.events.sorted)
 
     const {
         showForm,
@@ -63,6 +61,17 @@ export default function Events() {
         if (startDate < today) return event;
     })
 
+    const sortedEvents = eventsArray
+        .filter(event => {
+            const startDate = new Date(event.start);
+            return startDate > today; // Filter out events that haven't started yet
+        })
+        .sort((a, b) => {
+            const startDateA = new Date(a.start);
+            const startDateB = new Date(b.start);
+            return startDateA - startDateB; // Sort events by start date
+        });
+
     if (!eventsArray.length) {
         dispatch(thunkGetAllData())
         return null
@@ -78,10 +87,10 @@ export default function Events() {
                 <div className="flex justify-between pb-3 mb-6 border-b border-gray-300">
                     <h2 className="text-3xl" >Events</h2>
                     {user && <button
-                                onClick={() => setShowForm(true)}
-                                className="self-center py-2 px-4 md:px-4 bg-cyan-500 text-white rounded-lg border border-cyan-500 hover:bg-cyan-600 hover:border-cyan-600 active:bg-cyan-300 active:border active:border-white">
-                                Add Event
-                            </button>}
+                        onClick={() => setShowForm(true)}
+                        className="self-center py-2 px-4 md:px-4 bg-cyan-500 text-white rounded-lg border border-cyan-500 hover:bg-cyan-600 hover:border-cyan-600 active:bg-cyan-300 active:border active:border-white">
+                        Add Event
+                    </button>}
                 </div>
                 <div className='flex flex-col gap-10'>
                     <div className='hidden md:block'>
@@ -105,10 +114,10 @@ export default function Events() {
                     </div>
                     <div className='flex flex-col items-center md:items-stretch md:w-full'>
                         {listView === 'upcoming' && sortedEvents.map((event) => (
-                            <SingleEvent event={event}/>
+                            <SingleEvent event={event} />
                         ))}
                         {listView === 'past' && pastEvents.reverse().map((event) => (
-                            <SingleEvent event={event}/>
+                            <SingleEvent event={event} />
                         ))}
                         {listView === 'select' && selectedEvent && (
                             <SingleEvent event={selectedEvent} />
@@ -119,8 +128,8 @@ export default function Events() {
             {/* <div>
                 <EventCalendar/>
             </div> */}
-            {showForm && <EventFormModal/>}
-            {showRemove && <RemoveEventModal/>}
+            {showForm && <EventFormModal />}
+            {showRemove && <RemoveEventModal />}
         </div>
     )
 }

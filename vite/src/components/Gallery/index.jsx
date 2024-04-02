@@ -29,7 +29,7 @@ export default function Gallery() {
     const subHeaderClass = `text-left underline underline-offset-8 tracking-widest text-2xl my-8 ${darkMode && "text-white"}`
 
     const galleryMap = igImages.map(image => {
-        console.log("IMAGES", image)
+        // console.log("IMAGES", image)
         return (
             <div>
                 <ImageCard image={image.imageUrl} />
@@ -41,14 +41,14 @@ export default function Gallery() {
         <div className='flex flex-col my-4 gap-8 w-full px-4 lg:w-4/5 mx-auto mb-20'>
             <h1 className="text-3xl pb-3 mb-4 border-b border-gray-300">Gallery</h1>
             <div data-testid='home-1' className='container mb-20 justify-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
-                {/* {igImages.map((image) => (
+                {igImages.map((image) => (
                     <div className='rounded overflow-hidden'>
-                        <img src={image} className='cursor-pointer object-cover min-h-full rounded transition-transform transform-gpu hover:scale-110'
+                        <img src={image.imageUrl} className='cursor-pointer object-cover min-h-full rounded transition-transform transform-gpu hover:scale-110'
                             onClick={() => {}}
                         />
                     </div>
-                ))} */}
-                {galleryMap}
+                ))}
+                {/* {galleryMap} */}
             </div>
         </div>
     )

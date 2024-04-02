@@ -98,7 +98,7 @@ export const thunkUpdateEvent = (event, id) => async dispatch => {
     if (res.ok) {
         const data = await res.json()
         dispatch(editEvent(data.event))
-        dispatch(setUser(data.user))
+        // dispatch(setUser(data.user))
         return null
     } else {
         const data = await res.json()
@@ -114,7 +114,8 @@ export const thunkDeleteEvent = (id) => async dispatch => {
     if(res.ok) {
         const data = await res.json()
         dispatch(deleteEvent(id))
-        dispatch(setUser(data.user))
+        // dispatch(setUser(data.user))
+        // dispatch(thunkGetSortedEvents())
         return null
     } else {
         const data = await res.json()

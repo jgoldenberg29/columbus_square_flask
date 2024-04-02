@@ -3,27 +3,37 @@ import { Link } from 'react-router-dom';
 import { Dialog, Transition, Switch, Tab } from '@headlessui/react';
 import {useDispatch} from 'react-redux'
 import { useForm } from '../../context/form';
-import { thunkDeleteEvent, thunkGetSortedEvents } from '../../store/events';
+import { thunkDeleteEvent } from '../../store/events';
 import { useAccessibilitySettings } from '../../context/accessibility';
+import { useNavigate } from 'react-router-dom';
 
 export default function RemoveEventModal() {
     const { accessibilitySettings } = useAccessibilitySettings();
     const { darkMode, textSize } = accessibilitySettings;
 
+    const navigate = useNavigate();
+
     const dispatch = useDispatch()
+
+    const [errors, setErrors] = useState(null)
 
     const {
         showRemove,
         setShowRemove,
         removeItemId,
-    } = useForm()
+    } = useForm();
 
     const handleRemove = async () => {
         // remove event
-         dispatch(thunkDeleteEvent(removeItemId))
-         dispatch(thunkGetSortedEvents())
-         setShowRemove(false)
-    }
+        const deleteEvent = await dispatch(thunkDeleteEvent(removeItemId))
+
+        if (!deleteEvent) {
+            navigate('/events')
+            setShowRemove(false)
+        } else {
+            setErrors(deleteEvent)
+        }
+    };
 
     return (
         <Transition appear show={showRemove} as={Fragment}>
