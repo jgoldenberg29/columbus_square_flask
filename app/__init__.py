@@ -79,13 +79,13 @@ def react_root(path):
     or index.html requests
     """
     if path and path != 'favicon.ico':  # Check if path is not empty and not favicon.ico
-        # If the path is not empty and not favicon.ico, serve the requested file from the static folder
-        return app.send_static_file(path)
+        # If the path is not empty and not favicon.ico, serve the requested file from the Vite frontend folder
+        return app.send_static_file(os.path.join('..', 'vite', path))
 
-    # For favicon.ico or root path, serve index.html
-    return app.send_static_file('index.html')
+    # For favicon.ico or root path, serve index.html from the Vite frontend folder
+    return app.send_static_file(os.path.join('..', 'vite', 'index.html'))
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return app.send_static_file('index.html')
+    return app.send_static_file(os.path.join('..', 'vite', 'index.html'))
