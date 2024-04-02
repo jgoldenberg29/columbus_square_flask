@@ -3,7 +3,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, DateTimeField, TimeField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Email, ValidationError, Length, URL
 from app.models import Event
-from ..api.aws_helpers import ALLOWED_EXTENSIONS
+# from app.api.aws_helpers import ALLOWED_EXTENSIONS
 
 locations = [
     "Whole Park",
