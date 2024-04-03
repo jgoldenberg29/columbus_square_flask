@@ -8,6 +8,10 @@ export default defineConfig({
   build: {
     assetsDir: 'static',
   },
+  babel: {
+    presets: ['@babel/preset-react']
+    // Additional Babel configuration options...
+  },
   // server only for development
   server: {
     port: 5000,
