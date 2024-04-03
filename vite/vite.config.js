@@ -9,7 +9,7 @@ export default defineConfig({
     assetsDir: 'static',
   },
   babel: {
-    presets: ['@babel/preset-react']
+    presets: ["@babel/preset-env", '@babel/preset-react']
     // Additional Babel configuration options...
   },
   // server only for development
