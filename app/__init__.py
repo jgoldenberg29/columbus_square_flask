@@ -18,7 +18,10 @@ import mimetypes
 
 app = Flask(__name__, static_folder='../vite', static_url_path='/')
 
+# Add MIME type for JavaScript files
 mimetypes.add_type('application/javascript', '.js')
+# Add MIME type for JSX files
+mimetypes.add_type('text/javascript', '.jsx')
 
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
