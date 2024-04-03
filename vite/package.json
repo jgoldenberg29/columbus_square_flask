@@ -30,6 +30,7 @@
     "web-vitals": "^3.5.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.24.3",
     "@babel/preset-react": "^7.24.1",
     "@testing-library/react": "^14.2.2",
     "@types/react": "^18.2.66",
