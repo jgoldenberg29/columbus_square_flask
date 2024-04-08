@@ -14,7 +14,8 @@ export default defineConfig({
     sourcemap: false, // Disable source maps for production
   },
   babel: {
-    presets: ["@babel/preset-env", '@babel/preset-react']
+    // presets: ["@babel/preset-env", '@babel/preset-react'],
+    babelrc: true,
     // Additional Babel configuration options...
   },
   // server only for development
