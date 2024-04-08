@@ -13,11 +13,11 @@ export default defineConfig({
     minify: true, // Minify the output files for production
     sourcemap: false, // Disable source maps for production
   },
-  babel: {
-    // presets: ["@babel/preset-env", '@babel/preset-react'],
-    babelrc: true,
-    // Additional Babel configuration options...
-  },
+  // babel: {
+  //   // presets: ["@babel/preset-env", '@babel/preset-react'],
+  //   babelrc: true,
+  //   // Additional Babel configuration options...
+  // },
   // server only for development
   server: {
     port: 5000,
@@ -31,33 +31,33 @@ export default defineConfig({
       },
     },
   },
-  resolve: {
-    alias: {
-      src: resolve(__dirname, 'src'),
-    },
-  },
-  esbuild: {
-    loader: 'jsx',
-    include: /src\/.*\.jsx?$/,
-    exclude: [],
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      plugins: [
-        {
-          name: 'load-js-files-as-jsx',
-          setup(build) {
-            build.onLoad(
-              { filter: /src\\.*\.js$/ },
-              async (args) => ({
-                loader: 'jsx',
-                contents: await fs.readFile(args.path, 'utf8'),
-              })
-            );
-          },
-        },
-      ],
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     src: resolve(__dirname, 'src/main.jsx'),
+  //   },
+  // },
+  // esbuild: {
+  //   loader: 'jsx',
+  //   include: /src\/.*\.jsx?$/,
+  //   exclude: [],
+  // },
+  // optimizeDeps: {
+  //   esbuildOptions: {
+  //     plugins: [
+  //       {
+  //         name: 'load-js-files-as-jsx',
+  //         setup(build) {
+  //           build.onLoad(
+  //             { filter: /src\\.*\.js$/ },
+  //             async (args) => ({
+  //               loader: 'jsx',
+  //               contents: await fs.readFile(args.path, 'utf8'),
+  //             })
+  //           );
+  //         },
+  //       },
+  //     ],
+  //   },
+  // },
 
 })
