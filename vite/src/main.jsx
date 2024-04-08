@@ -13,28 +13,10 @@ import { CalendarProvider } from './context/calendar';
 
 const store = configureStore();
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// root.render(
-//   <React.StrictMode>
-//     <FormProvider>
-//       <AccessibilityProvider>
-//         <NavigationProvider>
-//           <LoginProvider>
-//             <CalendarProvider>
-//               <Provider store={store}>
-//                 <App />
-//               </Provider>
-//             </CalendarProvider>
-//           </LoginProvider>
-//         </NavigationProvider>
-//       </AccessibilityProvider>
-//     </FormProvider>
-//   </React.StrictMode>
-// );
-
-function Root() {
-  return (
+root.render(
+  <React.StrictMode>
     <FormProvider>
       <AccessibilityProvider>
         <NavigationProvider>
@@ -48,12 +30,30 @@ function Root() {
         </NavigationProvider>
       </AccessibilityProvider>
     </FormProvider>
-  )
-};
-
-ReactDOM.render(
-	<React.StrictMode>
-		<Root />
-	</React.StrictMode>,
-	document.getElementById("root")
+  </React.StrictMode>
 );
+
+// function Root() {
+//   return (
+//     <FormProvider>
+//       <AccessibilityProvider>
+//         <NavigationProvider>
+//           <LoginProvider>
+//             <CalendarProvider>
+//               <Provider store={store}>
+//                 <App />
+//               </Provider>
+//             </CalendarProvider>
+//           </LoginProvider>
+//         </NavigationProvider>
+//       </AccessibilityProvider>
+//     </FormProvider>
+//   )
+// };
+
+// ReactDOM.render(
+// 	<React.StrictMode>
+// 		<Root />
+// 	</React.StrictMode>,
+// 	document.getElementById("root")
+// );

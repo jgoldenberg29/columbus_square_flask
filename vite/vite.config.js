@@ -14,8 +14,8 @@ export default defineConfig({
     sourcemap: false, // Disable source maps for production
   },
   babel: {
-    // presets: ["@babel/preset-env", '@babel/preset-react'],
-    babelrc: true,
+    presets: ["@babel/preset-env", '@babel/preset-react'],
+    // babelrc: true,
     // Additional Babel configuration options...
   },
   // server only for development
@@ -41,23 +41,23 @@ export default defineConfig({
     include: /src\/.*\.jsx?$/,
     exclude: [],
   },
-  optimizeDeps: {
-    esbuildOptions: {
-      plugins: [
-        {
-          name: 'load-js-files-as-jsx',
-          setup(build) {
-            build.onLoad(
-              { filter: /src\\.*\.js$/ },
-              async (args) => ({
-                loader: 'jsx',
-                contents: await fs.readFile(args.path, 'utf8'),
-              })
-            );
-          },
-        },
-      ],
-    },
-  },
+  // optimizeDeps: {
+  //   esbuildOptions: {
+  //     plugins: [
+  //       {
+  //         name: 'load-js-files-as-jsx',
+  //         setup(build) {
+  //           build.onLoad(
+  //             { filter: /src\\.*\.js$/ },
+  //             async (args) => ({
+  //               loader: 'jsx',
+  //               contents: await fs.readFile(args.path, 'utf8'),
+  //             })
+  //           );
+  //         },
+  //       },
+  //     ],
+  //   },
+  // },
 
 })
