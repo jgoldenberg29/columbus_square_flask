@@ -7,12 +7,12 @@ import fs from 'fs/promises';
 export default defineConfig({
   base: '/',
   plugins: [react()],
-  build: {
-    assetsDir: 'static',
-    outDir: 'dist', // Specify the output directory for build files
-    minify: true, // Minify the output files for production
-    sourcemap: false, // Disable source maps for production
-  },
+  // build: {
+  //   assetsDir: 'static',
+  //   outDir: 'dist', // Specify the output directory for build files
+  //   minify: true, // Minify the output files for production
+  //   sourcemap: false, // Disable source maps for production
+  // },
   // babel: {
   //   // presets: ["@babel/preset-env", '@babel/preset-react'],
   //   babelrc: true,
