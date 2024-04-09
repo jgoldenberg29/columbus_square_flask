@@ -13,11 +13,11 @@ export default defineConfig({
   //   minify: true, // Minify the output files for production
   //   sourcemap: false, // Disable source maps for production
   // },
-  // babel: {
-  //   // presets: ["@babel/preset-env", '@babel/preset-react'],
-  //   babelrc: true,
-  //   // Additional Babel configuration options...
-  // },
+  babel: {
+    presets: ["@babel/preset-env", '@babel/preset-react'],
+    babelrc: true,
+    // Additional Babel configuration options...
+  },
   // server only for development
   server: {
     port: 5000,
