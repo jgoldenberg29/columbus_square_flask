@@ -39,16 +39,24 @@ export default function Footer() {
                         </div>
                         <div className='flex gap-3 mb-2 content-end items-center'>
                             <i className="fa-brands fa-facebook"></i>
-                            <Link to="https://www.facebook.com/friendsofcolumbussquare/" className='hover:underline'>Join us on Facebook!</Link>
+                            <Link to="https://www.facebook.com/friendsofcolumbussquare/"
+                            target='_blank'
+                            className='hover:underline'>Join us on Facebook!</Link>
                         </div>
                     </div>
                 </div>
                 <div className='flex flex-col gap-3 px-3'>
                     <h2 className='text-2xl font-newspaper'>Related Links</h2>
                     <div className='text-blue-500 flex flex-col'>
-                        <Link to="https://www.phila.gov/departments/philadelphia-parks-recreation/" className='mb-2 underline hover:no-underline'>Philadelphia Parks & Recreation</Link>
-                        <Link to="https://www.facebook.com/groups/241921246469738/" className='mb-2 underline hover:no-underline'>South Philadelphia Dog Owners Association (SPDOA)</Link>
-                        <Link to="https://www.drpipes.com/pa/philadelphia.html" className='mb-2 underline hover:no-underline'>Plumbers Near Philadelphia</Link>
+                        <Link to="https://www.phila.gov/departments/philadelphia-parks-recreation/"
+                        target='_blank'
+                        className='mb-2 underline hover:no-underline'>Philadelphia Parks & Recreation</Link>
+                        <Link to="https://www.facebook.com/groups/241921246469738/"
+                        target='_blank'
+                        className='mb-2 underline hover:no-underline'>South Philadelphia Dog Owners Association (SPDOA)</Link>
+                        <Link to="https://www.drpipes.com/pa/philadelphia.html"
+                        target='_blank'
+                        className='mb-2 underline hover:no-underline'>Plumbers Near Philadelphia</Link>
                     </div>
                 </div>
                 <div className='flex flex-col gap-3 px-3'>
