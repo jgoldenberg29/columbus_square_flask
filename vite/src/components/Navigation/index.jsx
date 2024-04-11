@@ -50,6 +50,9 @@ export default function Navigation() {
                 {/* Desktop */}
                 <div className='hidden lg:flex h-full'>
                     <div className='flex mr-4'>
+                        <button onClick={() => navigate("/")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "home" && "text-cyan-600"}`}>
+                            Home
+                        </button>
                         <button onClick={() => navigate("/about")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "about" && "text-cyan-600"}`}>
                             About
                         </button>
@@ -64,6 +67,9 @@ export default function Navigation() {
                         </button> */}
                         <button onClick={() => navigate("/gallery")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "gallery" && "text-cyan-600"}`}>
                             Gallery
+                        </button>
+                        <button onClick={() => navigate("/donate")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "donate" && "text-cyan-600"}`}>
+                            Donate
                         </button>
                         <button onClick={() => navigate("/contact")} className={`font-semibold text-xl md:px-2 lg:px-4 hover:text-rose-500 ${page === "contact" && "text-cyan-600"}`}>
                             Contact
