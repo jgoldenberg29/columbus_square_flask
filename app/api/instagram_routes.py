@@ -65,9 +65,8 @@ def authenticate():
         # commit to database
         pass
 
-    today_noon = present.replace(hour=12, minute=0, second=0, microsecond=0)
-    if present > today_noon and not user.ig_fetched:
-        ic("IT RAN")
+    today_noon = present.replace(hour=13, minute=34, second=0, microsecond=0)
+    if user.last_ig_fetch < present < today_noon:
         res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,media_type&access_token={user.ig_access_token}')
         # check for errors
         parsed_res = res.json()
@@ -87,7 +86,7 @@ def authenticate():
                     timestamp=item["timestamp"]
                 )
                 db.session.add(image)
-        user.ig_fetched = True
+        user.last_ig_fetch = present.replace(hour=23, minute=59, second=59, microsecond=59)
         db.session.commit()
 
 
