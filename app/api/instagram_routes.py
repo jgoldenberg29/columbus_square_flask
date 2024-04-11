@@ -67,11 +67,12 @@ def authenticate():
 
     today_noon = present.replace(hour=12, minute=0, second=0, microsecond=0)
     if present > today_noon and not user.ig_fetched:
-        res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp&access_token={user.ig_access_token}')
+        ic("IT RAN")
+        res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,media_type&access_token={user.ig_access_token}')
         # check for errors
         parsed_res = res.json()
         data = parsed_res['data']
-        ic(data)
+        # ic(data)
 
         if environment == "production":
             db.session.execute(f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
@@ -79,12 +80,13 @@ def authenticate():
             db.session.execute(text("DELETE FROM images"))
 
         for item in data:
-            image = Image(
-                caption=item['caption'] if 'caption' in item else None,
-                image_url=item["media_url"],
-                timestamp=item["timestamp"]
-            )
-            db.session.add(image)
+            if item['media_type'] != 'VIDEO':
+                image = Image(
+                    caption=item['caption'] if 'caption' in item else None,
+                    image_url=item["media_url"],
+                    timestamp=item["timestamp"]
+                )
+                db.session.add(image)
         user.ig_fetched = True
         db.session.commit()
 
