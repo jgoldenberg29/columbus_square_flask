@@ -12,7 +12,7 @@ def seed_users():
         admin=True,
         password='AtThePark99',
         ig_access_token=os.environ.get('IG_ACCESS_KEY'),
-        token_expiration=datetime(2024, 5, 10),
+        token_expiration=datetime(2024, 4, 10),
         last_ig_fetch=datetime(2024, 4, 10)
         )
 
