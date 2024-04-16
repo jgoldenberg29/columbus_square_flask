@@ -89,7 +89,8 @@ def authenticate():
         # check for errors
         parsed_res = res.json()
         data = parsed_res['data']
-        ic(data)
+        # ic(data)
+        print("data fetched")
 
         if environment == "production":
             db.session.execute(f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
