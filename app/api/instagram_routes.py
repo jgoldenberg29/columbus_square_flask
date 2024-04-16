@@ -82,7 +82,9 @@ def authenticate():
 
 
     today_noon = present.replace(hour=13, minute=34, second=0, microsecond=0)
-    if user.last_ig_fetch < present < today_noon:
+    # ic(user.last_ig_fetch, present, today_noon)
+    # ic(user.last_ig_fetch < present < today_noon or user.last_ig_fetch < present)
+    if user.last_ig_fetch < present:
         res = requests.get(f'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,media_type&access_token={user.ig_access_token}')
         # check for errors
         parsed_res = res.json()
