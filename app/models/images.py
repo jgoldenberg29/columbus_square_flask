@@ -10,7 +10,7 @@ class Image(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     caption = db.Column(db.Text, nullable=True)
-    image_url = db.Column(db.String(255), nullable=False)
+    image_url = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.String(100), nullable=False)
 
     # image_event = db.relationship('Event', back_populates='event_image')
