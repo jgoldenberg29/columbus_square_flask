@@ -24,7 +24,6 @@ export default function Events() {
 
     useEffect(() => {
         if (!sortedEvents.length) dispatch(thunkGetSortedEvents())
-        // setPage('events')
     }, []);
 
     useEffect(() => {
