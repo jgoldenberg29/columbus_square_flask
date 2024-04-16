@@ -2,7 +2,7 @@ from flask import Blueprint, session, request
 from sqlalchemy.sql import text
 import requests
 import os
-from app.models import db, User, Image, environment
+from app.models import db, User, Image, environment, SCHEMA
 from flask_login import login_required, current_user
 from datetime import datetime, timedelta
 from icecream import ic
@@ -89,7 +89,7 @@ def authenticate():
         # check for errors
         parsed_res = res.json()
         data = parsed_res['data']
-        # ic(data)
+        ic(data)
 
         if environment == "production":
             db.session.execute(f"TRUNCATE table {SCHEMA}.images RESTART IDENTITY CASCADE;")
