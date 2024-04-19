@@ -16,7 +16,7 @@ from .api.images_routes import images_routes
 from .seeds import seed_commands
 import mimetypes
 
-app = Flask(__name__, static_folder='../vite', static_url_path='/')
+app = Flask(__name__, static_folder='../vite/dist', static_url_path='/')
 
 # Add MIME type for JavaScript files
 mimetypes.add_type('application/javascript', '.js')
